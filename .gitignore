@@ -1,0 +1,4 @@
+.project
+/public/tmp/
+node_modules/
+.buildpath

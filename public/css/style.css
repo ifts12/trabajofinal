@@ -115,6 +115,7 @@ body {
 	width: 100%;
 }
 
+/*
 .caja::before {
 	position: absolute;
 	top: 0;
@@ -126,6 +127,7 @@ body {
 	color: #fff;
 	background-color: white;
 }
+*/
 
 .caja-thumb img.rounded-circle {
 	box-shadow: 4px 1px 1rem rgba(5, 5, 5, 0.6); 

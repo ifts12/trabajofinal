@@ -6,18 +6,17 @@ use UPCN\Config;
 
 class Conexion
 {
-    protected $config;
+    
     protected $conexion;
     
     public function __construct()
     {
-        $config = new Config();
-        $conf = $config->getConfig('basedatos');
-        $dsn = $conf['driver'] . ':dbname=' . $conf['dbname'] . ';host=' . $conf['host'];
-
+		$config = new Config();
+		//print_r($config->getDSN());
+	   
         try
         {
-            $this->conexion = new \PDO($dsn, $conf['user'], $conf['pass']);
+            $this->conexion = new \PDO($config->getDSN(), $config->getUser(), $config->getPass());
         }
         catch (PDOException $e)
         {

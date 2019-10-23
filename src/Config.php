@@ -4,39 +4,31 @@ namespace UPCN;
 
 class Config
 {
-    private $fileConfig = __DIR__ . '/config.yaml';
-    protected $config;
+   private $nameDB = "upcn";
+   private $user = "admin";
+   private $pass = "admin";
+   private $driver= "mysql";
+   private $host="127.0.0.1";
+   
+   public function getDSN ()
+   {
+	   return $this->driver . ":dbname=" . $this->nameDB.";host=".$this->host;
+	   
+	   
+	   
+   }
 
-    public function __construct()
-    {
-        if(file_exists($this->fileConfig))
-        {
-            $this->setConfig(yaml_parse_file($this->fileConfig));
-        }
-        else
-        {
-            die('Falta el archivo de configuración ' . $this->fileConfig);
-        }
-    }
-    
-    /**
-     * @return mixed
-     */
-    public function getConfig($parametro = null)
-    {
-        if(!empty($parametro))
-        {
-            return $this->config[$parametro];
-        }
-        return $this->config;
-    }
-    
-    /**
-     * @param mixed $config
-     */
-    public function setConfig($config)
-    {
-        $this->config = $config;
-    }
-    
+	public function getUser ()
+	{
+		return $this->user;
+		
+	}
+	public function getPass ()
+	{
+		return $this->pass;
+		
+	}
+
+
+
 }

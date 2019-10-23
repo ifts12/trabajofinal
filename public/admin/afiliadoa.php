@@ -5,6 +5,7 @@ require __DIR__ . '/../../src/autoload.php';
 use UPCN\Conexion;
 use UPCN\Afiliado;
 
+
 $c = new Conexion();
 
 $afiliado = new Afiliado();
@@ -43,24 +44,8 @@ if(!empty($_POST))
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';
 
-if($afiliado->hasError() || array_key_exists('error', $msg))
-{
 ?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Error </strong> en los datos del afiliado.
-    <strong>
-<?php echo $msg['error'];
-} else {
-?>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-	<strong>
-<?php echo $msg['success'];
-} ?>
-    </strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+ 
 
 <div class="container">
 <form name="afiliado" method="post" class="">

@@ -12,7 +12,6 @@ class Conexion
     public function __construct()
     {
 		$config = new Config();
-		//print_r($config->getDSN());
 	   
         try
         {

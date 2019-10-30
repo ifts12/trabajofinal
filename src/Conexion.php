@@ -17,7 +17,7 @@ class Conexion
         {
             $this->conexion = new \PDO($config->getDSN(), $config->getUser(), $config->getPass());
         }
-        catch (PDOException $e)
+        catch (\PDOException $e)
         {
             echo 'Falló la conexión: ' . $e->getMessage();
         }
@@ -45,7 +45,6 @@ class Conexion
     }
     
     
-    
 //     $calorías = 150;
 //     $color = 'red';
 //     $gsent = $gbd->prepare('SELECT name, colour, calories
@@ -54,9 +53,5 @@ class Conexion
 //     $gsent->bindParam(':calories', $calorías, PDO::PARAM_INT);
 //     $gsent->bindParam(':colour', $color, PDO::PARAM_STR, 12);
 //     $gsent->execute();
-    
-    
-    
-    
     
 }

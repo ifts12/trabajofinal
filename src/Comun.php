@@ -14,14 +14,17 @@ class Comun
         
         foreach ($props as $prop)
         {
-            $metodo = new \ReflectionMethod($this, 'set' . ucfirst($prop->getName()));
-            echo $metodo->invokeArgs($this, [$request[$prop->getName()]]);
-            
-            $this->error[$prop->getName()] = false;
-            if(array_key_exists($prop->getName(), $request) && empty($request[$prop->getName()]))
+            if(array_key_exists($prop->getName(), $request))
             {
-                $this->error[$prop->getName()] = true;
-                $this->hasError = true;
+                $metodo = new \ReflectionMethod($this, 'set' . ucfirst($prop->getName()));
+                echo $metodo->invokeArgs($this, [$request[$prop->getName()]]);
+                
+                $this->error[$prop->getName()] = false;
+                if(empty($request[$prop->getName()]))
+                {
+                    $this->error[$prop->getName()] = true;
+                    $this->hasError = true;
+                }
             }
         }
     }

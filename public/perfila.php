@@ -8,8 +8,7 @@ use UPCN\Perfil;
 $c = new Conexion();
 
 $Perfil = new Perfil();
-    //var_dump($_POST);
-	//exit;
+
 if(!empty($_POST))
 {
     $Perfil->validar($_POST);
@@ -17,7 +16,7 @@ if(!empty($_POST))
     {
         $c->beginTransaction();
         
-        $statement = $c->prepare('INSERT INTO perfil (dni, nombre, apellido, telefono, direccion, fecha_nac, email, id_rol, provincia) VALUES (:dni, :nombre, :apellido, :telefono, :direccion, :fecha_nac, :email, :id_rol, :provincia)');
+        $statement = $c->prepare('INSERT INTO perfil (dni, nombre, apellido, telefono, direccion, fecha_nac, email, id_rol, provincia, pass) VALUES (:dni, :nombre, :apellido, :telefono, :direccion, :fecha_nac, :email, :id_rol, :provincia, :pass)');
         $statement->bindValue(':dni', $Perfil->getDni(), \PDO::PARAM_INT);
         $statement->bindValue(':nombre', $Perfil->getNombre(), \PDO::PARAM_STR);
         $statement->bindValue(':apellido', $Perfil->getApellido(), \PDO::PARAM_STR);
@@ -27,6 +26,7 @@ if(!empty($_POST))
         $statement->bindValue(':email', $Perfil->getEmail(), \PDO::PARAM_STR);
         $statement->bindValue(':id_rol', $Perfil->getId_rol(), \PDO::PARAM_INT);
         $statement->bindValue(':provincia', $Perfil->getProvincia(), \PDO::PARAM_STR);
+        $statement->bindValue(':pass', password_hash($Perfil->getPass(), PASSWORD_ARGON2I, ['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 3]), \PDO::PARAM_STR);
         
         if($statement->execute())
         {
@@ -115,16 +115,15 @@ include DIR_TEMPLATE . '/_msg.html.php';
         <label for="rol">rol</label>
         <select name="id_rol">	
 		<?php
-	
 		try
 		{
             $statement = $c->prepare('SELECT * FROM rol');
             $statement->execute();
-            $Perfil = $statement->fetchAll();
-    		//var_dump($Perfil);
-    		foreach ($Perfil as $rol)
+            $roles = $statement->fetchAll();
+		    echo '<option value="">Seleccione una opción</option>';
+            foreach ($roles as $rol)
     		{
-    		    echo '<option value="' . $rol["id"] .'">'.$rol["rol"].' </option>';
+    		    echo '<option value="' . $rol["id"] .'" ' . ($rol["id"] == $Perfil->getId_rol() ? 'selected' : '') . '>'.$rol["rol"].' </option>';
     		}
 		}
 		catch (\PDOException $e)
@@ -132,16 +131,34 @@ include DIR_TEMPLATE . '/_msg.html.php';
             $e->getMessage();
 		}
 		?>	
-      
 		</select>
 		<small id="rolHelp" class="form-text text-muted">Ingrese el rol.</small>
         <div class="invalid-feedback">Debe elegir un rol</div>
     </div>
     
     <div class="form-group">
+        <label for="pass">Contraseña</label>
+        <input name="pass" type="password" class="form-control<?php echo $Perfil->getError('pass') ? ' is-invalid' : '' ?>" id="pass" value="<?php echo $Perfil->getPass() ?>" aria-describedby="passHelp" placeholder="Contraseña">
+        <small id="passHelp" class="form-text text-muted">Ingrese una contraseña.</small>
+        <div class="invalid-feedback">Debe ser un nombre válido</div>
+    </div>
+    
+    
+    <div class="form-group">
+        <label for="pass2">Reingresar la Contraseña</label>
+        <input name="pass2" type="password" class="form-control<?php echo $Perfil->getError('pass') ? ' is-invalid' : '' ?>" id="pass2" value="<?php echo $Perfil->getPass() ?>" aria-describedby="pass2Help" placeholder="Contraseña">
+        <small id="pass2Help" class="form-text text-muted">Reingresar la contraseña.</small>
+        <div class="invalid-feedback">Debe ser un nombre válido</div>
+    </div>
+    
+    <div class="form-group">
         <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 </form>
+
+<div class="form-group">
+	<a class="btn btn-info" href="login.php" role="button">Volver</a>
+</div>
 </div>
 
 <?php 

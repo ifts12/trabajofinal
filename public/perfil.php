@@ -18,12 +18,19 @@ if(!empty($_POST))
         $statement->bindValue(':dni', $Perfil->getDni(), \PDO::PARAM_INT);
         if($statement->execute())
         {
-            $msg['success'] = "Se encontraron los datos del Perfil correctamente.";
+            $row = $statement->fetch(\PDO::FETCH_ASSOC);
+            $msg = [
+                'tipo' => 'success',
+                'msg'  => "Se encontraron los datos del Perfil correctamente."
+            ];
             $c->commit();
         }
         else 
         {
-            $msg['error'] = 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2];
+            $msg = [
+                'tipo' => 'danger',
+                'msg'  => 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]
+            ];
             $c->rollBack();
         }
     }
@@ -31,6 +38,8 @@ if(!empty($_POST))
 
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';
+
+include DIR_TEMPLATE . '/_msg.html.php';
 ?>
 
 <div class="container">
@@ -47,7 +56,9 @@ include DIR_TEMPLATE . '/_menu.html.php';
 	<div class="form-group">
 		<button type="submit" class="btn btn-primary" onclick = "funcion();">BUSCAR </button>
 		
-    </div> 
+    </div>
+    
+    
 	<script>
 		function funcion()
 		{

@@ -20,7 +20,10 @@ class Perfil extends Comun
     
     private $provincia;
     
-    private $id;
+    private $id_rol;
+    
+    private $pass;
+    
     
     /**
      * @return mixed
@@ -28,62 +31,6 @@ class Perfil extends Comun
     public function getDni()
     {
         return $this->dni;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getApellido()
-    {
-        return $this->apellido;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTelefono()
-    {
-        return $this->telefono;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDireccion()
-    {
-        return $this->direccion;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFecha_nac()
-    {
-        return $this->fecha_nac;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -95,11 +42,27 @@ class Perfil extends Comun
     }
 
     /**
+     * @return mixed
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
      * @param mixed $nombre
      */
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApellido()
+    {
+        return $this->apellido;
     }
 
     /**
@@ -111,11 +74,27 @@ class Perfil extends Comun
     }
 
     /**
+     * @return mixed
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
      * @param mixed $telefono
      */
     public function setTelefono($telefono)
     {
         $this->telefono = $telefono;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
     }
 
     /**
@@ -127,11 +106,27 @@ class Perfil extends Comun
     }
 
     /**
-     * @param mixed $fechaNacimiento
+     * @return mixed
+     */
+    public function getFecha_nac()
+    {
+        return $this->fecha_nac;
+    }
+
+    /**
+     * @param mixed $fecha_nac
      */
     public function setFecha_nac($fecha_nac)
     {
         $this->fecha_nac = $fecha_nac;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**
@@ -142,14 +137,6 @@ class Perfil extends Comun
         $this->email = $email;
     }
 
-    /**
-     * @param mixed $rol
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-    
     /**
      * @return mixed
      */
@@ -166,7 +153,38 @@ class Perfil extends Comun
         $this->provincia = $provincia;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getId_rol()
+    {
+        return $this->id_rol;
+    }
 
+    /**
+     * @param mixed $id_rol
+     */
+    public function setId_rol($id_rol)
+    {
+        $this->id_rol = $id_rol;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getPass()
+    {
+        return $this->pass;
+    }
+
+    /**
+     * @param mixed $pass
+     */
+    public function setPass($pass)
+    {
+        $this->pass = $pass;
+    }
+
+    
 
 }

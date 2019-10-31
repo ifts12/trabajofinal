@@ -2,6 +2,9 @@
 
 require __DIR__ . '/../src/autoload.php';
 
+$permisos = ['Administrador'];
+// require __DIR__ . '/../src/session.php';
+
 use UPCN\Conexion;
 use UPCN\Login;
 

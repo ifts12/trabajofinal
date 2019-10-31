@@ -93,24 +93,13 @@ INSERT INTO `rol` (`id`, `rol`) VALUES
 	(3, 'afiliado');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 
--- Volcando estructura para tabla upcn.login
-DROP TABLE IF EXISTS `login`;
-CREATE TABLE IF NOT EXISTS `login` (
-  `dni` int(11) NOT NULL,
-  `pass` varchar(120) NOT NULL,
-  PRIMARY KEY (`dni`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla upcn.login: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `login` DISABLE KEYS */;
-/*!40000 ALTER TABLE `login` ENABLE KEYS */;
-
 -- Volcando estructura para tabla upcn.perfil
 DROP TABLE IF EXISTS `perfil`;
 CREATE TABLE IF NOT EXISTS `perfil` (
   `dni` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
+  `pass` varchar(120) NOT NULL,
   `telefono` varchar(50) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `provincia` varchar(50) NOT NULL,

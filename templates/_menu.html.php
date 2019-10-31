@@ -7,19 +7,19 @@
 			<nav>
 				<ul class="nav justify-content-center">
 					<li class="nav-item">
-						<a class="nav-link active" href="index.html">Inicio</a>
+						<a class="nav-link active" href="index.php">Inicio</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="paquetes.html">Paquetes</a>
+						<a class="nav-link" href="paquetes.php">Paquetes</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="historia.html">Quienes somos</a>
+						<a class="nav-link" href="historia.php">Quienes somos</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="contacto.html">Contacto</a>
+						<a class="nav-link" href="contacto.php">Contacto</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="login.html">Ingresar</a>
+						<a class="nav-link" href="login.php">Ingresar</a>
 					</li>
 				</ul>
 			</nav>

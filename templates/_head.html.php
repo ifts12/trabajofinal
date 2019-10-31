@@ -11,6 +11,13 @@
 <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="./lib/onokumus-twbuttons-412e935/dist/twbuttons.min.css" />
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.bootstrap4.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css"/>
+
+<!-- <link rel="stylesheet" type="text/css" href="./lib/datatables.net-bs4/css/dataTables.bootstrap4.min.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="./lib/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" /> -->
+
 <!-- <link rel="stylesheet" type="text/css" href="lib/" /> -->
 
 <link rel="stylesheet" type="text/css" href="./css/style.css" />

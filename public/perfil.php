@@ -68,7 +68,7 @@ include DIR_TEMPLATE . '/_msg.html.php';
 		document.write('<?php echo accion(); ?>');
 		document.write(<?php echo nombre; ?>);
 		}
-	script>
+	</script>
 	<div class="form-group">
         <label for="nombre">Nombre</label>
         <input name="nombre" type="text" class="form-control<?php echo $Perfil->getError('nombre') ? ' is-invalid' : '' ?>" id="nombre" value="<?php echo $Perfil->getNombre() ?>" aria-describedby="nombreHelp" placeholder="Nombre">

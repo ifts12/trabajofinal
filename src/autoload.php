@@ -1,6 +1,6 @@
 <?php
 
-define('DIR_ROOT', dirname(__DIR__ . '/../../'));
+define('DIR_ROOT', dirname(__DIR__));
 define('DIR_TEMPLATE', DIR_ROOT . '/templates');
 
 spl_autoload_register('clasesNamespaceAutoload');

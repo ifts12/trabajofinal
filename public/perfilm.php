@@ -10,8 +10,6 @@ $Perfil = new Perfil();
 
 if(!empty($_POST))
 {
-    
-   
     $Perfil->validar($_POST);
     if(!$Perfil->hasError())
     {
@@ -30,12 +28,18 @@ if(!empty($_POST))
         
         if($statement->execute())
         {
-            $msg['success'] = "Se actualizaron los datos del Perfil correctamente.";
+            $msg = [
+                'tipo' => 'success',
+                'msg'  => "Se actualizaron los datos del rol correctamente."
+            ];
             $c->commit();
         }
         else
         {
-            $msg['error'] = 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2];
+            $msg = [
+                'tipo' => 'danger',
+                'msg'  => 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]
+            ];
             $c->rollBack();
         }
     }
@@ -47,8 +51,13 @@ elseif($_GET && array_key_exists('edit', $_GET) && !empty($_GET['edit']))
         $statement->bindValue(':dni', $_GET['edit'], \PDO::PARAM_INT);
         $statement->execute();
         $Perfil = $statement->fetchObject(UPCN\Perfil::class);
-		//var_dump($Perfil);
-        $msg['success'] = true;
+        if(empty($Perfil))
+        {
+            $msg = [
+                'tipo' => 'info',
+                'msg'  => 'No se encontraron registros'
+            ];
+        }
     }
     catch (\PDOException $e)
     {
@@ -63,24 +72,9 @@ else
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';
 
-if($Perfil->hasError() || array_key_exists('error', $msg))
-{
+
+include DIR_TEMPLATE . '/_msg.html.php';
 ?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Error </strong> en los datos del Perfil.
-    <strong>
-<?php echo $msg['error'];
-} else {
-?>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-	<strong>
-<?php echo $msg['success'];
-} ?>
-    </strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-    </button>
-</div>
 
 <div class="container">
 <form name="Perfil" method="post">
@@ -151,7 +145,7 @@ if($Perfil->hasError() || array_key_exists('error', $msg))
         $Perfil = $statement->fetchAll();
 		//var_dump($Perfil);
 		foreach ($Perfil as $rol)
-		{ echo '<option value="' . $rol["id_rol"] .'">'.$rol["rol"].' </option>';
+		{ echo '<option value="' . $rol["id"] .'">'.$rol["rol"].' </option>';
 			//var_dump($rol);
 		}
 	   

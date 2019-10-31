@@ -97,7 +97,7 @@ INSERT INTO `rol` (`id`, `rol`) VALUES
 DROP TABLE IF EXISTS `login`;
 CREATE TABLE IF NOT EXISTS `login` (
   `dni` int(11) NOT NULL,
-  `pass` varchar(50) NOT NULL,
+  `pass` varchar(120) NOT NULL,
   PRIMARY KEY (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

@@ -15,6 +15,8 @@ class Rol extends Comun
      * @var string
      */
     private $rol;
+    
+    
     /**
      * @return number
      */

@@ -3,7 +3,7 @@
 require __DIR__ . '/../src/autoload.php';
 
 use UPCN\Conexion;
-use UPCN\Rol;
+use UPCN\Login;
 
 $c = new Conexion();
 
@@ -13,20 +13,20 @@ include DIR_TEMPLATE . '/_menu.html.php';
 
 <div class="container">
 <div class="form-group">
-	<a class="btn btn-success" href="rola.php" role="button">Nuevo</a>
+	<a class="btn btn-success" href="logina.php" role="button">Nuevo</a>
 </div>
 <table id="table">
 <?php 
 try {
-    $statement = $c->prepare('SELECT * FROM rol');
+    $statement = $c->prepare('SELECT * FROM login');
     $statement->execute();
     echo '<tr>';
-    echo "\t<th>ID</th><th>Rol</th><th>Acción</th>";
+    echo "\t<th>ID</th><th>Pass</th><th>Acción</th>";
     echo '</tr>';
     while ($row = $statement->fetch(\PDO::FETCH_ASSOC))
     {
         echo '<tr>';
-        echo "\t<td>" . $row['id'] . '</td><td>' . $row['rol'] . '</td><td><a href="rolm.php?edit=' . $row['id'] . '"><i class="fas fa-pen"></i></a></td>';
+        echo "\t<td>" . $row['dni'] . '</td><td>' . $row['pass'] . '</td><td><a href="loginm.php?edit=' . $row['dni'] . '"><i class="fas fa-pen"></i></a></td>';
         echo '</tr>';
     }
     $statement = null;

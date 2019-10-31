@@ -30,12 +30,18 @@ if(!empty($_POST))
         
         if($statement->execute())
         {
-            $msg['success'] = "Se guardaron los datos del Perfil correctamente.";
+            $msg = [
+                'tipo' => 'success',
+                'msg'  => "Se actualizaron los datos del rol correctamente."
+            ];
             $c->commit();
         }
         else 
         {
-            $msg['error'] = 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2];
+            $msg = [
+                'tipo' => 'danger',
+                'msg'  => 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]
+            ];
             $c->rollBack();
         }
     }
@@ -43,9 +49,10 @@ if(!empty($_POST))
 
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';
-//var_dump($msg);
+
+
+include DIR_TEMPLATE . '/_msg.html.php';
 ?>
- 
 
 <div class="container">
 <form name="Perfil" method="post" class="">
@@ -109,23 +116,22 @@ include DIR_TEMPLATE . '/_menu.html.php';
         <select name="id_rol">	
 		<?php
 	
-		try {
-        $statement = $c->prepare('SELECT * FROM rol');
-        $statement->execute();
-        $Perfil = $statement->fetchAll();
-		//var_dump($Perfil);
-		foreach ($Perfil as $rol)
-		{ echo '<option value="' . $rol["id_rol"] .'">'.$rol["rol"].' </option>';
-			//var_dump($rol);
-		}
-	   
+		try
+		{
+            $statement = $c->prepare('SELECT * FROM rol');
+            $statement->execute();
+            $Perfil = $statement->fetchAll();
+    		//var_dump($Perfil);
+    		foreach ($Perfil as $rol)
+    		{
+    		    echo '<option value="' . $rol["id"] .'">'.$rol["rol"].' </option>';
+    		}
 		}
 		catch (\PDOException $e)
 		{
-        $e->getMessage();
+            $e->getMessage();
 		}
 		?>	
-			
       
 		</select>
 		<small id="rolHelp" class="form-text text-muted">Ingrese el rol.</small>

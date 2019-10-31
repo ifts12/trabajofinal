@@ -3,7 +3,7 @@
 <script src="./js/jquery-ui.min.js"></script>
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/js/fontawesome.min.js" integrity="sha256-MoYcVrOTRHZb/bvF8DwaNkTJkqu9aCR21zOsGkkBo78=" crossorigin="anonymous"></script> -->
-<script defer src="./js/all.js"></script> <!--load all styles -->
+<script defer src="./lib/fontawesome-free-5.11.2-web/js/all.min.js"></script> <!--load all styles -->
 
 <!-- development version, includes helpful console warnings -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->

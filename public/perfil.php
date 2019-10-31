@@ -14,7 +14,6 @@ if(!empty($_POST))
     if(!$Perfil->hasError())
     {
         $c->beginTransaction();
-        
         $statement = $c->prepare('SELECT * FROM perfil where dni=:dni');
         $statement->bindValue(':dni', $Perfil->getDni(), \PDO::PARAM_INT);
         if($statement->execute())

@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `perfil` (
   `pass` varchar(120) NOT NULL,
   `telefono` varchar(50) NOT NULL,
   `direccion` varchar(50) NOT NULL,
-  `id_provincia` varchar(50) NOT NULL,
+  `id_provincia` int(11) NOT NULL,
   `fecha_nac` date NOT NULL,
   `email` varchar(50) NOT NULL,
   `id_rol` int(11) NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `perfil` (
 
 -- Volcando datos para la tabla upcn.perfil: ~19 rows (aproximadamente)
 /*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
-INSERT INTO `perfil` (`dni`, `nombre`, `apellido`, `telefono`, `direccion`, `provincia`, `fecha_nac`, `email`, `id_rol`) VALUES
+INSERT INTO `perfil` (`dni`, `nombre`, `apellido`, `telefono`, `direccion`, `id_provincia`, `fecha_nac`, `email`, `id_rol`) VALUES
 	(22333444, 'Tony', 'DL', '4318-3404', 'Roca 710', 2, '1961-10-17', 'tonydl@gmail.com', 1),
 	(7939954, 'Eduardo', 'Sundblad', '4318-3404', 'Roca 710', 2, '1961-10-17', 'e.sundabland@gmail.com', 3),
 	(8550842, 'Jose ', 'Alcorta', '4257-5872', 'Roca 710', 2, '1979-08-07', 'j.alcorta@hotmail.com', 3),

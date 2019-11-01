@@ -25,7 +25,7 @@ if(!empty($_POST))
         $statement->bindValue(':fecha_nac', $Perfil->getFecha_nac(), \PDO::PARAM_STR);
         $statement->bindValue(':email', $Perfil->getEmail(), \PDO::PARAM_STR);
         $statement->bindValue(':id_rol', $Perfil->getId_rol(), \PDO::PARAM_INT);
-        $statement->bindValue(':provincia', $Perfil->getProvincia(), \PDO::PARAM_STR);
+        $statement->bindValue(':provincia', $Perfil->getId_provincia(), \PDO::PARAM_STR);
         $statement->bindValue(':pass', password_hash($Perfil->getPass(), PASSWORD_ARGON2I, ['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 3]), \PDO::PARAM_STR);
         
         if($statement->execute())

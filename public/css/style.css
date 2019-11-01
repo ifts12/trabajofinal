@@ -157,3 +157,29 @@ header.sticky-top a:hover {
 	color: #fff;
 	text-shadow: 0 0 .5rem #FFF;
 }
+
+header a.dropdown-item,
+header a.dropdown-item:hover,
+header.sticky-top a.dropdown-item, 
+header.sticky-top a.dropdown-item:hover {
+	color: #000;
+	text-shadow: 0 0 .5rem #FFF;
+}
+
+.dropdown-menu {
+	border-radius: 0;
+	border-top: 2px solid #ef6c57;
+	padding: 0;
+	transition: all 1s;
+}
+
+.dropdown-item {
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+}
+
+.dropdown-item:hover {
+	background-color: #d8d9fe;
+}
+
+

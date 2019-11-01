@@ -1,7 +1,8 @@
 <?php
 require __DIR__ . '/../src/autoload.php';
 
-session_start();
+@session_start();
+unset($_SESSION['u']);
 
 use UPCN\Conexion;
 use UPCN\Perfil;

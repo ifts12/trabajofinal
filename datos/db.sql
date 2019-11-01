@@ -18,6 +18,41 @@ CREATE DATABASE IF NOT EXISTS `upcn` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLL
 USE `upcn`;
 
 -- Volcando estructura para tabla upcn.adicional
+DROP TABLE IF EXISTS `provincia`;
+CREATE TABLE IF NOT EXISTS `provincia` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `provincia` (`id`, `nombre`) VALUES
+	(1, 'Ciudad Autónoma de Buenos Aires'),
+	(2, 'Buenos Aires'),
+	(3, 'Catamarca'),
+	(4, 'Chaco'),
+	(5, 'Chubut'),
+	(6, 'Córdoba'),
+	(7, 'Corrientes'),
+	(8, 'Entre Ríos'),
+	(9, 'Formosa'),
+	(10, 'Jujuy'),
+	(11, 'La Pampa'),
+	(12, 'La Rioja'),
+	(13, 'Mendoza'),
+	(14, 'Misiones'),
+	(15, 'Neuquén'),
+	(16, 'Río Negro'),
+	(17, 'Salta'),
+	(18, 'San Juan'),
+	(19, 'San Luis'),
+	(20, 'Santa Cruz'),
+	(21, 'Santa Fe'),
+	(22, 'Santiago del Estero'),
+	(23, 'Tierra del Fuego, Antártida e Islas del Atlántico Sur'),
+	(24, 'Tucumán');
+
+-- Volcando estructura para tabla upcn.adicional
 DROP TABLE IF EXISTS `adicional`;
 CREATE TABLE IF NOT EXISTS `adicional` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -51,30 +86,31 @@ DROP TABLE IF EXISTS `hotel`;
 CREATE TABLE IF NOT EXISTS `hotel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
-  `lugar` varchar(50) NOT NULL,
+  `id_provincia` int(11) NOT NULL,
   `estellas` int(11) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT FOREIGN KEY hotel_provincia (id_provincia) REFERENCES provincia (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla upcn.hotel: ~12 rows (aproximadamente)
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` (`id`, `nombre`, `lugar`, `estellas`, `precio`, `cantidad`) VALUES
-	(1, 'Hotel Sol Andino', 'Mendoza', 3, 5577, 15),
-	(2, 'Hotel Cordón del Plata', 'Mendoza', 4, 6176, 10),
-	(3, 'Gran Hotel San Luis', 'San Luis', 5, 6778, 12),
-	(4, 'Hotel El Mirador', 'Cordoba', 3, 5531, 15),
-	(5, 'Hotel Kalton', 'Cordoba', 4, 6262, 15),
-	(6, 'hotel Carmen', 'Misiones', 4, 7000, 20),
-	(7, 'hotel Turrance', 'Misiones', 5, 8000, 15),
-	(8, 'Hotel Eco Max', 'Río Negro', 5, 5000, 15),
-	(9, 'Hotel Miglierina', 'Bs.As', 4, 3000, 25),
-	(10, 'Hotel Rivoli', 'Bs.As', 5, 4000, 15),
-	(11, 'Provincial Plaza Hotel', 'Salta', 4, 4700, 10),
-	(12, 'Wilson Hotel', 'Salta', 3, 2500, 11),
-	(13, 'Hotel Ushuaia', 'Tierra del Fuego', 3, 3500, 12),
-	(14, 'Hotel las Leñas', 'Tierra del Fuego', 4, 5000, 12);
+INSERT INTO `hotel` (`id`, `nombre`, `id_provincia`, `estellas`, `precio`, `cantidad`) VALUES
+	(1, 'Hotel Sol Andino', 13, 3, 5577, 15),
+	(2, 'Hotel Cordón del Plata', 13, 4, 6176, 10),
+	(3, 'Gran Hotel San Luis', 19, 5, 6778, 12),
+	(4, 'Hotel El Mirador', 6, 3, 5531, 15),
+	(5, 'Hotel Kalton', 6, 4, 6262, 15),
+	(6, 'hotel Carmen', 14, 4, 7000, 20),
+	(7, 'hotel Turrance', 14, 5, 8000, 15),
+	(8, 'Hotel Eco Max', 16, 5, 5000, 15),
+	(9, 'Hotel Miglierina', 2, 4, 3000, 25),
+	(10, 'Hotel Rivoli', 2, 5, 4000, 15),
+	(11, 'Provincial Plaza Hotel', 17, 4, 4700, 10),
+	(12, 'Wilson Hotel', 17, 3, 2500, 11),
+	(13, 'Hotel Ushuaia', 23, 3, 3500, 12),
+	(14, 'Hotel las Leñas', 23, 4, 5000, 12);
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 
 -- Volcando estructura para tabla upcn.rol
@@ -88,9 +124,9 @@ CREATE TABLE IF NOT EXISTS `rol` (
 -- Volcando datos para la tabla upcn.rol: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
 INSERT INTO `rol` (`id`, `rol`) VALUES
-	(1, 'administrador'),
-	(2, 'empleado'),
-	(3, 'afiliado');
+	(1, 'Administrador'),
+	(2, 'Empleado'),
+	(3, 'Afiliado');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 
 -- Volcando estructura para tabla upcn.perfil

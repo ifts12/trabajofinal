@@ -1,3 +1,9 @@
+<?php
+// require __DIR__ . '/../src/autoload.php';
+
+// Administrador / Empleado / Afiliado
+require DIR_ROOT . '/src/session.php';
+?>
 
 <header class="py-3">
 <div class="container">
@@ -9,8 +15,14 @@
 					<li class="nav-item">
 						<a class="nav-link active" href="index.php">Inicio</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="paquetes.php">Paquetes</a>
+					<li id="paquete" class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown">Turismo</a>
+					    <div class="dropdown-menu" style="margin-top: -2px">
+                            <a class="dropdown-item" href="paquetes.php">Paquetes</a>
+                            <a class="dropdown-item" href="escapada.php">Escapada</a>
+                            <a class="dropdown-item" href="miniturismo.php">Miniturismo</a>
+                            <a class="dropdown-item" href="hoteleria.php">Hotelería</a>
+                        </div>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="historia.php">Quienes somos</a>

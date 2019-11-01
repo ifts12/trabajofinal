@@ -90,12 +90,10 @@ include DIR_TEMPLATE . '/_msg.html.php';
         <div class="invalid-feedback">Debe ingresar una direccion válida</div>
     </div>
     
-    <div class="form-group">
-        <label for="email">provincia</label>
-        <input name="provincia" type="text" class="form-control<?php echo $Perfil->getError('provincia') ? ' is-invalid' : '' ?>" id="provincia" value="<?php echo $Perfil->getProvincia() ?>" aria-describedby="emailHelp" placeholder="Provincia">
-        <small id="provinciaHelp" class="form-text text-muted">Ingrese el provincia.</small>
-        <div class="invalid-feedback">Debe ingresar una provincia válida</div>
-    </div>
+<?php 
+$selected = $Perfil->getId_provincia();
+include DIR_TEMPLATE . '/_form_provincia.php';
+?>
     
     <div class="form-group">
         <label for="fechaNacimiento">fechaNacimiento</label>

@@ -18,7 +18,7 @@ class Perfil extends Comun
     
     private $email;
     
-    private $provincia;
+    private $id_provincia;
     
     private $id_rol;
     
@@ -140,17 +140,17 @@ class Perfil extends Comun
     /**
      * @return mixed
      */
-    public function getProvincia()
+    public function getId_provincia()
     {
-        return $this->provincia;
+        return $this->id_provincia;
     }
 
     /**
-     * @param mixed $provincia
+     * @param mixed $id_provincia
      */
-    public function setProvincia($provincia)
+    public function setId_provincia($id_provincia)
     {
-        $this->provincia = $provincia;
+        $this->id_provincia = $id_provincia;
     }
 
     /**
@@ -185,6 +185,7 @@ class Perfil extends Comun
         $this->pass = $pass;
     }
 
+    
     
 
 }

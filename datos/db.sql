@@ -138,36 +138,38 @@ CREATE TABLE IF NOT EXISTS `perfil` (
   `pass` varchar(120) NOT NULL,
   `telefono` varchar(50) NOT NULL,
   `direccion` varchar(50) NOT NULL,
-  `provincia` varchar(50) NOT NULL,
+  `id_provincia` varchar(50) NOT NULL,
   `fecha_nac` date NOT NULL,
   `email` varchar(50) NOT NULL,
   `id_rol` int(11) NOT NULL,
   PRIMARY KEY (`dni`),
-  CONSTRAINT FOREIGN KEY perfil_rol (id_rol) REFERENCES rol (id)
+  CONSTRAINT FOREIGN KEY perfil_rol (id_rol) REFERENCES rol (id),
+  CONSTRAINT FOREIGN KEY perfil_provincia (id_provincia) REFERENCES provincia (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla upcn.perfil: ~19 rows (aproximadamente)
 /*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
 INSERT INTO `perfil` (`dni`, `nombre`, `apellido`, `telefono`, `direccion`, `provincia`, `fecha_nac`, `email`, `id_rol`) VALUES
-	(7939954, 'Eduardo', 'Sundblad', '4318-3404', 'Roca 710', 'Buenos Aires', '1961-10-17', 'e.sundabland@gmail.com', 3),
-	(8550842, 'Jose ', 'Alcorta', '4257-5872', 'Roca 710', 'Buenos Aires', '1979-08-07', 'j.alcorta@hotmail.com', 3),
-	(17889219, 'Gabriela', 'Caino', '5781-5872', 'Av.Belgrano 448', 'Buenos Aires', '1989-11-07', 'g.caino@gmail.com', 2),
-	(21362151, 'Luisa', 'Gamboa', ' 4317-2000', 'Av.Belgrano 448', 'Buenos Aires', '1980-04-12', 'g.caino@gmail.com', 2),
-	(22976274, 'Lorena', 'Olivera', '4528-2875', 'Av.Belgrano 448', 'Buenos Aires', '1989-01-05', 'L.olivera@hotmail.com', 2),
-	(23140162, 'Silvia', 'Freire', '4582-2747', 'Av.Belgrano 485', 'Buenos Aires', '1985-05-03', 's.freire@hotmail.com', 3),
-	(27771259, 'Claudia', 'Avalos', '5452-2488', 'Av.Belgrano 448', 'Buenos Aires', '1995-02-13', 'c.avalos@gmail.com', 3),
-	(28379836, 'Maria', 'Torres', '4318-3404', 'Roca 710', 'Buenos Aires', '1982-09-01', 'm.torres@hotmail.com', 3),
-	(30191893, 'Florencia', 'Sanchez', '4257-8792', 'Av.Belgrano 448', 'Buenos Aires', '1990-10-06', 'f.sanchez@hotmail.com', 3),
-	(30913912, 'Ana', 'Mazzeo', '4258-8512', 'Av.Belgrano 448', 'Buenos Aires', '1990-04-01', 'a.mazzeo@hotmail.com', 3),
-	(31609032, 'Analia', 'Blanco', '4825-2577', 'Av.Belgrano 448', 'Buenos Aires', '1999-09-20', 'a.blanco@hotmail.com', 3),
-	(32545825, 'Claudia', 'Gonzalez', '5472-8721', 'Roca 710', 'Buenos Aires', '1998-02-15', 'c.gonzalez@hotmail.com', 3),
-	(32875623, 'Romina', 'Mejia', '5781-2484', 'Roca 710', 'Buenos Aires', '1993-03-25', 'r.mejia@gmail.com', 1),
-	(33195378, 'Rocio', 'Martin', '4528-2577', 'Av.Belgrano 448', 'Buenos Aires', '1990-10-15', 'r.martin@hotmail.com', 3),
-	(33223372, 'Analia', 'Oliva', '5459-8752', 'Av.Belgrano 448', 'Buenos Aires', '1995-08-02', 'a.oliva@hotmail.com', 3),
-	(34978622, 'Micaela', 'Gieco', '5789-2547', 'Av.Belgrano 448', 'Buenos Aires', '1992-07-11', 'm.gieco@gmail.com', 1),
-	(35426279, 'Jose Maria ', 'Rodriguez', '4527-8576', 'Av.Belgrano 448', 'Buenos Aires', '1992-06-08', 'j.rodriguez@gmail.com', 3),
-	(36592331, 'Fiorella', 'Freire', '4575-3257', 'Roca 710', 'Buenos Aires', '1994-10-01', 'f.freire@gmail.com', 1),
-	(36873330, 'Belen', 'Sanchez', '1152486538', 'Roca 710', 'Buenos Aires', '1092-07-19', 'belen.sanchez@hotmail.com', 1);
+	(22333444, 'Tony', 'DL', '4318-3404', 'Roca 710', 2, '1961-10-17', 'tonydl@gmail.com', 1),
+	(7939954, 'Eduardo', 'Sundblad', '4318-3404', 'Roca 710', 2, '1961-10-17', 'e.sundabland@gmail.com', 3),
+	(8550842, 'Jose ', 'Alcorta', '4257-5872', 'Roca 710', 2, '1979-08-07', 'j.alcorta@hotmail.com', 3),
+	(17889219, 'Gabriela', 'Caino', '5781-5872', 'Av.Belgrano 448', 2, '1989-11-07', 'g.caino@gmail.com', 2),
+	(21362151, 'Luisa', 'Gamboa', ' 4317-2000', 'Av.Belgrano 448', 2, '1980-04-12', 'g.caino@gmail.com', 2),
+	(22976274, 'Lorena', 'Olivera', '4528-2875', 'Av.Belgrano 448', 2, '1989-01-05', 'L.olivera@hotmail.com', 2),
+	(23140162, 'Silvia', 'Freire', '4582-2747', 'Av.Belgrano 485', 2, '1985-05-03', 's.freire@hotmail.com', 3),
+	(27771259, 'Claudia', 'Avalos', '5452-2488', 'Av.Belgrano 448', 2, '1995-02-13', 'c.avalos@gmail.com', 3),
+	(28379836, 'Maria', 'Torres', '4318-3404', 'Roca 710', 2, '1982-09-01', 'm.torres@hotmail.com', 3),
+	(30191893, 'Florencia', 'Sanchez', '4257-8792', 'Av.Belgrano 448', 2, '1990-10-06', 'f.sanchez@hotmail.com', 3),
+	(30913912, 'Ana', 'Mazzeo', '4258-8512', 'Av.Belgrano 448', 2, '1990-04-01', 'a.mazzeo@hotmail.com', 3),
+	(31609032, 'Analia', 'Blanco', '4825-2577', 'Av.Belgrano 448', 2, '1999-09-20', 'a.blanco@hotmail.com', 3),
+	(32545825, 'Claudia', 'Gonzalez', '5472-8721', 'Roca 710', 2, '1998-02-15', 'c.gonzalez@hotmail.com', 3),
+	(32875623, 'Romina', 'Mejia', '5781-2484', 'Roca 710', 2, '1993-03-25', 'r.mejia@gmail.com', 1),
+	(33195378, 'Rocio', 'Martin', '4528-2577', 'Av.Belgrano 448', 2, '1990-10-15', 'r.martin@hotmail.com', 3),
+	(33223372, 'Analia', 'Oliva', '5459-8752', 'Av.Belgrano 448', 2, '1995-08-02', 'a.oliva@hotmail.com', 3),
+	(34978622, 'Micaela', 'Gieco', '5789-2547', 'Av.Belgrano 448', 2, '1992-07-11', 'm.gieco@gmail.com', 1),
+	(35426279, 'Jose Maria ', 'Rodriguez', '4527-8576', 'Av.Belgrano 448', 2, '1992-06-08', 'j.rodriguez@gmail.com', 3),
+	(36592331, 'Fiorella', 'Freire', '4575-3257', 'Roca 710', 2, '1994-10-01', 'f.freire@gmail.com', 1),
+	(36873330, 'Belen', 'Sanchez', '1152486538', 'Roca 710', 2, '1092-07-19', 'belen.sanchez@hotmail.com', 1);
 /*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
 
 -- Volcando estructura para tabla upcn.tipo

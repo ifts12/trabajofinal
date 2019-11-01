@@ -36,7 +36,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#paquete').hover(
+	$('.submenu').hover(
         function()
 		{
         	$(this).addClass('show');

@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `hotel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   `id_provincia` int(11) NOT NULL,
-  `estellas` int(11) NOT NULL,
+  `estrellas` int(11) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `hotel` (
 
 -- Volcando datos para la tabla upcn.hotel: ~12 rows (aproximadamente)
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` (`id`, `nombre`, `id_provincia`, `estellas`, `precio`, `cantidad`) VALUES
+INSERT INTO `hotel` (`id`, `nombre`, `id_provincia`, `estrellas`, `precio`, `cantidad`) VALUES
 	(1, 'Hotel Sol Andino', 13, 3, 5577, 15),
 	(2, 'Hotel Cordón del Plata', 13, 4, 6176, 10),
 	(3, 'Gran Hotel San Luis', 19, 5, 6778, 12),

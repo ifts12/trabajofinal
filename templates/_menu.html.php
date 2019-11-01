@@ -1,6 +1,4 @@
 <?php
-// require __DIR__ . '/../src/autoload.php';
-
 // Administrador / Empleado / Afiliado
 require DIR_ROOT . '/src/session.php';
 ?>
@@ -15,7 +13,7 @@ require DIR_ROOT . '/src/session.php';
 					<li class="nav-item">
 						<a class="nav-link active" href="index.php">Inicio</a>
 					</li>
-					<li id="paquete" class="nav-item dropdown">
+					<li class="submenu nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown">Turismo</a>
 					    <div class="dropdown-menu" style="margin-top: -2px">
                             <a class="dropdown-item" href="paquetes.php">Paquetes</a>
@@ -30,8 +28,24 @@ require DIR_ROOT . '/src/session.php';
 					<li class="nav-item">
 						<a class="nav-link" href="contacto.php">Contacto</a>
 					</li>
+					<?php if(isset($user) && $user['rol'] == "Administrador") { ?>
+					<li class="submenu nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown">Administrar</a>
+					    <div class="dropdown-menu" style="margin-top: -2px">
+                            <a class="dropdown-item" href="hotels.php">Hotel</a>
+                            <a class="dropdown-item" href="escapada.php">Escapada</a>
+                            <a class="dropdown-item" href="miniturismo.php">Miniturismo</a>
+                            <a class="dropdown-item" href="hoteleria.php">Hotelería</a>
+                        </div>
+					</li>
+					</li>
+					<?php } ?>
 					<li class="nav-item">
+					<?php if(isset($_SESSION['u'])) { ?>
+						<a class="nav-link" href="logout.php">Salir</a>
+					<?php } else { ?>
 						<a class="nav-link" href="login.php">Ingresar</a>
+					<?php } ?>
 					</li>
 				</ul>
 			</nav>

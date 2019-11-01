@@ -165,14 +165,17 @@ include DIR_TEMPLATE . '/_msg.html.php';
 	
 	
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="submit" class="btn btn-rect btn-grad btn-primary">Actualizar</button>
     </div>
 </form>
 <form method="post" onsubmit="return confirm('¿Esta seguro que quiere borrar este item?');">
     <input type="hidden" name="dni" value="<?php echo $Perfil->getDni() ?>">
     <input type="hidden" name="method" value="DELETE">
-    <button class="btn btn-flat btn-danger">Borrar</button>
+    <button class="btn btn-rect btn-grad btn-danger">Borrar</button>
 </form>
+<div class="form-group">
+	<a class="btn btn-rect btn-grad btn-info" href="rol.php" role="button">Volver</a>
+</div>
 
 </div>
 

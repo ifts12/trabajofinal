@@ -6,7 +6,6 @@ use UPCN\Conexion;
 use UPCN\Perfil;
 
 $c = new Conexion();
-
 $Perfil = new Perfil();
 
 if(!empty($_POST))
@@ -16,7 +15,7 @@ if(!empty($_POST))
     {
         $c->beginTransaction();
         
-        $statement = $c->prepare('INSERT INTO perfil (dni, nombre, apellido, telefono, direccion, fecha_nac, email, id_rol, provincia, pass) VALUES (:dni, :nombre, :apellido, :telefono, :direccion, :fecha_nac, :email, :id_rol, :provincia, :pass)');
+        $statement = $c->prepare('INSERT INTO perfil (dni, nombre, apellido, telefono, direccion, fecha_nac, email, id_rol, id_provincia, pass) VALUES (:dni, :nombre, :apellido, :telefono, :direccion, :fecha_nac, :email, :id_rol, :provincia, :pass)');
         $statement->bindValue(':dni', $Perfil->getDni(), \PDO::PARAM_INT);
         $statement->bindValue(':nombre', $Perfil->getNombre(), \PDO::PARAM_STR);
         $statement->bindValue(':apellido', $Perfil->getApellido(), \PDO::PARAM_STR);
@@ -150,12 +149,12 @@ include DIR_TEMPLATE . '/_form_provincia.php';
     </div>
     
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-rect btn-grad btn-primary">Guardar</button>
     </div>
 </form>
 
 <div class="form-group">
-	<a class="btn btn-info" href="login.php" role="button">Volver</a>
+	<a class="btn btn-rect btn-grad btn-info" href="perfil.php" role="button">Volver</a>
 </div>
 </div>
 

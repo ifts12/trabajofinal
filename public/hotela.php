@@ -82,12 +82,12 @@ include DIR_TEMPLATE . '/_form_provincia.php';
     </div>
     
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-rect btn-grad btn-primary">Guardar</button>
     </div>
 </form>
 
 <div class="form-group">
-	<a class="btn btn-info" href="login.php" role="button">Volver</a>
+	<a class="btn btn-rect btn-grad btn-info" href="hotels.php" role="button">Volver</a>
 </div>
 
 </div>

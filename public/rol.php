@@ -13,7 +13,7 @@ include DIR_TEMPLATE . '/_menu.html.php';
 
 <div class="container">
 <div class="form-group">
-	<a class="btn btn-success" href="rola.php" role="button">Nuevo</a>
+	<a class="btn btn-rect btn-grad btn-success" href="rola.php" role="button">Nuevo</a>
 </div>
 <table id="table">
 <?php 

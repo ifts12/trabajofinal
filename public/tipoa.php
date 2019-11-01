@@ -3,26 +3,24 @@
 require __DIR__ . '/../src/autoload.php';
 
 use UPCN\Conexion;
-use UPCN\Rol;
+use UPCN\Tipo;
 
 $c = new Conexion();
+$clase = new Tipo();
 
-$rol = new Rol();
 if(!empty($_POST))
 {
-    $rol->validar($_POST);
-    if(!$rol->hasError())
+    $clase->validar($_POST);
+    if(!$clase->hasError())
     {
         $c->beginTransaction();
-        
-        $statement = $c->prepare('INSERT INTO rol (rol) VALUES (:rol)');
-        $statement->bindValue(':rol', $rol->getRol(), \PDO::PARAM_STR);
-        
+        $statement = $c->prepare('INSERT INTO tipo (nombre) VALUES (:nombre)');
+        $statement->bindValue(':nombre', $clase->getNombre(), \PDO::PARAM_STR);
         if($statement->execute())
         {
             $msg = [
                 'tipo' => 'success',
-                'msg'  => "Se guardaron los datos del afiliado correctamente."
+                'msg'  => "Se guardaron los datos correctamente."
             ];
             $c->commit();
         }
@@ -40,17 +38,16 @@ if(!empty($_POST))
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';
 
-
 include DIR_TEMPLATE . '/_msg.html.php';
 ?>
 
 <div class="container">
-<form name="roles" method="post">
+<form name="logines" method="post">
     <div class="form-group">
-        <label for="rol">Rol</label>
-        <input name="rol" type="text" class="form-control<?php echo $rol->getError('rol') ? ' is-invalid' : '' ?>" id="rol" value="<?php echo $rol->getRol() ?>" aria-describedby="rolHelp" placeholder="rol">
-        <small id="rolHelp" class="form-text text-muted">Ingrese el rol.</small>
-        <div class="invalid-feedback">Debe elegir un rol</div>
+        <label for="nombre">nombre</label>
+        <input name="nombre" type="text" class="form-control<?php echo $clase->getError('nombre') ? ' is-invalid' : '' ?>" id="nombre" value="<?php echo $clase->getNombre() ?>" aria-describedby="nombreHelp" placeholder="Nombre">
+        <small id="nombreHelp" class="form-text text-muted">Documento Nacional de Identidad (sin puntos).</small>
+        <div class="invalid-feedback">Debe ser un número de documento válido</div>
     </div>
     
     <div class="form-group">
@@ -59,7 +56,7 @@ include DIR_TEMPLATE . '/_msg.html.php';
 </form>
 
 <div class="form-group">
-	<a class="btn btn-rect btn-grad btn-info" href="rol.php" role="button">Volver</a>
+	<a class="btn btn-rect btn-grad btn-info" href="tipo.php" role="button">Volver</a>
 </div>
 
 </div>

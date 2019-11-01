@@ -3,20 +3,20 @@
 require __DIR__ . '/../src/autoload.php';
 
 use UPCN\Conexion;
-use UPCN\Hotel;
+use UPCN\Tipo;
 
 $c = new Conexion();
 
 if(!empty($_POST))
 {
-    $clase = new Hotel();
+    $clase = new Tipo();
     $clase->validar($_POST);
     if(!$clase->hasError())
     {
         $c->beginTransaction();
         if(array_key_exists('method', $_POST) && $_POST['method'] == "DELETE")
         {
-            $statement = $c->prepare('DELETE FROM hotel WHERE id=:id');
+            $statement = $c->prepare('DELETE FROM tipo WHERE id=:id');
             $statement->bindValue(':id', $clase->getId(), \PDO::PARAM_INT);
             $msg = [
                 'tipo' => 'warning',
@@ -27,12 +27,8 @@ if(!empty($_POST))
         }
         else 
         {
-            $statement = $c->prepare('UPDATE hotel SET nombre=:nombre, id_provincia=:id_provincia, estrellas=:estrellas, precio=:precio, cantidad=:cantidad WHERE id=:id');
+            $statement = $c->prepare('UPDATE tipo SET nombre=:nombre WHERE id=:id');
             $statement->bindValue(':nombre', $clase->getNombre(), \PDO::PARAM_STR);
-            $statement->bindValue(':id_provincia', $clase->getId_provincia(), \PDO::PARAM_INT);
-            $statement->bindValue(':estrellas', $clase->getEstrellas(), \PDO::PARAM_INT);
-            $statement->bindValue(':precio', $clase->getPrecio(), \PDO::PARAM_INT);
-            $statement->bindValue(':cantidad', $clase->getCantidad(), \PDO::PARAM_INT);
             $statement->bindValue(':id', $clase->getId(), \PDO::PARAM_INT);
         }
         
@@ -53,10 +49,10 @@ if(!empty($_POST))
 elseif($_GET && array_key_exists('edit', $_GET) && !empty($_GET['edit']))
 {
     try {
-        $statement = $c->prepare('SELECT * FROM hotel WHERE id=:id');
+        $statement = $c->prepare('SELECT * FROM tipo WHERE id=:id');
         $statement->bindValue(':id', $_GET['edit'], \PDO::PARAM_INT);
         $statement->execute();
-        $clase = $statement->fetchObject(UPCN\Hotel::class);
+        $clase = $statement->fetchObject(UPCN\Tipo::class);
         if(empty($clase))
         {
             $msg = [
@@ -72,7 +68,7 @@ elseif($_GET && array_key_exists('edit', $_GET) && !empty($_GET['edit']))
 }
 else
 {
-    header('location: hotels.php');
+    header('location: tipo.php');
 }
 
 include DIR_TEMPLATE . '/_head.html.php';
@@ -93,34 +89,8 @@ if(isset($clase) && !empty($clase))
     <div class="form-group">
         <label for="nombre">nombre</label>
         <input name="nombre" type="text" class="form-control<?php echo $clase->getError('nombre') ? ' is-invalid' : '' ?>" id="nombre" value="<?php echo $clase->getNombre() ?>" aria-describedby="nombreHelp" placeholder="Nombre">
-        <small id="nombreHelp" class="form-text text-muted">Documento Nacional de Identidad (sin puntos).</small>
-        <div class="invalid-feedback">Debe ser un número de documento válido</div>
-    </div>
-    
-<?php 
-$selected = $clase->getId_provincia();
-include DIR_TEMPLATE . '/_form_provincia.php';
-?>
-    
-    <div class="form-group">
-        <label for="estrellas">Estrellas</label>
-        <input name="estrellas" type="number" class="form-control<?php echo $clase->getError('estrellas') ? ' is-invalid' : '' ?>" id="estrellas" value="<?php echo $clase->getEstrellas() ?>" aria-describedby="estrellasHelp" placeholder="Estrellas" min="1" max="5">
-        <small id="estrellasHelp" class="form-text text-muted">Ingrese una contraseña.</small>
-        <div class="invalid-feedback">Debe ser un nombre válido</div>
-    </div>
-    
-    <div class="form-group">
-        <label for="pass">Precio</label>
-        <input name="precio" type="text" class="form-control<?php echo $clase->getError('precio') ? ' is-invalid' : '' ?>" id="precio" value="<?php echo $clase->getPrecio() ?>" aria-describedby="precioHelp" placeholder="precio">
-        <small id="precioHelp" class="form-text text-muted">Ingrese una contraseña.</small>
-        <div class="invalid-feedback">Debe ser un nombre válido</div>
-    </div>
-    
-    <div class="form-group">
-        <label for="cantidad">Cantidad</label>
-        <input name="cantidad" type="number" class="form-control<?php echo $clase->getError('cantidad') ? ' is-invalid' : '' ?>" id="cantidad" value="<?php echo $clase->getCantidad() ?>" aria-describedby="cantidadHelp" placeholder="Cantidad">
-        <small id="cantidadHelp" class="form-text text-muted">Ingrese una contraseña.</small>
-        <div class="invalid-feedback">Debe ser un nombre válido</div>
+        <small id="nombreHelp" class="form-text text-muted">Tipo de Turismo.</small>
+        <div class="invalid-feedback">Debe ingresar un nombre</div>
     </div>
     
 	
@@ -139,7 +109,7 @@ include DIR_TEMPLATE . '/_form_provincia.php';
 
 
 <div class="form-group">
-	<a class="btn btn-rect btn-grad btn-info" href="hotels.php" role="button">Volver</a>
+	<a class="btn btn-rect btn-grad btn-info" href="tipo.php" role="button">Volver</a>
 </div>
 
 </div>

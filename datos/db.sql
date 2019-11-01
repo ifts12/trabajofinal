@@ -183,55 +183,56 @@ CREATE TABLE IF NOT EXISTS `tipo` (
 -- Volcando datos para la tabla upcn.tipo: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `tipo` DISABLE KEYS */;
 INSERT INTO `tipo` (`id`, `nombre`) VALUES
-	(1, 'miniturismo'),
-	(2, 'escapada'),
-	(3, 'paquete');
+	(1, 'Miniturismo'),
+	(2, 'Escapada'),
+	(3, 'Paquete');
 /*!40000 ALTER TABLE `tipo` ENABLE KEYS */;
 
 -- Volcando estructura para tabla upcn.viaje
 DROP TABLE IF EXISTS `viaje`;
 CREATE TABLE IF NOT EXISTS `viaje` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Lugar` varchar(50) NOT NULL,
+  `id_provincia` int(11) NOT NULL,
+  `lugar` varchar(50) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `detalle` varchar(50) NOT NULL,
   `dias` varchar(50) NOT NULL,
   `cantidad` varchar(50) NOT NULL,
   `id_tipo` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT FOREIGN KEY viaje_tipo (id_tipo) REFERENCES tipo (id)
+  CONSTRAINT FOREIGN KEY viaje_tipo (id_tipo) REFERENCES tipo (id),
+  CONSTRAINT FOREIGN KEY viaje_provincia (id_provincia) REFERENCES provincia (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla upcn.viaje: ~25 rows (aproximadamente)
 /*!40000 ALTER TABLE `viaje` DISABLE KEYS */;
-INSERT INTO `viaje` (`id`, `Lugar`, `precio`, `detalle`, `dias`, `cantidad`, `id_tipo`) VALUES
-	(1, 'Mendoza / Con termas de Cacheuta', 5677, 'Hotel Sol Andino+Media pensión', '4 días / 2 noches', '10', 1),
-	(2, 'Mendoza / Con termas de Cacheuta', 6176, 'Hotel Cordón del Plata+Media pensión', '4 dias / 2 noches', '10', 1),
-	(3, 'San Luis / Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis+Media pensión', '4 dias / 2 noches', '10', 1),
-	(4, ' Córdoba / Villa Carlos Paz', 5531, 'Hotel El Mirador+ Pensión completa', '4 dias / 2 noches', '10', 1),
-	(5, 'Córdoba / Villa Carlos Paz', 6262, 'Hotel Kalton + Pensión completa', '4 dias / 2 noches', '10', 1),
-	(6, 'Buenos Aires / Mar del Plata', 4207, 'Hotel Dos Reyes+ Desayuno incluido', '4 dias / 2 noches', '10', 1),
-	(7, 'Buenos Aires / Mar del Plata', 3800, 'Hotel Pergamino + Desayuno incluido', '4 dias / 2 noches', '10', 1),
-	(8, 'Santa Fe / Rosario', 2500, 'Hotel de la Cité+ Desayuno incluido', '4 dias / 2 noches', '10', 1),
-	(9, 'Misiones / Cataratas del Iguazu', 6000, 'Hotel Colonial Iguazu+ Media Pensión', '4 dias / 2 noches', '10', 1),
-	(10, 'Misiones / Caratas del Iguazu', 7000, 'Exe Hotel Cataratas+ Media Pensión', '4 dias / 2 noches', '10', 1),
-	(11, 'Día de campo en Brandsen', 2000, 'Actividades de campo+ Desayuno+ Picada+ Merienda', '1 dia', '15', 2),
-	(12, 'San Luis / Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis + Media pensión', '4 dias / 2 noches', '15', 2),
-	(13, 'Córdoba / Villa Carlos Paz', 5531, 'Hotel El Mirador + Pensión completa', '4 dias / 2 noches', '15', 2),
-	(14, 'Córdoba / Villa Carlos Paz', 6262, 'Hotel Kalton + Pensión completa', '4 dias / 2 noches', '15', 2),
-	(15, 'Entre Ríos / Villa Elisa ', 5200, 'Hotel Quinto Elemento + Media pensión', '4 dias / 2 noches', '15', 2),
-	(16, 'Buenos Aires / Tigre ', 3350, 'Hotel Wyndham Nordelta + Desayuno incluido ', '1 dia ', '15', 2),
-	(17, 'Buenos Aires / Lobos', 3000, 'La candelaria + Media pension ', '2 dias ', '15', 2),
-	(18, 'Mendoza / Termas de Cacheuta', 5677, 'Hotel Sol Andino + Media pensión+ Micro', '4 dias / 2 noches', '20', 3),
-	(19, 'Mendoza / Termas de Cacheuta', 6176, 'Hotel Cordón del Plata + Media pensión+ Micro', '4 dias / 2 noches ', '20', 3),
-	(20, 'San Luis / Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis+ Media pensión+ Micro', '4 días / 2 noches', '20', 3),
-	(21, 'Córdoba / Villa Carlos Paz', 5531, 'Hotel El Mirador+ Media pensión+ Micro ', '4 días / 2 noches', '20', 3),
-	(22, 'Córdoba / Villa Carlos Paz', 6262, 'Hotel Kalton + pensión completa + Micro', '4 dias / 2 noches', '20', 3),
-	(23, 'Mendoza ', 12000, 'Hotel Provincial+ Desayuno incluido+ Aereo', '4 dias / 2 noches', '20', 3),
-	(24, 'Rio Negro/ Bariloche', 20000, 'Hotel Nevada+ Desayuno + Aereo', '4 dias / 2 noches', '20', 3),
-	(25, 'Chubut / Puerto Madryn', 15000, 'Hotel Península Valdés+ Desayuno+ Aereo', '4 dias / 2 noches', '20', 3);
+INSERT INTO `viaje` (`id`, `id_provincia`, `lugar`, `precio`, `detalle`, `dias`, `cantidad`, `id_tipo`) VALUES
+	(1, 13, 'Con termas de Cacheuta', 5677, 'Hotel Sol Andino+Media pensión', '4 días / 2 noches', '10', 1),
+	(2, 13, 'Con termas de Cacheuta', 6176, 'Hotel Cordón del Plata+Media pensión', '4 dias / 2 noches', '10', 1),
+	(3, 19, 'Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis+Media pensión', '4 dias / 2 noches', '10', 1),
+	(4, 6, 'Villa Carlos Paz', 5531, 'Hotel El Mirador+ Pensión completa', '4 dias / 2 noches', '10', 1),
+	(5, 6, 'Villa Carlos Paz', 6262, 'Hotel Kalton + Pensión completa', '4 dias / 2 noches', '10', 1),
+	(6, 2, 'Mar del Plata', 4207, 'Hotel Dos Reyes+ Desayuno incluido', '4 dias / 2 noches', '10', 1),
+	(7, 2, 'Mar del Plata', 3800, 'Hotel Pergamino + Desayuno incluido', '4 dias / 2 noches', '10', 1),
+	(8, 21, 'Rosario', 2500, 'Hotel de la Cité+ Desayuno incluido', '4 dias / 2 noches', '10', 1),
+	(9, 14, 'Cataratas del Iguazu', 6000, 'Hotel Colonial Iguazu+ Media Pensión', '4 dias / 2 noches', '10', 1),
+	(10, 14, 'Caratas del Iguazu', 7000, 'Exe Hotel Cataratas+ Media Pensión', '4 dias / 2 noches', '10', 1),
+	(11, 2, 'Día de campo en Brandsen', 2000, 'Actividades de campo+ Desayuno+ Picada+ Merienda', '1 dia', '15', 2),
+	(12, 19, 'Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis + Media pensión', '4 dias / 2 noches', '15', 2),
+	(13, 6, 'Villa Carlos Paz', 5531, 'Hotel El Mirador + Pensión completa', '4 dias / 2 noches', '15', 2),
+	(14, 6, 'Villa Carlos Paz', 6262, 'Hotel Kalton + Pensión completa', '4 dias / 2 noches', '15', 2),
+	(15, 8, 'Villa Elisa ', 5200, 'Hotel Quinto Elemento + Media pensión', '4 dias / 2 noches', '15', 2),
+	(16, 2, 'Tigre ', 3350, 'Hotel Wyndham Nordelta + Desayuno incluido ', '1 dia ', '15', 2),
+	(17, 2, 'Lobos', 3000, 'La candelaria + Media pension ', '2 dias ', '15', 2),
+	(18, 13, 'Termas de Cacheuta', 5677, 'Hotel Sol Andino + Media pensión+ Micro', '4 dias / 2 noches', '20', 3),
+	(19, 13, 'Termas de Cacheuta', 6176, 'Hotel Cordón del Plata + Media pensión+ Micro', '4 dias / 2 noches ', '20', 3),
+	(20, 19, 'Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis+ Media pensión+ Micro', '4 días / 2 noches', '20', 3),
+	(21, 6, 'Villa Carlos Paz', 5531, 'Hotel El Mirador+ Media pensión+ Micro ', '4 días / 2 noches', '20', 3),
+	(22, 6, 'Villa Carlos Paz', 6262, 'Hotel Kalton + pensión completa + Micro', '4 dias / 2 noches', '20', 3),
+	(23, 13, 'MENDOZA', 12000, 'Hotel Provincial+ Desayuno incluido+ Aereo', '4 dias / 2 noches', '20', 3),
+	(24, 16, 'Bariloche', 20000, 'Hotel Nevada+ Desayuno + Aereo', '4 dias / 2 noches', '20', 3),
+	(25, 5, 'Puerto Madryn', 15000, 'Hotel Península Valdés+ Desayuno+ Aereo', '4 dias / 2 noches', '20', 3);
 /*!40000 ALTER TABLE `viaje` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla upcn.compra
 DROP TABLE IF EXISTS `compra`;

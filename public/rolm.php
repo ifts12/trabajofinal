@@ -106,13 +106,13 @@ if(isset($rol) && !empty($rol))
     <input type="hidden" name="id" value="<?php echo $rol->getId() ?>">
     <input type="hidden" name="rol" value="<?php echo $rol->getRol() ?>">
     <input type="hidden" name="method" value="DELETE">
-    <button class="btn btn-flat btn-danger">Borrar</button>
+    <button class="btn btn-rect btn-grad btn-danger">Borrar</button>
 </form>
 <?php 
 }
 ?>
 <div class="form-group">
-	<a class="btn btn-info" href="rol.php" role="button">Volver</a>
+	<a class="btn btn-rect btn-grad btn-info" href="rol.php" role="button">Volver</a>
 </div>
 
 </div>

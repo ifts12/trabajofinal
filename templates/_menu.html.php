@@ -28,22 +28,32 @@ require DIR_ROOT . '/src/session.php';
 					<li class="nav-item">
 						<a class="nav-link" href="contacto.php">Contacto</a>
 					</li>
-					<?php if(isset($user) && $user['rol'] == "Administrador") { ?>
+					<?php var_dump($_SESSION['u']); if(isset($user) && $user['rol'] == "Administrador") { ?>
 					<li class="submenu nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown">Administrar</a>
 					    <div class="dropdown-menu" style="margin-top: -2px">
                             <a class="dropdown-item" href="hotels.php">Hotel</a>
+                            <a class="dropdown-item" href="viaje.php">Viaje</a>
                             <a class="dropdown-item" href="escapada.php">Escapada</a>
                             <a class="dropdown-item" href="miniturismo.php">Miniturismo</a>
                             <a class="dropdown-item" href="hoteleria.php">Hotelería</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="perfil.php">Perfil</a>
+                            <a class="dropdown-item" href="rol.php">Rol</a>
+                            <a class="dropdown-item" href="tipo.php">Tipo</a>
                         </div>
 					</li>
-					</li>
 					<?php } ?>
-					<li class="nav-item">
 					<?php if(isset($_SESSION['u'])) { ?>
-						<a class="nav-link" href="logout.php">Salir</a>
+					<li class="submenu nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown"><i class="fas fa-user-circle"></i></a>
+					    <div class="dropdown-menu" style="margin-top: -2px">
+                            <a class="dropdown-item" href="logout.php">INFO</a>
+    						<a class="dropdown-item" href="logout.php">Salir</a>
+                        </div>
+					</li>
 					<?php } else { ?>
+					<li class="nav-item">
 						<a class="nav-link" href="login.php">Ingresar</a>
 					<?php } ?>
 					</li>

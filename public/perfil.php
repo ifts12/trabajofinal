@@ -54,7 +54,7 @@ include DIR_TEMPLATE . '/_msg.html.php';
     </div>
 	
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary" onclick = "funcion();">BUSCAR </button>
+		<button type="submit" class="btn btn-rect btn-grad btn-primary" onclick = "funcion();">BUSCAR </button>
 		
     </div>
     

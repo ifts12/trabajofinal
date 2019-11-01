@@ -161,14 +161,20 @@ header.sticky-top a:hover {
 header a.dropdown-item,
 header a.dropdown-item:hover,
 header.sticky-top a.dropdown-item, 
-header.sticky-top a.dropdown-item:hover {
-	color: #000;
-	text-shadow: 0 0 .5rem #FFF;
+header.sticky-top a.dropdown-item:hover
+{
+	color: #333;
+	text-shadow: 0 0 .5rem #a7a9aa;
+}
+
+.dropdown-menu,
+.dropdown-divider
+{
+	border-top: 2px solid #ef6c57;
 }
 
 .dropdown-menu {
 	border-radius: 0;
-	border-top: 2px solid #ef6c57;
 	padding: 0;
 	transition: all 1s;
 }
@@ -179,7 +185,9 @@ header.sticky-top a.dropdown-item:hover {
 }
 
 .dropdown-item:hover {
-	background-color: #d8d9fe;
+	background-color: #c1e0ff;
+	border-top: 1px solid #a0a0dd;
+	border-bottom: 1px solid #a0a0dd;
 }
 
 

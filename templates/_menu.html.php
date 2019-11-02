@@ -1,7 +1,3 @@
-<?php
-// Administrador / Empleado / Afiliado
-require DIR_ROOT . '/src/session.php';
-?>
 
 <header class="py-3">
 <div class="container">
@@ -28,19 +24,18 @@ require DIR_ROOT . '/src/session.php';
 					<li class="nav-item">
 						<a class="nav-link" href="contacto.php">Contacto</a>
 					</li>
-					<?php var_dump($_SESSION['u']); if(isset($user) && $user['rol'] == "Administrador") { ?>
+					<?php if(isset($user) && @get_class($user) && $user->hasRol("Administrador")) { ?>
 					<li class="submenu nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown">Administrar</a>
 					    <div class="dropdown-menu" style="margin-top: -2px">
                             <a class="dropdown-item" href="hotels.php">Hotel</a>
                             <a class="dropdown-item" href="viaje.php">Viaje</a>
-                            <a class="dropdown-item" href="escapada.php">Escapada</a>
-                            <a class="dropdown-item" href="miniturismo.php">Miniturismo</a>
-                            <a class="dropdown-item" href="hoteleria.php">Hotelería</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="perfil.php">Perfil</a>
                             <a class="dropdown-item" href="rol.php">Rol</a>
                             <a class="dropdown-item" href="tipo.php">Tipo</a>
+                            <a class="dropdown-item" href="adicional.php">Adicional</a>
+                            <a class="dropdown-item" href="asistencia.php">Asistencia</a>
                         </div>
 					</li>
 					<?php } ?>

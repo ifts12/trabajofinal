@@ -192,6 +192,7 @@ INSERT INTO `tipo` (`id`, `nombre`) VALUES
 DROP TABLE IF EXISTS `viaje`;
 CREATE TABLE IF NOT EXISTS `viaje` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `foto` varchar(255),
   `id_provincia` int(11) NOT NULL,
   `lugar` varchar(50) NOT NULL,
   `precio` decimal(10,2) NOT NULL,

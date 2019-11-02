@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . '/../src/autoload.php';
+require DIR_ROOT . '/src/session.php';
 
 use UPCN\Conexion;
 use UPCN\Rol;

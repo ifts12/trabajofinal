@@ -1,6 +1,8 @@
 <?php
 
 require __DIR__ . '/../src/autoload.php';
+require DIR_ROOT . '/src/session.php';
+
 
 use UPCN\Conexion;
 use UPCN\Perfil;
@@ -55,20 +57,8 @@ include DIR_TEMPLATE . '/_msg.html.php';
 	
 	<div class="form-group">
 		<button type="submit" class="btn btn-rect btn-grad btn-primary" onclick = "funcion();">BUSCAR </button>
-		
     </div>
     
-    
-	<script>
-		function funcion()
-		{
-		alert('<?php echo accion(); ?>');
-		alert(<?php echo nombre; ?>);
-		/* Escribir en el Documento*/
-		document.write('<?php echo accion(); ?>');
-		document.write(<?php echo nombre; ?>);
-		}
-	</script>
 	<div class="form-group">
         <label for="nombre">Nombre</label>
         <input name="nombre" type="text" class="form-control<?php echo $Perfil->getError('nombre') ? ' is-invalid' : '' ?>" id="nombre" value="<?php echo $Perfil->getNombre() ?>" aria-describedby="nombreHelp" placeholder="Nombre">
@@ -96,13 +86,12 @@ include DIR_TEMPLATE . '/_msg.html.php';
         <div class="invalid-feedback">Debe ingresar una direccion válida</div>
     </div>
     
-    <div class="form-group">
-        <label for="email">provincia</label>
-        <input name="provincia" type="text" class="form-control<?php echo $Perfil->getError('provincia') ? ' is-invalid' : '' ?>" id="provincia" value="<?php echo $Perfil->getProvincia() ?>" aria-describedby="emailHelp" placeholder="Provincia">
-        <small id="provinciaHelp" class="form-text text-muted">Ingrese el provincia.</small>
-        <div class="invalid-feedback">Debe ingresar una provincia válida</div>
-    </div>
-    
+
+<?php 
+$selected = $Perfil->getId_provincia();
+include DIR_TEMPLATE . '/_form_provincia.php';
+?>
+        
     <div class="form-group">
         <label for="fechaNacimiento">fechaNacimiento</label>
         <input name="fecha_nac" type="date" min="1900-01-01" max="2019-12-31" class="form-control<?php echo $Perfil->getError('fecha_nac') ? ' is-invalid' : '' ?>" id="fechaNacimiento" value="<?php echo $Perfil->getFecha_nac() ?>" aria-describedby="fechaNacimientoHelp" placeholder="fechaNacimiento">

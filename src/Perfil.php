@@ -24,6 +24,17 @@ class Perfil extends Comun
     
     private $pass;
     
+    private $rol;
+    
+    
+    public function hasRol($rol)
+    {
+        if($this->getRol() === $rol)
+        {
+            return true;
+        }
+        return false;
+    }
     
     /**
      * @return mixed
@@ -184,6 +195,23 @@ class Perfil extends Comun
     {
         $this->pass = $pass;
     }
+    
+    /**
+     * @return mixed
+     */
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+    /**
+     * @param mixed $rol
+     */
+    public function setRol($rol)
+    {
+        $this->rol = $rol;
+    }
+
 
     
     

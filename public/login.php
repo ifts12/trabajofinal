@@ -1,4 +1,5 @@
 <?php
+
 require __DIR__ . '/../src/autoload.php';
 
 @session_start();
@@ -7,11 +8,11 @@ unset($_SESSION['u']);
 use UPCN\Conexion;
 use UPCN\Perfil;
 
-$c = new Conexion();
-$clase = new Perfil();
-
 if(!empty($_POST))
 {
+    $c = new Conexion();
+    $clase = new Perfil();
+    
     $clase->validar($_POST);
     $msg = [
         'tipo' => 'danger',

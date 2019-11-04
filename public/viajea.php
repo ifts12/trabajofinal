@@ -53,16 +53,11 @@ include DIR_TEMPLATE . '/_msg.html.php';
 <div class="container">
 <form name="forms" method="post">
     
-    <div class="form-group">
-        <label for="foto">Foto</label>
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="fotoFile" lang="es">
-            <label class="custom-file-label" for="customFile"><?php echo empty($clase->getFoto()) ? 'Seleccione una foto' : $clase->getFoto() ?></label>
-        </div>
-        <small id="fotoHelp" class="form-text text-muted">Foto.</small>
-        <div class="invalid-feedback">Debe subir una foto</div>
-    </div>
-
+<?php 
+include DIR_TEMPLATE . '/_form_foto.php';
+?>
+    
+    
 <?php 
 $selected = $clase->getId_provincia();
 include DIR_TEMPLATE . '/_form_provincia.php';

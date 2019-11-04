@@ -22,12 +22,12 @@ try {
     if($statement->execute())
     {
         echo '<tr>';
-        echo "\t<th>ID</th><th>Nombre</th><th>Provincia</th><th>Estrellas</th><th>Precio</th><th>Cantidad</th><th>Acción</th>";
+        echo "\t<th>ID</th><th>Nombre</th><th>Foto</th><th>Provincia</th><th>Estrellas</th><th>Precio</th><th>Cantidad</th><th>Acción</th>";
         echo '</tr>';
         while ($row = $statement->fetch(\PDO::FETCH_ASSOC))
         {
             echo '<tr>';
-            echo sprintf("\t<td>%d</td><td>%s</td><td>%s</td><td>%d</td><td>%0.2f</td><td>%d</td><td><a href='hotelm.php?edit=%d'><i class='fas fa-pen'></i></a></td>", $row['id'], $row['nombre'], $row['provincia'], $row['estrellas'], $row['precio'], $row['cantidad'], $row['id']);
+            echo sprintf("\t<td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%d</td><td>%0.2f</td><td>%d</td><td><a href='hotelm.php?edit=%d'><i class='fas fa-pen'></i></a></td>", $row['id'], $row['nombre'], $row['foto'], $row['provincia'], $row['estrellas'], $row['precio'], $row['cantidad'], $row['id']);
             echo '</tr>';
         }
     }

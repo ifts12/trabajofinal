@@ -17,10 +17,11 @@ if(!empty($_POST))
     {
         $c->beginTransaction();
         
-        $statement = $c->prepare('INSERT INTO perfil (dni, nombre, apellido, telefono, direccion, fecha_nac, email, id_rol, id_provincia, pass) VALUES (:dni, :nombre, :apellido, :telefono, :direccion, :fecha_nac, :email, :id_rol, :provincia, :pass)');
+        $statement = $c->prepare('INSERT INTO perfil (dni, nombre, apellido, foto, telefono, direccion, fecha_nac, email, id_rol, id_provincia, pass) VALUES (:dni, :nombre, :apellido, :foto, :telefono, :direccion, :fecha_nac, :email, :id_rol, :provincia, :pass)');
         $statement->bindValue(':dni', $Perfil->getDni(), \PDO::PARAM_INT);
         $statement->bindValue(':nombre', $Perfil->getNombre(), \PDO::PARAM_STR);
         $statement->bindValue(':apellido', $Perfil->getApellido(), \PDO::PARAM_STR);
+        $statement->bindValue(':foto', $Perfil->getFoto(), \PDO::PARAM_STR);
         $statement->bindValue(':telefono', $Perfil->getTelefono(), \PDO::PARAM_STR);
         $statement->bindValue(':direccion', $Perfil->getDireccion(), \PDO::PARAM_STR);
         $statement->bindValue(':fecha_nac', $Perfil->getFecha_nac(), \PDO::PARAM_STR);
@@ -77,6 +78,12 @@ include DIR_TEMPLATE . '/_msg.html.php';
         <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido.</small>
         <div class="invalid-feedback">Debe ser un apellido válido</div>
     </div>
+    
+<?php 
+$clase = $Perfil;
+include DIR_TEMPLATE . '/_form_foto.php';
+?>
+    
     
     <div class="form-group">
         <label for="telefono">Telefono</label>

@@ -29,9 +29,10 @@ if(!empty($_POST))
         }
         else 
         {
-            $statement = $c->prepare('UPDATE hotel SET nombre=:nombre, id_provincia=:id_provincia, estrellas=:estrellas, precio=:precio, cantidad=:cantidad WHERE id=:id');
+            $statement = $c->prepare('UPDATE hotel SET nombre=:nombre, id_provincia=:id_provincia, foto=:foto, estrellas=:estrellas, precio=:precio, cantidad=:cantidad WHERE id=:id');
             $statement->bindValue(':nombre', $clase->getNombre(), \PDO::PARAM_STR);
             $statement->bindValue(':id_provincia', $clase->getId_provincia(), \PDO::PARAM_INT);
+            $statement->bindValue(':estrellas', $clase->getFoto(), \PDO::PARAM_STR);
             $statement->bindValue(':estrellas', $clase->getEstrellas(), \PDO::PARAM_INT);
             $statement->bindValue(':precio', $clase->getPrecio(), \PDO::PARAM_INT);
             $statement->bindValue(':cantidad', $clase->getCantidad(), \PDO::PARAM_INT);
@@ -103,6 +104,12 @@ if(isset($clase) && !empty($clase))
 $selected = $clase->getId_provincia();
 include DIR_TEMPLATE . '/_form_provincia.php';
 ?>
+    
+    
+<?php 
+include DIR_TEMPLATE . '/_form_foto.php';
+?>
+    
     
     <div class="form-group">
         <label for="estrellas">Estrellas</label>

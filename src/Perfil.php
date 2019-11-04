@@ -10,6 +10,8 @@ class Perfil extends Comun
     
     private $apellido;
     
+    private $foto;
+    
     private $telefono;
     
     private $direccion;
@@ -26,15 +28,6 @@ class Perfil extends Comun
     
     private $rol;
     
-    
-    public function hasRol($rol)
-    {
-        if($this->getRol() === $rol)
-        {
-            return true;
-        }
-        return false;
-    }
     
     /**
      * @return mixed
@@ -82,6 +75,22 @@ class Perfil extends Comun
     public function setApellido($apellido)
     {
         $this->apellido = $apellido;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    /**
+     * @param mixed $foto
+     */
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
     }
 
     /**
@@ -195,7 +204,7 @@ class Perfil extends Comun
     {
         $this->pass = $pass;
     }
-    
+
     /**
      * @return mixed
      */
@@ -212,8 +221,14 @@ class Perfil extends Comun
         $this->rol = $rol;
     }
 
-
-    
+    public function hasRol($rol)
+    {
+        if($this->getRol() === $rol)
+        {
+            return true;
+        }
+        return false;
+    }
     
 
 }

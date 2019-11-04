@@ -16,9 +16,10 @@ if(!empty($_POST))
     if(!$clase->hasError())
     {
         $c->beginTransaction();
-        $statement = $c->prepare('INSERT INTO hotel (nombre, id_provincia, estrellas, precio, cantidad) VALUES (:nombre, :id_provincia, :estrellas, :precio, :cantidad)');
+        $statement = $c->prepare('INSERT INTO hotel (nombre, id_provincia, foto, estrellas, precio, cantidad) VALUES (:nombre, :id_provincia, :foto, :estrellas, :precio, :cantidad)');
         $statement->bindValue(':nombre', $clase->getNombre(), \PDO::PARAM_STR);
         $statement->bindValue(':id_provincia', $clase->getId_provincia(), \PDO::PARAM_INT);
+        $statement->bindValue(':foto', $clase->getFoto(), \PDO::PARAM_STR);
         $statement->bindValue(':estrellas', $clase->getEstrellas(), \PDO::PARAM_INT);
         $statement->bindValue(':precio', $clase->getPrecio(), \PDO::PARAM_INT);
         $statement->bindValue(':cantidad', $clase->getCantidad(), \PDO::PARAM_INT);
@@ -61,6 +62,12 @@ include DIR_TEMPLATE . '/_msg.html.php';
 $selected = $clase->getId_provincia();
 include DIR_TEMPLATE . '/_form_provincia.php';
 ?>
+    
+    
+<?php 
+include DIR_TEMPLATE . '/_form_foto.php';
+?>
+    
     
     <div class="form-group">
         <label for="estrellas">Estrellas</label>

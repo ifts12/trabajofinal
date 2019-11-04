@@ -1,7 +1,5 @@
 <?php
 require __DIR__ . '/../src/autoload.php';
-
-// Administrador / Empleado / Afiliado
 require DIR_ROOT . '/src/session.php';
 
 include DIR_TEMPLATE . '/_head.html.php';

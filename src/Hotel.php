@@ -20,6 +20,11 @@ class Hotel extends Comun
     private $nombre;
     
     /**
+     * @var string
+     */
+    private $foto;
+    
+    /**
      * @var integer
      */
     private $id_provincia;
@@ -84,6 +89,22 @@ class Hotel extends Comun
     }
 
     /**
+     * @return string
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    /**
+     * @param string $foto
+     */
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+    }
+
+    /**
      * @return number
      */
     public function getId_provincia()
@@ -132,7 +153,6 @@ class Hotel extends Comun
     }
 
     
-
     
 
 }

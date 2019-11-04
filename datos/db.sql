@@ -85,6 +85,7 @@ INSERT INTO `asistencia` (`id`, `detalle`) VALUES
 DROP TABLE IF EXISTS `hotel`;
 CREATE TABLE IF NOT EXISTS `hotel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `foto` varchar(255),
   `nombre` varchar(50) NOT NULL,
   `id_provincia` int(11) NOT NULL,
   `estrellas` int(11) NOT NULL,
@@ -136,6 +137,7 @@ CREATE TABLE IF NOT EXISTS `perfil` (
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `pass` varchar(120) NOT NULL,
+  `foto` varchar(255),
   `telefono` varchar(50) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `id_provincia` int(11) NOT NULL,

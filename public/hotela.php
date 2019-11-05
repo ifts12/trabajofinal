@@ -49,7 +49,7 @@ include DIR_TEMPLATE . '/_msg.html.php';
 ?>
 
 <div class="container">
-<form name="logines" method="post">
+<form enctype="multipart/form-data"  name="forms" method="post">
     <div class="form-group">
         <label for="nombre">nombre</label>
         <input name="nombre" type="text" class="form-control<?php echo $clase->getError('nombre') ? ' is-invalid' : '' ?>" id="nombre" value="<?php echo $clase->getNombre() ?>" aria-describedby="nombreHelp" placeholder="Nombre">

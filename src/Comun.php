@@ -29,6 +29,34 @@ class Comun
         }
     }
     
+    /**
+     * FileUpload
+     * @return boolean
+     */
+    public function fileUpload($request)
+    {
+        if (is_uploaded_file($request['foto']['tmp_name']))
+        {
+            if (move_uploaded_file($request['foto']['tmp_name'], DIR_UPLOAD_IMG . DIRECTORY_SEPARATOR . basename($request['foto']['name'])))
+            {
+                echo "El fichero es válido y se subió con éxito.\n";
+                $this->setFoto(basename($request['foto']['name']));
+            }
+            else
+            {
+                echo "¡Posible ataque de subida de ficheros!\n";
+            }
+            
+            
+        }
+        else
+        {
+            echo "Posible ataque del archivo subido: ";
+            echo "nombre del archivo '". $_FILES['foto']['tmp_name'] . "'.";
+        }
+        
+    }
+    
     public function hasError()
     {
         if($this->hasError)
@@ -62,5 +90,6 @@ class Comun
         $this->error = $error;
     }
 
+    
 
 }

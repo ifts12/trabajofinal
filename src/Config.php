@@ -9,7 +9,7 @@ class Config
    private $pass = "Admin.";
    private $driver= "mysql";
    private $host="127.0.0.1";
-   
+      
    public function getDSN ()
    {
 	   return $this->driver . ":dbname=" . $this->nameDB.";host=".$this->host;

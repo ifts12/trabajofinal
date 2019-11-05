@@ -2,6 +2,8 @@
 
 define('DIR_ROOT', dirname(__DIR__));
 define('DIR_TEMPLATE', DIR_ROOT . '/templates');
+define('DIR_UPLOAD', DIR_ROOT . '/public/uploads');
+define('DIR_UPLOAD_IMG', DIR_UPLOAD . '/img');
 
 define('LOGIN', 'login.php');
 

@@ -51,7 +51,7 @@ include DIR_TEMPLATE . '/_msg.html.php';
 ?>
 
 <div class="container">
-<form name="forms" method="post">
+<form enctype="multipart/form-data"  name="forms" method="post">
     
 <?php 
 include DIR_TEMPLATE . '/_form_foto.php';

@@ -85,7 +85,7 @@ if(isset($clase) && !empty($clase))
 {
 ?>
 
-<form name="forms" method="post">
+<form enctype="multipart/form-data"  name="forms" method="post">
 	<input type="hidden" name="id" value="<?php echo $clase->getId() ?>">
 
     <div class="form-group">
@@ -100,7 +100,7 @@ if(isset($clase) && !empty($clase))
         <button type="submit" class="btn btn-rect btn-grad btn-primary">Actualizar</button>
     </div>
 </form>
-<form method="post" onsubmit="return confirm('¿Esta seguro que quiere borrar este item?');">
+<form enctype="multipart/form-data"  method="post" onsubmit="return confirm('¿Esta seguro que quiere borrar este item?');">
     <input type="hidden" name="id" value="<?php echo $clase->getId() ?>">
     <input type="hidden" name="method" value="DELETE">
     <button class="btn btn-rect btn-grad btn-danger">Borrar</button>

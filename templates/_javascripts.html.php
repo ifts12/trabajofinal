@@ -51,6 +51,11 @@ $(document).ready(function() {
 
 	$('#table').DataTable();
 	document.onscroll = stickyScroll;
+	$('#fotoFile').on('change', function() {
+		var res = $(this).val().replace('C:\\fakepath\\', "");
+		$(this).next().html(res);
+		
+	});
 });
 
 function stickyScroll(e) {

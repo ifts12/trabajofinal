@@ -7,7 +7,7 @@
 <div class="my-5">
 	<div class="container">
 		<h1>Contacto</h1>
-		<form>
+		<form enctype="multipart/form-data" >
 			<div class="form-row py-3">
 				<label for="inputNombre">Nombre</label>
 				<input type="text" class="form-control" id="inputNombre" placeholder="Nombre">

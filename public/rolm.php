@@ -87,7 +87,7 @@ include DIR_TEMPLATE . '/_msg.html.php';
 if(isset($rol) && !empty($rol))
 {
 ?>
-<form name="roles" method="post">
+<form enctype="multipart/form-data"  name="roles" method="post">
     <div class="form-group">
         <label for="id">rol</label>
         <input name="id" type="number" class="form-control" id="id" value="<?php echo $rol->getId() ?>" aria-describedby="idRolHelp" placeholder="" readonly>
@@ -104,7 +104,7 @@ if(isset($rol) && !empty($rol))
         <button type="submit" class="btn btn-primary">Actualizar</button>
     </div>
 </form>
-<form method="post" onsubmit="return confirm('¿Esta seguro que quiere borrar este item?');">
+<form enctype="multipart/form-data"  method="post" onsubmit="return confirm('¿Esta seguro que quiere borrar este item?');">
     <input type="hidden" name="id" value="<?php echo $rol->getId() ?>">
     <input type="hidden" name="rol" value="<?php echo $rol->getRol() ?>">
     <input type="hidden" name="method" value="DELETE">

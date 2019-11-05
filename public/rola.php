@@ -47,7 +47,7 @@ include DIR_TEMPLATE . '/_msg.html.php';
 ?>
 
 <div class="container">
-<form name="roles" method="post">
+<form enctype="multipart/form-data"  name="roles" method="post">
     <div class="form-group">
         <label for="rol">Rol</label>
         <input name="rol" type="text" class="form-control<?php echo $rol->getError('rol') ? ' is-invalid' : '' ?>" id="rol" value="<?php echo $rol->getRol() ?>" aria-describedby="rolHelp" placeholder="rol">

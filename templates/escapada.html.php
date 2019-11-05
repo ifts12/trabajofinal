@@ -22,7 +22,7 @@
 				<div class="col-lg-4 col-md-4 col-sm-6">
 					<div class="caja-simple">
 						<div class="caja-thumb">
-							<img class="img-fluid rounded-circle" src="images/roman-fox-_yWwo_Y1eEo-unsplash-4x4.jpg" alt="">
+							<img class="img-fluid" src="images/roman-fox-_yWwo_Y1eEo-unsplash-4x4.jpg" alt="">
 						</div>
 						<div class="p-4">
 							<div class="pt-2">
@@ -42,7 +42,7 @@
 				<div class="col-lg-4 col-md-4 col-sm-6">
 					<div class="caja-simple">
 						<div class="caja-thumb">
-							<img class="img-fluid rounded-circle" src="images/ana-azevedo-PfYO9gONpGo-unsplash-4x4.jpg" alt="">
+							<img class="img-fluid" src="images/ana-azevedo-PfYO9gONpGo-unsplash-4x4.jpg" alt="">
 						</div>
 						<div class="p-4">
 							<div class="pt-2">
@@ -61,7 +61,7 @@
 				<div class="col-lg-4 col-md-4 col-sm-6">
 					<div class="caja-simple">
 						<div class="caja-thumb">
-							<img class="img-fluid rounded-circle" src="images/marion-michele-WGGSNlYzhKM-unsplash-4x4.jpg" alt="">
+							<img class="img-fluid" src="images/marion-michele-WGGSNlYzhKM-unsplash-4x4.jpg" alt="">
 						</div>
 						<div class="p-4">
 							<div class="pt-2">

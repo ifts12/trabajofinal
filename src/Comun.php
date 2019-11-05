@@ -46,15 +46,27 @@ class Comun
             {
                 echo "¡Posible ataque de subida de ficheros!\n";
             }
-            
-            
         }
         else
         {
             echo "Posible ataque del archivo subido: ";
             echo "nombre del archivo '". $_FILES['foto']['tmp_name'] . "'.";
         }
-        
+    }
+    
+    public function getDefaultImages($dir = null, $prefix = null)
+    {
+        if(empty($dir))
+        {
+            $dir = DIR_PUBLIC . DIRECTORY_SEPARATOR . DIR_IMG;
+        }
+        $archivo = array_slice(scandir($dir), 2); // elimina los '.' y '..'
+        $imgs = array_filter($archivo, function($v, $k) {
+                return preg_match('/^xd-/', $v);
+            }, ARRAY_FILTER_USE_BOTH);
+            
+        $elemento = array_rand($imgs);
+        return DIR_IMG . DIRECTORY_SEPARATOR . $imgs[$elemento];
     }
     
     public function hasError()

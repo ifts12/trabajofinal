@@ -32,32 +32,50 @@ use UPCN\Hotel;
 
 $c = new Conexion();
 try {
-    $statement = $c->prepare('SELECT * FROM hotel');
+    $statement = $c->prepare('SELECT h.*, p.nombre AS provincia FROM hotel h LEFT JOIN provincia p ON h.id_provincia=p.id');
     $statement->execute();
-    echo '<tr>';
-    echo "\t<th>ID</th><th>Rol</th><th>Acción</th>";
-    echo '</tr>';
-//     $rows = $statement->fetchObject(Hotel::class);
-//     $rows = $statement->fetch(\PDO::FETCH_ASSOC);
-    $rows = $statement->fetchAll();
-    
-    echo '<pre>';
-    echo var_dump($statement->rowCount());
-    echo var_dump($rows);
-    echo '</pre>';
-//     while ($row = $statement->fetchObject(Hotel::class))
-//     {
-//         echo '<pre>';
-//         echo var_dump($row);
-//         echo '</pre>';
-//     }
+    $i = 0;
+    while($row = $statement->fetch(\PDO::FETCH_ASSOC))
+    {
+        $clase = new Hotel();
+        if(empty($row['foto']))
+        {
+            $img = $clase->getDefaultImages();
+        }
+        else
+        {
+            $img = DIR_UPLOAD_IMG . DIRECTORY_SEPARATOR . $row['foto'];
+            if(!file_exists($img))
+            {
+                $img = DIR_IMG . DIRECTORY_SEPARATOR . $row['foto'];
+                if(!file_exists($img))
+                {
+                    $img = $clase->getDefaultImages();
+                }
+            }
+        }
+?>
+<div class="col-lg-4 col-md-4 col-sm-6 my-3">
+	<div class="caja-simple">
+		<div class="caja-thumb" style="background-image: url(<?php echo $img ?>);"></div>
+		<div class="p-4">
+			<div class="pt-2">
+				<span><?php echo $row['provincia'] ?></span>
+			</div>
+			<h5><?php echo $row['nombre'] ?></h5>
+			<p><?php echo $row['estrellas'] ?></p>
+			<p><?php echo $row['dias'] ?></p>
+			<p><?php echo $row['precio'] ?></p>
+		</div>
+	</div>
+</div>
+<?php 
+    }
     $statement = null;
 }
 catch (\PDOException $e)
 {
-    echo '<tr>';
-    echo '\t<td>' . $e->getMessage() . '</td>';
-    echo '</tr>';
+    echo '\t' . $e->getMessage();
 }
 
 // 				<div class="col-lg-4 col-md-4 col-sm-6">

@@ -17,7 +17,7 @@ else
         $statement = $c->prepare('SELECT p.*, r.* FROM perfil p LEFT JOIN rol r ON p.id_rol=r.id WHERE dni=:dni');
         $statement->bindValue(':dni', $_SESSION['u'], \PDO::PARAM_INT);
         $statement->execute();
-        $user = $statement->fetchObject(\UPCN\Perfil::class);
+        $user = $statement->fetchObject(\UPCN\Afiliado::class);
         if(!$user)
         {
             header('Location: ' . LOGIN);

@@ -5,15 +5,10 @@ require DIR_ROOT . '/src/session.php';
 
 
 use UPCN\Conexion;
-use UPCN\Perfil;
+use UPCN\afiliado;
 
 $c = new Conexion();
-$clase = new Perfil();
-
-if(!empty($_FILES))
-{
-    $clase->fileUpload($_FILES);
-}
+$clase = new Afiliado();
 
 if(!empty($_POST))
 {
@@ -22,7 +17,7 @@ if(!empty($_POST))
     {
         $c->beginTransaction();
         
-        $statement = $c->prepare('INSERT INTO perfil (dni, nombre, apellido, foto, telefono, direccion, fecha_nac, email, id_rol, id_provincia, pass) VALUES (:dni, :nombre, :apellido, :foto, :telefono, :direccion, :fecha_nac, :email, :id_rol, :provincia, :pass)');
+        $statement = $c->prepare('UPDATE afiliado SET nombre=:nombre, apellido=:apellido, foto=:foto, telefono=:telefono, direccion=:direccion, fecha_nac=:fecha_nac, email=:email, id_rol=:id_rol, provincia=:provincia WHERE dni=:dni');
         $statement->bindValue(':dni', $clase->getDni(), \PDO::PARAM_INT);
         $statement->bindValue(':nombre', $clase->getNombre(), \PDO::PARAM_STR);
         $statement->bindValue(':apellido', $clase->getApellido(), \PDO::PARAM_STR);
@@ -31,9 +26,8 @@ if(!empty($_POST))
         $statement->bindValue(':direccion', $clase->getDireccion(), \PDO::PARAM_STR);
         $statement->bindValue(':fecha_nac', $clase->getFecha_nac(), \PDO::PARAM_STR);
         $statement->bindValue(':email', $clase->getEmail(), \PDO::PARAM_STR);
-        $statement->bindValue(':id_rol', $clase->getId_rol(), \PDO::PARAM_INT);
-        $statement->bindValue(':provincia', $clase->getId_provincia(), \PDO::PARAM_STR);
-        $statement->bindValue(':pass', password_hash($clase->getPass(), PASSWORD_ARGON2I, ['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 3]), \PDO::PARAM_STR);
+        $statement->bindValue(':id_rol', $clase->getId_rol(), \PDO::PARAM_STR);
+        $statement->bindValue(':provincia', $clase->getProvincia(), \PDO::PARAM_STR);
         
         if($statement->execute())
         {
@@ -43,7 +37,7 @@ if(!empty($_POST))
             ];
             $c->commit();
         }
-        else 
+        else
         {
             $msg = [
                 'tipo' => 'danger',
@@ -52,6 +46,30 @@ if(!empty($_POST))
             $c->rollBack();
         }
     }
+}
+elseif($_GET && array_key_exists('edit', $_GET) && !empty($_GET['edit']))
+{
+    try {
+        $statement = $c->prepare('SELECT * FROM afiliado WHERE dni=:dni');
+        $statement->bindValue(':dni', $_GET['edit'], \PDO::PARAM_INT);
+        $statement->execute();
+        $clase = $statement->fetchObject(UPCN\afiliado::class);
+        if(empty($clase))
+        {
+            $msg = [
+                'tipo' => 'info',
+                'msg'  => 'No se encontraron registros'
+            ];
+        }
+    }
+    catch (\PDOException $e)
+    {
+        $e->getMessage();
+    }
+}
+else
+{
+	header('location: afiliado.php');
 }
 
 include DIR_TEMPLATE . '/_head.html.php';
@@ -62,12 +80,11 @@ include DIR_TEMPLATE . '/_msg.html.php';
 ?>
 
 <div class="container">
-<form enctype="multipart/form-data"  name="Perfil" method="post" class="">
+<form enctype="multipart/form-data"  name="afiliado" method="post">
     <div class="form-group">
         <label for="dni">DNI</label>
-        <input name="dni" type="number" class="form-control<?php echo $clase->getError('dni') ? ' is-invalid' : '' ?>" id="dni" value="<?php echo $clase->getDni() ?>" aria-describedby="dniHelp" placeholder="D.N.I." min="2000000" max="50000000">
+        <input name="dni" type="number" class="form-control" id="dni" value="<?php echo $clase->getDni() ?>" aria-describedby="dniHelp" placeholder="D.N.I." min="2000000" max="50000000" readonly>
         <small id="emailHelp" class="form-text text-muted">Documento Nacional de Identidad (sin puntos).</small>
-        <div class="invalid-feedback">Debe ser un número de documento válido</div>
     </div>
     
     <div class="form-group">
@@ -83,6 +100,7 @@ include DIR_TEMPLATE . '/_msg.html.php';
         <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido.</small>
         <div class="invalid-feedback">Debe ser un apellido válido</div>
     </div>
+
     
 <?php 
 include DIR_TEMPLATE . '/_form_foto.php';
@@ -102,14 +120,16 @@ include DIR_TEMPLATE . '/_form_foto.php';
         <div class="invalid-feedback">Debe ingresar una direccion válida</div>
     </div>
     
-<?php 
-$selected = $clase->getId_provincia();
-include DIR_TEMPLATE . '/_form_provincia.php';
-?>
+    <div class="form-group">
+        <label for="email">provincia</label>
+        <input name="provincia" type="text" class="form-control<?php echo $clase->getError('provincia') ? ' is-invalid' : '' ?>" id="provincia" value="<?php echo $clase->getProvincia() ?>" aria-describedby="emailHelp" placeholder="Provincia">
+        <small id="provinciaHelp" class="form-text text-muted">Ingrese el provincia.</small>
+        <div class="invalid-feedback">Debe ingresar una provincia válida</div>
+    </div>
     
     <div class="form-group">
         <label for="fechaNacimiento">fechaNacimiento</label>
-        <input name="fecha_nac" type="date" min="1900-01-01" max="2019-12-31" class="form-control<?php echo $clase->getError('fecha_nac') ? ' is-invalid' : '' ?>" id="fechaNacimiento" value="<?php echo $clase->getFecha_nac() ?>" aria-describedby="fechaNacimientoHelp" placeholder="fechaNacimiento">
+        <input name="fecha_nac" type="date" min="1900-01-01" max="2019-12-31" class="form-control<?php echo $clase->getError('fechaNacimiento') ? ' is-invalid' : '' ?>" id="fechaNacimiento" value="<?php echo $clase->getFecha_nac() ?>" aria-describedby="fechaNacimientoHelp" placeholder="fechaNacimiento">
         <small id="fechaNacimientoHelp" class="form-text text-muted">Ingrese el fecha de nacimiento.</small>
         <div class="invalid-feedback">Debe ingresar una fecha de nacimiento válido</div>
     </div>
@@ -120,55 +140,52 @@ include DIR_TEMPLATE . '/_form_provincia.php';
         <small id="emailHelp" class="form-text text-muted">Ingrese el email.</small>
         <div class="invalid-feedback">Debe ingresar un correo válido</div>
     </div>
+     
     
-    <div class="form-group">
+	
+	 <div class="form-group">
         <label for="rol">rol</label>
         <select name="id_rol">	
 		<?php
-		try
-		{
-            $statement = $c->prepare('SELECT * FROM rol');
-            $statement->execute();
-            $roles = $statement->fetchAll();
-		    echo '<option value="">Seleccione una opción</option>';
-            foreach ($roles as $rol)
-    		{
-    		    echo '<option value="' . $rol["id"] .'" ' . ($rol["id"] == $clase->getId_rol() ? 'selected' : '') . '>'.$rol["rol"].' </option>';
-    		}
+	
+		try {
+        $statement = $c->prepare('SELECT * FROM rol');
+        $statement->execute();
+        $clase = $statement->fetchAll();
+		//var_dump($afiliado);
+		foreach ($clase as $rol)
+		{ echo '<option value="' . $rol["id"] .'">'.$rol["rol"].' </option>';
+			//var_dump($rol);
+		}
+	   
 		}
 		catch (\PDOException $e)
 		{
-            $e->getMessage();
+        $e->getMessage();
 		}
 		?>	
+			
+      
 		</select>
 		<small id="rolHelp" class="form-text text-muted">Ingrese el rol.</small>
         <div class="invalid-feedback">Debe elegir un rol</div>
     </div>
-    
+	
+	
+	
     <div class="form-group">
-        <label for="pass">Contraseña</label>
-        <input name="pass" type="password" class="form-control<?php echo $clase->getError('pass') ? ' is-invalid' : '' ?>" id="pass" value="<?php echo $clase->getPass() ?>" aria-describedby="passHelp" placeholder="Contraseña">
-        <small id="passHelp" class="form-text text-muted">Ingrese una contraseña.</small>
-        <div class="invalid-feedback">Debe ser un nombre válido</div>
-    </div>
-    
-    
-    <div class="form-group">
-        <label for="pass2">Reingresar la Contraseña</label>
-        <input name="pass2" type="password" class="form-control<?php echo $clase->getError('pass') ? ' is-invalid' : '' ?>" id="pass2" value="<?php echo $clase->getPass() ?>" aria-describedby="pass2Help" placeholder="Contraseña">
-        <small id="pass2Help" class="form-text text-muted">Reingresar la contraseña.</small>
-        <div class="invalid-feedback">Debe ser un nombre válido</div>
-    </div>
-    
-    <div class="form-group">
-        <button type="submit" class="btn btn-rect btn-grad btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-rect btn-grad btn-primary">Actualizar</button>
     </div>
 </form>
-
+<form enctype="multipart/form-data"  method="post" onsubmit="return confirm('¿Esta seguro que quiere borrar este item?');">
+    <input type="hidden" name="dni" value="<?php echo $clase->getDni() ?>">
+    <input type="hidden" name="method" value="DELETE">
+    <button class="btn btn-rect btn-grad btn-danger">Borrar</button>
+</form>
 <div class="form-group">
-	<a class="btn btn-rect btn-grad btn-info" href="perfil.php" role="button">Volver</a>
+	<a class="btn btn-rect btn-grad btn-info" href="rol.php" role="button">Volver</a>
 </div>
+
 </div>
 
 <?php 

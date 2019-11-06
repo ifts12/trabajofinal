@@ -5,25 +5,32 @@ require DIR_ROOT . '/src/session.php';
 
 
 use UPCN\Conexion;
-use UPCN\Perfil;
+use UPCN\Afiliado;
 
 $c = new Conexion();
 
-$clase = new Perfil();
+$clase = new Afiliado();
 if(!empty($_POST))
 {
-    $clase->validar($_POST);
+    
+    echo '<pre>';
+    echo var_dump($clase);    
+    $clase->setData($_POST);
+    echo 'AFTER';
+    echo var_dump($clase);    
+    
+    echo '</pre>';
     if(!$clase->hasError())
     {
         $c->beginTransaction();
-        $statement = $c->prepare('SELECT * FROM perfil where dni=:dni');
+        $statement = $c->prepare('SELECT * FROM afiliado where dni=:dni');
         $statement->bindValue(':dni', $clase->getDni(), \PDO::PARAM_INT);
         if($statement->execute())
         {
             $row = $statement->fetch(\PDO::FETCH_ASSOC);
             $msg = [
                 'tipo' => 'success',
-                'msg'  => "Se encontraron los datos del Perfil correctamente."
+                'msg'  => "Se encontraron los datos del afiliado correctamente."
             ];
             $c->commit();
         }
@@ -45,7 +52,7 @@ include DIR_TEMPLATE . '/_msg.html.php';
 ?>
 
 <div class="container">
-<form enctype="multipart/form-data"  name="Perfil" method="post" class="">
+<form enctype="multipart/form-data"  name="afiliado" method="post" class="">
     <div class="form-group">
         <label for="dni">DNI</label>
         <input name="dni" type="number" class="form-control<?php echo $clase->getError('dni') ? ' is-invalid' : '' ?>" id="dni" value="<?php echo $clase->getDni() ?>" aria-describedby="dniHelp" placeholder="D.N.I." min="2000000" max="50000000">

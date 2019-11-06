@@ -6,12 +6,12 @@ require __DIR__ . '/../src/autoload.php';
 unset($_SESSION['u']);
 
 use UPCN\Conexion;
-use UPCN\Perfil;
+use UPCN\afiliado;
 
 if(!empty($_POST))
 {
     $c = new Conexion();
-    $clase = new Perfil();
+    $clase = new Afiliado();
     
     $clase->validar($_POST);
     $msg = [
@@ -20,7 +20,7 @@ if(!empty($_POST))
     ];
     
     $c->beginTransaction();
-    $statement = $c->prepare('SELECT * FROM perfil WHERE dni=:dni');
+    $statement = $c->prepare('SELECT * FROM afiliado WHERE dni=:dni');
     $statement->bindValue(':dni', $clase->getDni(), \PDO::PARAM_INT);
     
     if($statement->execute())

@@ -30,6 +30,26 @@ class Comun
     }
     
     /**
+     * Mapea Array a Objeto
+     * @param Array $data
+     */
+    public function setData($data)
+    {
+        $reflect = new \ReflectionClass($this);
+        $props   = $reflect->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED);
+        
+        foreach ($props as $prop)
+        {
+            if(array_key_exists($prop->getName(), $data))
+            {
+                $metodo = new \ReflectionMethod($this, 'set' . ucfirst($prop->getName()));
+                $metodo->invokeArgs($this, [$data[$prop->getName()]]);
+            }
+        }
+        return $this;
+    }
+    
+    /**
      * FileUpload
      * @return boolean
      */

@@ -19,17 +19,17 @@
 	<div class="container overlap">
 		<div class="row">
 			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<a href="miniturismo.html" class="unit-1 text-center"> <img src="images/marco-ceschi-Aq36dAm15Yo-unsplash.jpg" alt="Image" class="img-fluid">
+				<a href="miniturismo.html.php" class="unit-1 text-center"> <img src="images/marco-ceschi-Aq36dAm15Yo-unsplash.jpg" alt="Image" class="img-fluid">
 					<div class="unit-1-text"><h3 class="unit-1-heading">Miniturismo</h3></div>
 				</a>
 			</div>
 			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<a href="escapada.html" class="unit-1 text-center"> <img src="images/chaandersoon-3NlcDImS9_0-unsplash.jpg" alt="Image" class="img-fluid">
+				<a href="escapada.html.php" class="unit-1 text-center"> <img src="images/chaandersoon-3NlcDImS9_0-unsplash.jpg" alt="Image" class="img-fluid">
 					<div class="unit-1-text"><h3 class="unit-1-heading">Escapada</h3></div>
 				</a>
 			</div>
 			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<a href="hoteleria.html" class="unit-1 text-center"> <img src="images/roberto-nickson-ttB3z9bDiHQ-unsplash.jpg" alt="Image" class="img-fluid">
+				<a href="hoteleria.html.php" class="unit-1 text-center"> <img src="images/roberto-nickson-ttB3z9bDiHQ-unsplash.jpg" alt="Image" class="img-fluid">
 					<div class="unit-1-text"><h3 class="unit-1-heading">Hotelería</h3></div>
 				</a>
 			</div>

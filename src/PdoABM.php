@@ -1,8 +1,14 @@
 <?php
 namespace UPCN;
 
-interface abm
+interface PdoABM
 {
+    
+    /**
+     * Seleccion los registro
+     */
+    public function select();
+    
     /**
      * Inserta un registro
      */

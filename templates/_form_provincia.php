@@ -4,14 +4,12 @@
 	<?php
 	try
 	{
-        $statement = $c->prepare('SELECT * FROM provincia');
-        $statement->execute();
-        $datos = $statement->fetchAll();
+        $datos = $clase->getProvincias();
 	    echo '<option value="">Seleccione una opción</option>';
         foreach ($datos as $dato)
 		{
 		    printf('<option value="%d"', $dato["id"]);
-		    if($dato["id"] == $selected)
+		    if($dato["id"] == $clase->getId_provincia())
 		    {
 		        echo ' selected';
 		    }

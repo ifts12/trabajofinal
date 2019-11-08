@@ -29,7 +29,7 @@
 		
 		  <h2>1966-1970 -  Intervención del gremio  </h2>
 		  <img src="images/upcn06.jpg" width="375" height="240" class="float-right border border-dark rounded p-2 m-2">
-		  <p>En los años 1966/1970 UPCN estuvo intervenida, en una de las tantas  intervenciones que tuvo nuestro gremio. Esto trajo aparejado la designación de  un normalizador, con la posterior elección del compañero Héctor López.<br> El viejo Estatuto, posibilitaba que donde hubiera 200 afiliados,  cualquiera fuera el área, se formaba una seccional. Por esa época, teníamos en  ministerios nacionales 8, 10,12 o 15 secciónales. En algunas provincias, como  el caso de Santa Fe, hasta había coordinadores para estas seccionales.<br> </p>
+		  <p>En los años 1966/1970 UPCN estuvo intervenida, en una de las tantas  intervenciones que tuvo nuestro gremio. Esto trajo aparejado la designación de  un normalizador, con la posterior elección del compañero Héctor López.<br> El viejo Estatuto, posibilitaba que donde hubiera 200 perfils,  cualquiera fuera el área, se formaba una seccional. Por esa época, teníamos en  ministerios nacionales 8, 10,12 o 15 secciónales. En algunas provincias, como  el caso de Santa Fe, hasta había coordinadores para estas seccionales.<br> </p>
 		  <br />
 		  
 		  <h2 class="clearfix">1974-1975 -  Unificación del sector público nacional  </h2>
@@ -39,7 +39,7 @@
 		  provincias que habían formado una asociación o sindicato podían llegar a ser incorporadas por FATE
 		  (cuando lograra su personería) o por UPCN. Tras 6 o 7 meses de tareas de convencimiento se logro incorporar a Jujuy,
 		  Río Negro, Formosa, y Corrientes. Estos gremios provinciales condicionaron su acceso, pidiendo la modificación
-		  en el Estatuto, de la cláusula que establecía la condición de tener 200 afiliados para constituir
+		  en el Estatuto, de la cláusula que establecía la condición de tener 200 perfils para constituir
 		  una seccional.</p>
 		<p>
 		  <br> El compañero López tuvo la visión de integrar al país y para ello luchó y trabajó
@@ -76,7 +76,7 @@
 		 como Secretario Gremial.</p>
 		<p>
 		  <br> Es de destacar que los mismos recibieron, de manos de la dictadura militar de ese momento, un gremio vaciado, en un estado
-		  caótico y deplorable con muy pocos afiliados y que, luego de 20 años de democracia política y sindical,
+		  caótico y deplorable con muy pocos perfils y que, luego de 20 años de democracia política y sindical,
 		  se ha logrado un crecimiento que posicionó al mismo entre los mejores y más grandes sindicatos de la Argentina,
 		  brindando a los trabajadores públicos y su familia salud, capacitación, formación sindical, defensa
 		  de su salario y una nueva legislación laboral acorde a las demandas de la época.
@@ -105,7 +105,7 @@
 		  grandes cambios como no los hubiera imaginado la mente más febril. Desde aquellas primeras luchas sindicales pasando
 		  por la intervención de la última dictadura militar y el periodo democrático, nuestra organización
 		  atravesó todas las pruebas dando muestras cabales de ingenio, sacrificio y solidaridad. Nada logró quebrar
-		  la voluntad de afiliados y dirigentes, quienes preservaron el espíritu de justicia social, democracia y participación
+		  la voluntad de perfils y dirigentes, quienes preservaron el espíritu de justicia social, democracia y participación
 		  que dio origen a nuestra Unión, en una vasta geografía con hombres y culturas diversas, pero solidariamente
 		  unidos en una organización sindical desplegada a lo largo y ancho de la patria, sustentando la fuerza de nuestro
 		  origen y la amplitud de nuestro futuro.</p>

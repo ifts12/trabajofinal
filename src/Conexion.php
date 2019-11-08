@@ -44,14 +44,4 @@ class Conexion
         return $this->conexion->commit();
     }
     
-    
-//     $calorías = 150;
-//     $color = 'red';
-//     $gsent = $gbd->prepare('SELECT name, colour, calories
-//     FROM fruit
-//     WHERE calories < :calories AND colour = :colour');
-//     $gsent->bindParam(':calories', $calorías, PDO::PARAM_INT);
-//     $gsent->bindParam(':colour', $color, PDO::PARAM_STR, 12);
-//     $gsent->execute();
-    
 }

@@ -2,8 +2,6 @@
 
 @session_start();
 
-use UPCN\Conexion;
-
 if (!isset($_SESSION['u']))
 {
     session_unset();
@@ -12,19 +10,9 @@ if (!isset($_SESSION['u']))
 }
 else
 {
-    try {
-        $c = new Conexion();
-        $statement = $c->prepare('SELECT p.*, r.* FROM perfil p LEFT JOIN rol r ON p.id_rol=r.id WHERE dni=:dni');
-        $statement->bindValue(':dni', $_SESSION['u'], \PDO::PARAM_INT);
-        $statement->execute();
-        $user = $statement->fetchObject(\UPCN\Afiliado::class);
-        if(!$user)
-        {
-            header('Location: ' . LOGIN);
-        }
-    }
-    catch (\PDOException $e)
+    $user = new UPCN\Perfil();
+    if(!$user->findByDni(filter_var($_SESSION['u'], FILTER_SANITIZE_NUMBER_INT)))
     {
-        echo $e->getMessage();
+        header('Location: ' . LOGIN);
     }
 }

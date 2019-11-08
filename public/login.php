@@ -6,32 +6,24 @@ require __DIR__ . '/../src/autoload.php';
 unset($_SESSION['u']);
 
 use UPCN\Conexion;
-use UPCN\afiliado;
+use UPCN\Perfil;
 
 if(!empty($_POST))
 {
-    $c = new Conexion();
-    $clase = new Afiliado();
+    $clase = new Perfil();
+    $clase->setData($_POST);
     
-    $clase->validar($_POST);
-    $msg = [
-        'tipo' => 'danger',
-        'msg'  => 'Error de usuario o contraseña'
-    ];
-    
-    $c->beginTransaction();
-    $statement = $c->prepare('SELECT * FROM afiliado WHERE dni=:dni');
-    $statement->bindValue(':dni', $clase->getDni(), \PDO::PARAM_INT);
-    
-    if($statement->execute())
+    if($clase->login(filter_var($_POST['dni'], FILTER_SANITIZE_NUMBER_INT)))
     {
-        $row = $statement->fetch(\PDO::FETCH_ASSOC);
-        if (password_verify($clase->getPass(), $row['pass']))
-        {
-            $_SESSION['u'] = $row['dni'];
-            unset($msg);
-            header('Location: paquetes.php');
-        }
+        $_SESSION['u'] = $clase->getDni();
+        header('Location: paquetes.php');
+    }
+    else
+    {
+        $_SESSION['msg'] = json_encode([
+            'tipo' => 'danger',
+            'msg'  => $clase->getError()
+        ]);
     }
 }
 

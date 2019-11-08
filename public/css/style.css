@@ -78,13 +78,14 @@ body {
 }
 
 .footer {
+	position: relative;
+	width: 100%;
+	top: 5rem;
 	padding: 1rem;
 	background-color: #337A9F;
 	background-image: url('../images/logog.png');
 	background-size: cover;
 	color: #000;
-	position: relative;
-	width: 100%;
 }
 
 .footer::before {

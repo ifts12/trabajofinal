@@ -24,7 +24,7 @@ if(!empty($_POST))
         {
             $msg = [
                 'tipo' => 'success',
-                'msg'  => "Se guardaron los datos del afiliado correctamente."
+                'msg'  => "Se guardaron los datos del perfil correctamente."
             ];
             $c->commit();
         }

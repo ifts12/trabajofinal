@@ -130,9 +130,9 @@ INSERT INTO `rol` (`id`, `rol`) VALUES
 	(3, 'Afiliado');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 
--- Volcando estructura para tabla upcn.afiliado
-DROP TABLE IF EXISTS `afiliado`;
-CREATE TABLE IF NOT EXISTS `afiliado` (
+-- Volcando estructura para tabla upcn.perfil
+DROP TABLE IF EXISTS `perfil`;
+CREATE TABLE IF NOT EXISTS `perfil` (
   `dni` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
@@ -145,13 +145,13 @@ CREATE TABLE IF NOT EXISTS `afiliado` (
   `email` varchar(50) NOT NULL,
   `id_rol` int(11) NOT NULL,
   PRIMARY KEY (`dni`),
-  CONSTRAINT FOREIGN KEY afiliado_rol (id_rol) REFERENCES rol (id),
-  CONSTRAINT FOREIGN KEY afiliado_provincia (id_provincia) REFERENCES provincia (id)
+  CONSTRAINT FOREIGN KEY perfil_rol (id_rol) REFERENCES rol (id),
+  CONSTRAINT FOREIGN KEY perfil_provincia (id_provincia) REFERENCES provincia (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla upcn.afiliado: ~19 rows (aproximadamente)
-/*!40000 ALTER TABLE `afiliado` DISABLE KEYS */;
-INSERT INTO `afiliado` (`dni`, `nombre`, `apellido`, `pass`, `telefono`, `direccion`, `id_provincia`, `fecha_nac`, `email`, `id_rol`) VALUES
+-- Volcando datos para la tabla upcn.perfil: ~19 rows (aproximadamente)
+/*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
+INSERT INTO `perfil` (`dni`, `nombre`, `apellido`, `pass`, `telefono`, `direccion`, `id_provincia`, `fecha_nac`, `email`, `id_rol`) VALUES
 	(22333444, 'Tony', 'DL', '$argon2i$v=19$m=2048,t=4,p=3$L2RiTC9Td1ZNQy41MTJjRg$Y6tU/eJ+KiIZG6TN3gfVG787qyREbKfVp43X8B/BN4Y',  '4318-3404', 'Roca 710', 2, '1961-10-17', 'tonydl@gmail.com', 1),
 	(7939954, 'Eduardo', 'Sundblad', '$argon2i$v=19$m=2048,t=4,p=3$L2RiTC9Td1ZNQy41MTJjRg$Y6tU/eJ+KiIZG6TN3gfVG787qyREbKfVp43X8B/BN4Y', '4318-3404', 'Roca 710', 2, '1961-10-17', 'e.sundabland@gmail.com', 3),
 	(8550842, 'Jose ', 'Alcorta', '$argon2i$v=19$m=2048,t=4,p=3$L2RiTC9Td1ZNQy41MTJjRg$Y6tU/eJ+KiIZG6TN3gfVG787qyREbKfVp43X8B/BN4Y', '4257-5872', 'Roca 710', 2, '1979-08-07', 'j.alcorta@hotmail.com', 3),
@@ -172,28 +172,29 @@ INSERT INTO `afiliado` (`dni`, `nombre`, `apellido`, `pass`, `telefono`, `direcc
 	(35426279, 'Jose Maria ', 'Rodriguez', '$argon2i$v=19$m=2048,t=4,p=3$L2RiTC9Td1ZNQy41MTJjRg$Y6tU/eJ+KiIZG6TN3gfVG787qyREbKfVp43X8B/BN4Y', '4527-8576', 'Av.Belgrano 448', 2, '1992-06-08', 'j.rodriguez@gmail.com', 3),
 	(36592331, 'Fiorella', 'Freire', '$argon2i$v=19$m=2048,t=4,p=3$L2RiTC9Td1ZNQy41MTJjRg$Y6tU/eJ+KiIZG6TN3gfVG787qyREbKfVp43X8B/BN4Y', '4575-3257', 'Roca 710', 2, '1994-10-01', 'f.freire@gmail.com', 1),
 	(36873330, 'Belen', 'Sanchez', '$argon2i$v=19$m=2048,t=4,p=3$L2RiTC9Td1ZNQy41MTJjRg$Y6tU/eJ+KiIZG6TN3gfVG787qyREbKfVp43X8B/BN4Y', '1152486538', 'Roca 710', 2, '1092-07-19', 'belen.sanchez@hotmail.com', 1);
-/*!40000 ALTER TABLE `afiliado` ENABLE KEYS */;
+/*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
 
 -- Volcando estructura para tabla upcn.tipo
 DROP TABLE IF EXISTS `tipo_paquete`;
-CREATE TABLE IF NOT EXISTS `tipo` (
+CREATE TABLE IF NOT EXISTS `tipo_paquete` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla upcn.tipo: ~3 rows (aproximadamente)
-/*!40000 ALTER TABLE `tipo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipo_paquete` DISABLE KEYS */;
 INSERT INTO `tipo_paquete` (`id`, `nombre`) VALUES
 	(1, 'Miniturismo'),
 	(2, 'Escapada'),
 	(3, 'Paquete');
-/*!40000 ALTER TABLE `tipo` ENABLE KEYS */;
+/*!40000 ALTER TABLE `tipo_paquete` ENABLE KEYS */;
 
--- Volcando estructura para tabla upcn.viaje
+-- Volcando estructura para tabla upcn.paquete
 DROP TABLE IF EXISTS `paquete`;
 CREATE TABLE IF NOT EXISTS `paquete` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_tipo_paquete` int(11) NOT NULL,
   `foto` varchar(255),
   `id_provincia` int(11) NOT NULL,
   `lugar` varchar(50) NOT NULL,
@@ -201,42 +202,41 @@ CREATE TABLE IF NOT EXISTS `paquete` (
   `detalle` varchar(50) NOT NULL,
   `dias` int(11) NOT NULL,
   `noches` int(11) NOT NULL,
-  `cantidad` varchar(50) NOT NULL,
-  `id_tipo_paquete` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT FOREIGN KEY paquete_tipo (id_tipo_paquete) REFERENCES tipo (id),
   CONSTRAINT FOREIGN KEY paquete_provincia (id_provincia) REFERENCES provincia (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla upcn.viaje: ~25 rows (aproximadamente)
-/*!40000 ALTER TABLE `viaje` DISABLE KEYS */;
-INSERT INTO `viaje` (`id`, `id_provincia`, `lugar`, `precio`, `detalle`, `dias`, `noches`, `cantidad`, `id_tipo_paquete`) VALUES
-	(1, 13, 'Con termas de Cacheuta', 5677, 'Hotel Sol Andino+Media pensión', '4', '2', '10', 1),
-	(2, 13, 'Con termas de Cacheuta', 6176, 'Hotel Cordón del Plata+Media pensión', '4', '2', '10', 1),
-	(3, 19, 'Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis+Media pensión', '4', '2', '10', 1),
-	(4, 6, 'Villa Carlos Paz', 5531, 'Hotel El Mirador+ Pensión completa', '4', '2', '10', 1),
-	(5, 6, 'Villa Carlos Paz', 6262, 'Hotel Kalton + Pensión completa', '4', '2', '10', 1),
-	(6, 2, 'Mar del Plata', 4207, 'Hotel Dos Reyes+ Desayuno incluido', '4', '2', '10', 1),
-	(7, 2, 'Mar del Plata', 3800, 'Hotel Pergamino + Desayuno incluido', '4', '2', '10', 1),
-	(8, 21, 'Rosario', 2500, 'Hotel de la Cité+ Desayuno incluido', '4', '2', '10', 1),
-	(9, 14, 'Cataratas del Iguazu', 6000, 'Hotel Colonial Iguazu+ Media Pensión', '4', '2', '10', 1),
-	(10, 14, 'Caratas del Iguazu', 7000, 'Exe Hotel Cataratas+ Media Pensión', '4', '2', '10', 1),
-	(11, 2, 'Día de campo en Brandsen', 2000, 'Actividades de campo+ Desayuno+ Picada+ Merienda', '1 dia', '15', 2),
-	(12, 19, 'Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis + Media pensión', '4', '2', '15', 2),
-	(13, 6, 'Villa Carlos Paz', 5531, 'Hotel El Mirador + Pensión completa', '4', '2', '15', 2),
-	(14, 6, 'Villa Carlos Paz', 6262, 'Hotel Kalton + Pensión completa', '4', '2', '15', 2),
-	(15, 8, 'Villa Elisa ', 5200, 'Hotel Quinto Elemento + Media pensión', '4', '2', '15', 2),
-	(16, 2, 'Tigre ', 3350, 'Hotel Wyndham Nordelta + Desayuno incluido ', '1 dia ', '15', 2),
-	(17, 2, 'Lobos', 3000, 'La candelaria + Media pension ', '2 dias ', '15', 2),
-	(18, 13, 'Termas de Cacheuta', 5677, 'Hotel Sol Andino + Media pensión+ Micro', '4', '2', '20', 3),
-	(19, 13, 'Termas de Cacheuta', 6176, 'Hotel Cordón del Plata + Media pensión+ Micro', '4 dias / 2 noches ', '20', 3),
-	(20, 19, 'Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis+ Media pensión+ Micro', '4 días / 2 noches', '20', 3),
-	(21, 6, 'Villa Carlos Paz', 5531, 'Hotel El Mirador+ Media pensión+ Micro ', '4 días / 2 noches', '20', 3),
-	(22, 6, 'Villa Carlos Paz', 6262, 'Hotel Kalton + pensión completa + Micro', '4', '2', '20', 3),
-	(23, 13, 'MENDOZA', 12000, 'Hotel Provincial+ Desayuno incluido+ Aereo', '2', '1', '20', 3),
-	(24, 16, 'Bariloche', 20000, 'Hotel Nevada+ Desayuno + Aereo', '4', '2', '20', 3),
-	(25, 5, 'Puerto Madryn', 15000, 'Hotel Península Valdés+ Desayuno+ Aereo', '1', '2', '20', 3);
-/*!40000 ALTER TABLE `viaje` ENABLE KEYS */;
+-- Volcando datos para la tabla upcn.paquete: ~25 rows (aproximadamente)
+/*!40000 ALTER TABLE `paquete` DISABLE KEYS */;
+INSERT INTO `paquete` (`id`, `id_provincia`, `lugar`, `precio`, `detalle`, `dias`, `noches`, `cantidad`, `id_tipo_paquete`) VALUES
+	(1, 13, 'Con termas de Cacheuta', 5677, 'Hotel Sol Andino+Media pensión', 4, 2, 10, 1),
+	(2, 13, 'Con termas de Cacheuta', 6176, 'Hotel Cordón del Plata+Media pensión', 4, 2, 10, 1),
+	(3, 19, 'Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis+Media pensión', 4, 2, 10, 1),
+	(4, 6, 'Villa Carlos Paz', 5531, 'Hotel El Mirador+ Pensión completa', 4, 2, 10, 1),
+	(5, 6, 'Villa Carlos Paz', 6262, 'Hotel Kalton + Pensión completa', 4, 2, 10, 1),
+	(6, 2, 'Mar del Plata', 4207, 'Hotel Dos Reyes+ Desayuno incluido', 4, 2, 10, 1),
+	(7, 2, 'Mar del Plata', 3800, 'Hotel Pergamino + Desayuno incluido', 4, 2, 10, 1),
+	(8, 21, 'Rosario', 2500, 'Hotel de la Cité+ Desayuno incluido', 4, 2, 10, 1),
+	(9, 14, 'Cataratas del Iguazu', 6000, 'Hotel Colonial Iguazu+ Media Pensión', 4, 2, 10, 1),
+	(10, 14, 'Caratas del Iguazu', 7000, 'Exe Hotel Cataratas+ Media Pensión', 4, 2, 10, 1),
+	(11, 2, 'Día de campo en Brandsen', 2000, 'Actividades de campo+ Desayuno+ Picada+ Merienda', 1, 2, 15, 2),
+	(12, 19, 'Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis + Media pensión', 4, 2, 15, 2),
+	(13, 6, 'Villa Carlos Paz', 5531, 'Hotel El Mirador + Pensión completa', 4, 2, 15, 2),
+	(14, 6, 'Villa Carlos Paz', 6262, 'Hotel Kalton + Pensión completa', 4, 2, 15, 2),
+	(15, 8, 'Villa Elisa ', 5200, 'Hotel Quinto Elemento + Media pensión', 4, 2, 15, 2),
+	(16, 2, 'Tigre ', 3350, 'Hotel Wyndham Nordelta + Desayuno incluido ', 4, 2, 15, 2),
+	(17, 2, 'Lobos', 3000, 'La candelaria + Media pension ', 4, 2, 15, 2),
+	(18, 13, 'Termas de Cacheuta', 5677, 'Hotel Sol Andino + Media pensión+ Micro', 4, 2, 20, 3),
+	(19, 13, 'Termas de Cacheuta', 6176, 'Hotel Cordón del Plata + Media pensión+ Micro', 4, 2, 15, 3),
+	(20, 19, 'Parque Nacional Sierras de la Quijada', 6778, 'Gran Hotel San Luis+ Media pensión+ Micro', 4, 2, 15, 3),
+	(21, 6, 'Villa Carlos Paz', 5531, 'Hotel El Mirador+ Media pensión+ Micro ', 4, 2, 15, 3),
+	(22, 6, 'Villa Carlos Paz', 6262, 'Hotel Kalton + pensión completa + Micro', 4, 2, 15, 3),
+	(23, 13, 'MENDOZA', 12000, 'Hotel Provincial+ Desayuno incluido+ Aereo', 4, 2, 15, 3),
+	(24, 16, 'Bariloche', 20000, 'Hotel Nevada+ Desayuno + Aereo', 4, 2, 15, 3),
+	(25, 5, 'Puerto Madryn', 15000, 'Hotel Península Valdés+ Desayuno+ Aereo', 4, 2, 15, 3);
+/*!40000 ALTER TABLE `paquete` ENABLE KEYS */;
 
 -- Volcando estructura para tabla upcn.compra
 DROP TABLE IF EXISTS `compra`;
@@ -245,14 +245,14 @@ CREATE TABLE IF NOT EXISTS `compra` (
   `dni` int(11) NOT NULL,
   `id_adicional` int(11) NOT NULL,
   `id_asist` int(11) NOT NULL,
-  `id_viaje` int(11) NOT NULL,
+  `id_paquete` int(11) NOT NULL,
   `id_hotel` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio_final` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT FOREIGN KEY compra_adicional (id_adicional) REFERENCES adicional (id),
   CONSTRAINT FOREIGN KEY compra_asistencia (id_asist) REFERENCES asistencia (id),
-  CONSTRAINT FOREIGN KEY compra_viaje (id_viaje) REFERENCES viaje (id),
+  CONSTRAINT FOREIGN KEY compra_paquete (id_paquete) REFERENCES paquete (id),
   CONSTRAINT FOREIGN KEY compra_hotel (id_hotel) REFERENCES hotel (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

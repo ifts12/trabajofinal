@@ -2,8 +2,10 @@
 
 namespace UPCN;
 
-class Tipo extends Comun
+class AsistenciaMedica extends Comun
 {
+    protected $tabla = 'asistencia_medica';
+    
     /**
      * ID
      * @var integer
@@ -11,10 +13,15 @@ class Tipo extends Comun
     protected $id;
     
     /**
-     * Nombre
+     * @var float
+     */
+    protected $precio;
+    
+    /**
      * @var string
      */
-    protected $nombre;
+    protected $detalle;
+    
     
     /**
      * Construct
@@ -22,9 +29,10 @@ class Tipo extends Comun
     public function __construct()
     {
         parent::__construct();
-        $this->setTabla('tipo');
+        $this->setTabla('asistencia_medica');
         $this->required = [
-            'nombre'
+            'precio',
+            'detalle'
         ];
     }
     
@@ -36,8 +44,9 @@ class Tipo extends Comun
     public function insert()
     {
         $this->con->beginTransaction();
-        $statement = $this->con->prepare('INSERT INTO ' . $this->getTabla() . ' (nombre) VALUES (:nombre)');
-        $statement->bindValue(':nombre', $this->getNombre(), \PDO::PARAM_STR);
+        $statement = $this->con->prepare('INSERT INTO ' . $this->getTabla() . ' (precio, detalle) VALUES (:precio, :detalle)');
+        $statement->bindValue(':precio', $this->getPrecio(), \PDO::PARAM_STR);
+        $statement->bindValue(':detalle', $this->getDetalle(), \PDO::PARAM_STR);
         return $this->con->execute($this, $statement, "Se guardaron los datos correctamente.");
     }
     
@@ -48,10 +57,11 @@ class Tipo extends Comun
     public function update()
     {
         $this->con->beginTransaction();
-        $sql = sprintf('UPDATE %s SET nombre=:nombre WHERE id=:id', $this->getTabla());
+        $sql = sprintf('UPDATE %s SET precio=:precio, detalle=:detalle WHERE id=:id', $this->getTabla());
         
         $statement = $this->con->prepare($sql);
-        $statement->bindValue(':nombre', $this->getNombre(), \PDO::PARAM_STR);
+        $statement->bindValue(':precio', $this->getPrecio(), \PDO::PARAM_STR);
+        $statement->bindValue(':detalle', $this->getDetalle(), \PDO::PARAM_STR);
         $statement->bindValue(':id', $this->getId(), \PDO::PARAM_INT);
         return $this->con->execute($this, $statement, "Se actualizaron los datos correctamente.");
     }
@@ -76,20 +86,36 @@ class Tipo extends Comun
     /**
      * @return string
      */
-    public function getNombre()
+    public function getDetalle()
     {
-        return $this->nombre;
+        return $this->detalle;
     }
 
     /**
-     * @param string $nombre
+     * @param string $detalle
      */
-    public function setNombre($nombre)
+    public function setDetalle($detalle)
     {
-        $this->nombre = $nombre;
+        $this->detalle = $detalle;
+    }
+    
+    /**
+     * @return number
+     */
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
+    /**
+     * @param number $precio
+     */
+    public function setPrecio($precio)
+    {
+        $this->precio = $precio;
     }
 
 
-
+    
 
 }

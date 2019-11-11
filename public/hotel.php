@@ -3,8 +3,8 @@
 require __DIR__ . '/../src/autoload.php';
 require DIR_ROOT . '/src/session.php';
 
-use UPCN\Tipo;
-$clase = new Tipo();
+use UPCN\Hotel;
+$clase = new Hotel();
 
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';
@@ -15,7 +15,7 @@ if(!array_key_exists('a', $_GET) && empty($_POST))
 {
     include DIR_TEMPLATE . '/_' . $clase->getTabla() . '_list.html.php';
 }
-else
+else 
 {
     if(!empty($_POST))
     {

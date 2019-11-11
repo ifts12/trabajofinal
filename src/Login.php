@@ -4,48 +4,95 @@ namespace UPCN;
 
 class Login extends Comun
 {
-    /**
-     * ID
-     * @var integer
-     */
-    private $dni;
+    protected $rol = null;
+    
+    protected $required;
     
     /**
-     * Pass
-     * @var string
+     * Construct
      */
-    private $pass;
-    
-    
-    /**
-     * @return number
-     */
-    public function getDni()
+    public function __construct()
     {
-        return $this->dni;
+        parent::__construct();
     }
     
     /**
-     * @param number $id
+     * Chequea el login
+     * 
+     * @param integer $dni
+     * @return boolean
      */
-    public function setDni($dni)
+    public function login($dni)
     {
-        $this->dni = $dni;
+        if(empty($dni))
+        {
+            $this->setMsg('danger', 'Error en login!');
+            return false;
+        }
+        
+        $this->con->beginTransaction();
+        $statement = $this->con->prepare('SELECT * FROM perfil WHERE dni=:dni');
+        $statement->bindValue(':dni', $dni, \PDO::PARAM_INT);
+        
+        if($statement->execute())
+        {
+            $this->con->commit();
+            $row = $statement->fetch(\PDO::FETCH_ASSOC);
+            if (password_verify($this->getPass(), $row['pass']))
+            {
+                return true;
+            }
+            else
+            {
+                $this->setMsg('danger', 'Error en login');
+                return false;
+            }
+        }
+    }
+    
+    public function checkPass()
+    {
+        if($this->getPass() === $this->getPass2() && !(empty($this->getPass()) || empty($this->getPass2())))
+        {
+            return true;
+        }
+        return false;
     }
     
     /**
-     * @return string
+     * @return mixed
      */
-    public function getPass()
+    public function getRol($id = null)
     {
-        return $this->pass;
+        $this->con->beginTransaction();
+        $statement = $this->con->prepare('SELECT * FROM rol WHERE id=:id');
+        
+        if(is_null($id))
+        {
+            $statement->bindValue(':id', $this->getId_rol(), \PDO::PARAM_INT);
+        }
+        else
+        {
+            $statement->bindValue(':id', filter_var($id, FILTER_SANITIZE_NUMBER_INT), \PDO::PARAM_INT);
+        }
+        
+        if($statement->execute())
+        {
+            $this->con->commit();
+            $row = $statement->fetch(\PDO::FETCH_ASSOC);
+            $this->rol = $row['rol']; 
+        }
+        return $this->rol;
     }
-    
-    /**
-     * @param string $pass
-     */
-    public function setPass($pass)
+
+    public function hasRol($rol)
     {
-        $this->pass = $pass;
+        if($this->getRol() === $rol)
+        {
+            return true;
+        }
+        return false;
     }
+
+
 }

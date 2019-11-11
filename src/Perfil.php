@@ -2,37 +2,35 @@
 
 namespace UPCN;
 
-class Perfil extends Comun implements PdoABM
+class Perfil extends Login
 {
     protected $tabla = 'perfil';
     
-    private $dni;
+    protected $id;
     
-    private $nombre;
+    protected $dni;
     
-    private $apellido;
+    protected $nombre;
     
-    private $pass;
+    protected $apellido;
     
-    private $pass2;
+    protected $pass;
     
-    private $foto;
+    protected $pass2;
     
-    private $telefono;
+    protected $foto;
     
-    private $direccion;
+    protected $telefono;
     
-    private $id_provincia;
+    protected $direccion;
     
-    private $fecha_nac;
+    protected $id_provincia;
     
-    private $email;
+    protected $fecha_nac;
     
-    private $id_rol;
+    protected $email;
     
-    private $rol = null;
-    
-    protected $required;
+    protected $id_rol;
     
     /**
      * Construct
@@ -89,19 +87,7 @@ class Perfil extends Comun implements PdoABM
         $statement->bindValue(':id_rol', $this->getId_rol(), \PDO::PARAM_INT);
         $statement->bindValue(':id_provincia', $this->getId_provincia(), \PDO::PARAM_STR);
         $statement->bindValue(':pass', password_hash($this->getPass(), PASSWORD_ARGON2I, ['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 3]), \PDO::PARAM_STR);
-        
-        if($statement->execute())
-        {
-            $this->setMsg('success', "Se guardaron los datos correctamente.");
-            $this->con->commit();
-            return TRUE;
-        }
-        else
-        {
-            $this->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]);
-            $this->con->rollBack();
-            return FALSE;
-        }
+        return $this->con->execute($this, $statement, "Se guardaron los datos correctamente.");
     }
     
     /**
@@ -138,20 +124,8 @@ class Perfil extends Comun implements PdoABM
             $statement->bindValue(':pass', password_hash($this->getPass(), PASSWORD_ARGON2I, ['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 3]), \PDO::PARAM_STR);
         }
         
-        if($statement->execute())
-        {
-            $this->setMsg('success', "Se actualizaron los datos correctamente.");
-            $this->con->commit();
-            return TRUE;
-        }
-        else
-        {
-            $this->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]);
-            $this->con->rollBack();
-            return FALSE;
-        }
+        return $this->con->execute($this, $statement, "Se actualizaron los datos correctamente.");
     }
-    
     
     /**
      * {@inheritDoc}
@@ -159,51 +133,13 @@ class Perfil extends Comun implements PdoABM
      */
     public function delete()
     {
-    }
-    
-    /**
-     * Chequea el login
-     * 
-     * @param integer $dni
-     * @return boolean
-     */
-    public function login($dni)
-    {
-        if(empty($dni))
-        {
-            $this->setMsg('danger', 'Error en login!');
-            return false;
-        }
-        
         $this->con->beginTransaction();
-        $statement = $this->con->prepare('SELECT * FROM perfil WHERE dni=:dni');
-        $statement->bindValue(':dni', $dni, \PDO::PARAM_INT);
         
-        if($statement->execute())
-        {
-            $this->con->commit();
-            $row = $statement->fetch(\PDO::FETCH_ASSOC);
-            if (password_verify($this->getPass(), $row['pass']))
-            {
-                return true;
-            }
-            else
-            {
-                $this->setMsg('danger', 'Error en login');
-                return false;
-            }
-        }
+        $sql = sprintf('DELETE FROM %s WHERE dni=:id', $this->getTabla());
+        $statement = $this->con->prepare($sql);
+        $statement->bindValue(':id', $this->getDni(), \PDO::PARAM_INT);
+        return $this->con->execute($this, $statement, "Se borraron los datos correctamente.");
     }
-    
-    public function checkPass()
-    {
-        if($this->getPass() === $this->getPass2() && !(empty($this->getPass()) || empty($this->getPass2())))
-        {
-            return true;
-        }
-        return false;
-    }
-    
     
     /**
      * Chequea el login
@@ -244,36 +180,17 @@ class Perfil extends Comun implements PdoABM
     /**
      * @return mixed
      */
-    public function getRol($id = null)
+    public function getId()
     {
-        $this->con->beginTransaction();
-        $statement = $this->con->prepare('SELECT * FROM rol WHERE id=:id');
-        
-        if(is_null($id))
-        {
-            $statement->bindValue(':id', $this->getId_rol(), \PDO::PARAM_INT);
-        }
-        else
-        {
-            $statement->bindValue(':id', filter_var($id, FILTER_SANITIZE_NUMBER_INT), \PDO::PARAM_INT);
-        }
-        
-        if($statement->execute())
-        {
-            $this->con->commit();
-            $row = $statement->fetch(\PDO::FETCH_ASSOC);
-            $this->rol = $row['rol']; 
-        }
-        return $this->rol;
+        return $this->dni;
     }
 
-    public function hasRol($rol)
+    /**
+     * @param mixed $dni
+     */
+    public function setId($dni)
     {
-        if($this->getRol() === $rol)
-        {
-            return true;
-        }
-        return false;
+        $this->dni = $dni;
     }
     
     /**

@@ -4,7 +4,7 @@ namespace UPCN;
 
 use UPCN\Conexion;
 
-class Comun
+class Comun implements PdoABM
 {
     /**
      * Conexion a la Base de Datos
@@ -18,6 +18,8 @@ class Comun
      */
     protected $tabla;
     
+    protected $required;
+    
     protected $error = [];
     
     protected $msg;
@@ -25,6 +27,43 @@ class Comun
     public function __construct()
     {
         $this->con = new Conexion();
+    }
+    
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::select()
+     */
+    public function select()
+    {
+        return $this->findAll('SELECT t.* FROM ' . $this->getTabla() . ' t');
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::insert()
+     * return boolean
+     */
+    public function insert(){}
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::update()
+     */
+    public function update(){}
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::delete()
+     */
+    public function delete()
+    {
+        $this->con->beginTransaction();
+        
+        $sql = sprintf('DELETE FROM %s WHERE id=:id', $this->getTabla());
+        $statement = $this->con->prepare($sql);
+        $statement->bindValue(':id', $this->getId(), \PDO::PARAM_INT);
+        return $this->con->execute($this, $statement, "Se borraron los datos correctamente.");
     }
     
     
@@ -38,12 +77,9 @@ class Comun
         {
             echo '<meta http-equiv="Refresh" content="0; url=' . $this->getTabla() . '.php' . '" />';
             echo '<script>window.location.href="' . $this->getTabla() . '.php' . '"</script>';
-            
-//             window.location.hostname='http://www.w3docs.com/'
-//             window.location.replace='http://www.w3docs.com/'
-//             window.location.assign='http://www.w3docs.com/'
-                
-            
+//             window.location.hostname='$this->getTabla() . '.php''
+//             window.location.replace='$this->getTabla() . '.php''
+//             window.location.assign='$this->getTabla() . '.php''
         }
     }
     
@@ -72,13 +108,16 @@ class Comun
         return $this;
     }
     
-    
     /**
      * FileUpload
      * @return boolean
      */
     public function fileUpload($request)
     {
+        if(empty($request['foto']['tmp_name']))
+        {
+            return FALSE;
+        }
         if (is_uploaded_file($request['foto']['tmp_name']) && move_uploaded_file($request['foto']['tmp_name'], DIR_UPLOAD_IMG . DIRECTORY_SEPARATOR . basename($request['foto']['name'])))
         {
             echo "El fichero es válido y se subió con éxito.\n";
@@ -220,14 +259,17 @@ class Comun
                     {
                         $this->con->commit();
                         $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
-                        if (!empty($res))
+                        
+                        if(empty($res))
                         {
-                            foreach($res as $class)
-                            {
-                                $row[] = $this->setData($class);
-                            }
+                            return FALSE;
                         }
-                        return $row;
+                        
+                        foreach($res as $class)
+                        {
+                            $rows[] = $this->setData($class);
+                        }
+                        return $rows;
                     }
                 }
             }

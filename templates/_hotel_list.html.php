@@ -4,7 +4,7 @@
     </div>
     <table id="table">
     	<tr>
-    		<th>ID</th><th>Nombre</th><th>Apellido</th><th>Foto</th><th>Fecha Nac.</th><th>Email</th><th>Rol</th><th>Acción</th>
+    		<th>ID</th><th>Nombre</th><th>Foto</th><th>Provincia</th><th>Estrellas</th><th>Precio</th><th>Cantidad</th><th>Acción</th>
     	</tr>
     <?php 
     try {
@@ -12,7 +12,7 @@
         foreach ($datos as $dato)
         {
             echo '<tr>';
-            echo sprintf("\t<td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td><a href='%s.php?a=edit&d=%d'><i class='fas fa-pen'></i></a></td>", $dato['dni'], $dato['nombre'], $dato['apellido'], $dato['foto'], $dato['fecha_nac'], $dato['email'], $clase->getRol($dato['id_rol']), $clase->getTabla(), $dato['dni']);
+            echo sprintf("\t<td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%d</td><td>%0.2f</td><td>%d</td><td><a href='%s.php?a=edit&d=%d'><i class='fas fa-pen'></i></a></td>", $dato['id'], $dato['nombre'], $dato['foto'], $dato['provincia'], $dato['estrellas'], $dato['precio'], $dato['cantidad'], $clase->getTabla(), $dato['id']);
             echo '</tr>';
         }
     }

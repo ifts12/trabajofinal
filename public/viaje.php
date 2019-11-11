@@ -3,50 +3,80 @@
 require __DIR__ . '/../src/autoload.php';
 require DIR_ROOT . '/src/session.php';
 
-
-use UPCN\Conexion;
+use UPCN\Viaje;
+$clase = new Viaje();
 
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';
-?>
 
-<div class="container">
-<div class="form-group">
-	<a class="btn btn-rect btn-grad btn-success" href="viajea.php" role="button">Nuevo</a>
-</div>
-<table id="table">
-<?php 
-try {
-    $c = new Conexion();
-    $statement = $c->prepare('SELECT v.*, p.nombre AS provincia, t.nombre AS tipo FROM viaje v LEFT JOIN provincia p ON v.id_provincia=p.id LEFT JOIN tipo t ON v.id_tipo=t.id');
-    if($statement->execute())
+include DIR_TEMPLATE . '/_msg.html.php';
+
+if(!array_key_exists('a', $_GET) && empty($_POST))
+{
+    include DIR_TEMPLATE . '/_' . $clase->getTabla() . '_list.html.php';
+}
+else
+{
+    if(!empty($_POST))
     {
-        echo '<tr>';
-        echo "\t<th>ID</th><th>Provincia</th><th>Lugar</th><th>Precio</th><th>Detalle</th><th>Días</th><th>Cantidad</th><th>Tipo</th><th>Acción</th>";
-        echo '</tr>';
-        while ($row = $statement->fetch(\PDO::FETCH_ASSOC))
+        if(!empty($_FILES))
         {
-            echo '<tr>';
-            echo sprintf("\t<td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td><a href='viajem.php?edit=%d'><i class='fas fa-pen'></i></a></td>", $row['id'], $row['provincia'], $row['lugar'], $row['precio'], $row['detalle'], $row['dias'], $row['cantidad'], $row['tipo'], $row['id']);
-            echo '</tr>';
+            $_SESSION['msg'] = json_encode($clase->fileUpload($_FILES));
+            $foto = $clase->getFoto();
+        }
+        
+        $clase->setData($_POST);
+        if(isset($foto))
+        {
+            $clase->setFoto($foto);
+        }
+        
+        if(!empty($_POST['method']) && $_POST['method'] === 'DELETE')
+        {
+            $status = $clase->delete();
+            $clase->redirect();
+        }
+        elseif(!$clase->hasError())
+        {
+            if(!empty($_POST['method']) && $_POST['method'] === 'PUT')
+            {
+                $status = $clase->update();
+            }
+            else
+            {
+                $status = $clase->insert();
+            }
+            $_SESSION['msg'] = json_encode($clase->getMsg());
+            if($status)
+            {
+                $clase->redirect();
+            }
+        }
+        else
+        {
+            $_SESSION['msg'] = json_encode([
+                'tipo' => 'danger',
+                'msg'  => $clase->getError()
+            ]);
         }
     }
-    else
+    elseif(array_key_exists('a', $_GET) && !empty($_GET['a']))
     {
-        echo "VACIO";
+        $accion = 'Nuevo';
+        if($_GET['a'] == 'edit' && !empty($_GET['d']))
+        {
+            $status = $clase->findBy(['id' => $_GET['d']]);
+            if(!$status)
+            {
+                $clase->redirect();
+            }
+            $accion = 'Editar';
+        }
     }
+    include DIR_TEMPLATE . '/_' . $clase->getTabla() . '_form.html.php';
 }
-catch (\PDOException $e)
-{
-    echo '<tr>';
-    echo '\t<td>' . $e->getMessage() . '</td>';
-    echo '</tr>';
-}
-?>
-</table>
-</div>
 
-<?php 
 include DIR_TEMPLATE . '/_javascripts.html.php';
 include  DIR_TEMPLATE . '/_foot.html.php';
 ?>
+

@@ -1,6 +1,6 @@
 <div class="container">
 <?php 
-if(isset($_SESSION['msg']))
+if(array_key_exists('msg', $_SESSION) && isset($_SESSION['msg']) && !empty($_SESSION['msg']))
 {
     $msg = json_decode($_SESSION['msg']);
 ?>

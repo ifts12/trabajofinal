@@ -44,4 +44,40 @@ class Conexion
         return $this->conexion->commit();
     }
     
+    public function execute($self, $statement, $msg)
+    {
+        try
+        {
+            if($statement->execute())
+            {
+                $self->setMsg('success', $msg);
+                $this->conexion->commit();
+
+// echo '<pre>';
+// echo var_dump($self);
+// echo '<============>';
+// echo var_dump($statement);
+// echo '<============>';
+// echo var_dump($statement->debugDumpParams());
+// echo '</pre>';
+// exit;
+
+                return TRUE;
+            }
+            else
+            {
+                
+                $self->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]);
+                $this->conexion->rollBack();
+                return FALSE;
+            }
+        }
+        catch(\Exception $e)
+        {
+            $self->setMsg('danger', 'Codigo: ' . $e->getCode() . ', Error: ' . $e->getMessage());
+            $this->conexion->rollBack();
+            return FALSE;
+        }
+    }
+    
 }

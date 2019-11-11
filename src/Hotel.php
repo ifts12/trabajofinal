@@ -7,37 +7,115 @@ class Hotel extends Comun
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      */
-    private $estrellas;
+    protected $estrellas;
     
     /**
      * @var string
      */
-    private $nombre;
+    protected $nombre;
     
     /**
      * @var string
      */
-    private $foto;
+    protected $foto;
     
     /**
      * @var integer
      */
-    private $id_provincia;
+    protected $id_provincia;
     
     /**
      * @var float
      */
-    private $precio;
+    protected $precio;
     
     /**
      * @var integer
      */
-    private $cantidad;
+    protected $cantidad;
+    
+    
+    /**
+     * Construct
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setTabla('hotel');
+        $this->required = [
+            'estrellas',
+            'nombre',
+            'id_provincia',
+            'precio',
+            'cantidad'
+        ];
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::select()
+     */
+    public function select()
+    {
+        return $this->findAll('SELECT t.*, p.nombre AS provincia FROM ' . $this->getTabla() . ' t LEFT JOIN provincia p ON t.id_provincia=p.id');
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::insert()
+     * return boolean
+     */
+    public function insert()
+    {
+        $this->con->beginTransaction();
+        $statement = $this->con->prepare('INSERT INTO ' . $this->getTabla() . ' (nombre, id_provincia, foto, estrellas, precio, cantidad) VALUES (:nombre, :id_provincia, :foto, :estrellas, :precio, :cantidad)');
+        $statement->bindValue(':nombre', $this->getNombre(), \PDO::PARAM_STR);
+        $statement->bindValue(':id_provincia', $this->getId_provincia(), \PDO::PARAM_INT);
+        $statement->bindValue(':foto', $this->getFoto(), \PDO::PARAM_STR);
+        $statement->bindValue(':estrellas', $this->getEstrellas(), \PDO::PARAM_INT);
+        $statement->bindValue(':precio', $this->getPrecio(), \PDO::PARAM_INT);
+        $statement->bindValue(':cantidad', $this->getCantidad(), \PDO::PARAM_INT);
+        return $this->con->execute($this, $statement, "Se guardaron los datos correctamente.");
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::update()
+     */
+    public function update()
+    {
+        $this->con->beginTransaction();
+        $sql = sprintf('UPDATE %s SET nombre=:nombre, id_provincia=:id_provincia, foto=:foto, estrellas=:estrellas, precio=:precio, cantidad=:cantidad WHERE id=:id', $clase->getTabla());
+        
+        $statement = $this->con->prepare($sql);
+        $statement->bindValue(':nombre', $this->getNombre(), \PDO::PARAM_STR);
+        $statement->bindValue(':id_provincia', $this->getId_provincia(), \PDO::PARAM_INT);
+        $statement->bindValue(':foto', $this->getFoto(), \PDO::PARAM_STR);
+        $statement->bindValue(':estrellas', $this->getEstrellas(), \PDO::PARAM_INT);
+        $statement->bindValue(':precio', $this->getPrecio(), \PDO::PARAM_STR);
+        $statement->bindValue(':cantidad', $this->getCantidad(), \PDO::PARAM_INT);
+        $statement->bindValue(':id', $this->getId(), \PDO::PARAM_INT);
+        return $this->con->execute($this, $statement, "Se actualizaron los datos correctamente.");
+    }
+    
+//     /**
+//      * {@inheritDoc}
+//      * @see \UPCN\PdoABM::delete()
+//      */
+//     public function delete()
+//     {
+//         $this->con->beginTransaction();
+        
+//         $sql = sprintf('DELETE FROM %s WHERE id=:id', $this->getTabla());
+//         $statement = $this->con->prepare($sql);
+//         $statement->bindValue(':id', $this->getId(), \PDO::PARAM_INT);
+//         $this->con->execute($this, $statement, "Se borraron los datos correctamente.");
+//     }
     
     
     /**

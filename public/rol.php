@@ -3,46 +3,79 @@
 require __DIR__ . '/../src/autoload.php';
 require DIR_ROOT . '/src/session.php';
 
-use UPCN\Conexion;
 use UPCN\Rol;
-
-$c = new Conexion();
+$clase = new Rol();
 
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';
-?>
 
-<div class="container">
-<div class="form-group">
-	<a class="btn btn-rect btn-grad btn-success" href="rola.php" role="button">Nuevo</a>
-</div>
-<table id="table">
-<?php 
-try {
-    $statement = $c->prepare('SELECT * FROM rol');
-    $statement->execute();
-    echo '<tr>';
-    echo "\t<th>ID</th><th>Rol</th><th>Acción</th>";
-    echo '</tr>';
-    while ($row = $statement->fetch(\PDO::FETCH_ASSOC))
-    {
-        echo '<tr>';
-        echo "\t<td>" . $row['id'] . '</td><td>' . $row['rol'] . '</td><td><a href="rolm.php?edit=' . $row['id'] . '"><i class="fas fa-pen"></i></a></td>';
-        echo '</tr>';
-    }
-    $statement = null;
-}
-catch (\PDOException $e)
+include DIR_TEMPLATE . '/_msg.html.php';
+
+if(!array_key_exists('a', $_GET) && empty($_POST))
 {
-    echo '<tr>';
-    echo '\t<td>' . $e->getMessage() . '</td>';
-    echo '</tr>';
+    include DIR_TEMPLATE . '/_' . $clase->getTabla() . '_list.html.php';
 }
-?>
-</table>
-</div>
+else
+{
+    if(!empty($_POST))
+    {
+        if(!empty($_FILES))
+        {
+            $_SESSION['msg'] = json_encode($clase->fileUpload($_FILES));
+            $foto = $clase->getFoto();
+        }
+        
+        $clase->setData($_POST);
+        if(isset($foto))
+        {
+            $clase->setFoto($foto);
+        }
+        
+        if(!empty($_POST['method']) && $_POST['method'] === 'DELETE')
+        {
+            $status = $clase->delete();
+            $clase->redirect();
+        }
+        elseif(!$clase->hasError())
+        {
+            if(!empty($_POST['method']) && $_POST['method'] === 'PUT')
+            {
+                $status = $clase->update();
+            }
+            else
+            {
+                $status = $clase->insert();
+            }
+            $_SESSION['msg'] = json_encode($clase->getMsg());
+            if($status)
+            {
+                $clase->redirect();
+            }
+        }
+        else
+        {
+            $_SESSION['msg'] = json_encode([
+                'tipo' => 'danger',
+                'msg'  => $clase->getError()
+            ]);
+        }
+    }
+    elseif(array_key_exists('a', $_GET) && !empty($_GET['a']))
+    {
+        $accion = 'Nuevo';
+        if($_GET['a'] == 'edit' && !empty($_GET['d']))
+        {
+            $status = $clase->findBy(['id' => $_GET['d']]);
+            if(!$status)
+            {
+                $clase->redirect();
+            }
+            $accion = 'Editar';
+        }
+    }
+    include DIR_TEMPLATE . '/_' . $clase->getTabla() . '_form.html.php';
+}
 
-<?php 
 include DIR_TEMPLATE . '/_javascripts.html.php';
 include  DIR_TEMPLATE . '/_foot.html.php';
 ?>

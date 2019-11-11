@@ -94,4 +94,14 @@ include DIR_TEMPLATE . '/_form_rol.php';
     <div class="form-group">
     	<a class="btn btn-rect btn-grad btn-info float-left ml-3" href="perfil.php" role="button">Volver</a>
     </div>
+    
+
+<?php 
+if($_GET['a'] == 'edit')
+{
+    include DIR_TEMPLATE . '/_form_borrar.php';
+}
+?>
+    
+    
 </div>

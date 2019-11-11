@@ -28,14 +28,13 @@
 					<li class="submenu nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown">Administrar</a>
 					    <div class="dropdown-menu" style="margin-top: -2px">
-                            <a class="dropdown-item" href="hotels.php">Hotel</a>
+                            <a class="dropdown-item" href="hotel.php">Hotel</a>
                             <a class="dropdown-item" href="viaje.php">Viaje</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="perfil.php">Perfil</a>
                             <a class="dropdown-item" href="rol.php">Rol</a>
                             <a class="dropdown-item" href="tipo.php">Tipo</a>
-                            <a class="dropdown-item" href="adicional.php">Adicional</a>
-                            <a class="dropdown-item" href="asistencia.php">Asistencia</a>
+                            <a class="dropdown-item" href="asistencia_medica.php">Asistencia</a>
                         </div>
 					</li>
 					<?php } ?>

@@ -31,7 +31,13 @@ else
             $clase->setFoto($foto);
         }
         
-        if(!$clase->hasError())
+        
+        if(!empty($_POST['method']) && $_POST['method'] === 'DELETE')
+        {
+            $status = $clase->delete();
+            $clase->redirect();
+        }
+        elseif(!$clase->hasError())
         {
             if(!empty($_POST['method']) && $_POST['method'] === 'PUT')
             {
@@ -60,7 +66,11 @@ else
         $accion = 'Nuevo';
         if($_GET['a'] == 'edit' && !empty($_GET['d']))
         {
-            $clase->findBy(['dni' => $_GET['d']]);
+            $status = $clase->findBy(['dni' => $_GET['d']]);
+            if(!$status)
+            {
+                $clase->redirect();
+            }
             $accion = 'Editar';
         }
     }

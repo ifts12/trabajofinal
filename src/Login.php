@@ -87,7 +87,7 @@ class Login extends Comun
 
     public function hasRol($rol)
     {
-        if($this->getRol() === $rol)
+        if((is_array($rol) && array_keys($rol, $this->getRol())) || $this->getRol() === $rol)
         {
             return true;
         }

@@ -3,6 +3,7 @@
 namespace UPCN;
 
 use UPCN\Conexion;
+use UPCN\PdoABM;
 
 class Comun implements PdoABM
 {
@@ -77,9 +78,6 @@ class Comun implements PdoABM
         {
             echo '<meta http-equiv="Refresh" content="0; url=' . $this->getTabla() . '.php' . '" />';
             echo '<script>window.location.href="' . $this->getTabla() . '.php' . '"</script>';
-//             window.location.hostname='$this->getTabla() . '.php''
-//             window.location.replace='$this->getTabla() . '.php''
-//             window.location.assign='$this->getTabla() . '.php''
         }
     }
     
@@ -167,6 +165,27 @@ class Comun implements PdoABM
             
         $elemento = array_rand($imgs);
         return DIR_IMG . DIRECTORY_SEPARATOR . $imgs[$elemento];
+    }
+    
+    public function getImage($image = NULL)
+    {
+        if(empty($image))
+        {
+            $img = $this->getDefaultImages();
+        }
+        else
+        {
+            $img = DIR_UPLOAD_IMG . DIRECTORY_SEPARATOR . $image;
+            if(!file_exists($img))
+            {
+                $img = DIR_IMG . DIRECTORY_SEPARATOR . $image;
+                if(!file_exists($img))
+                {
+                    $img = $this->getDefaultImages();
+                }
+            }
+        }
+        return $img;
     }
     
     /**
@@ -294,6 +313,15 @@ class Comun implements PdoABM
     public function getProvincias()
     {
         return $this->findAll('SELECT * FROM provincia');
+    }
+    
+    /**
+     * Obtiene todos los tipos de paquetes
+     * @return mixed|boolean
+     */
+    public function getTipoViaje()
+    {
+        return $this->findAll('SELECT * FROM tipo_viaje');
     }
     
     /**

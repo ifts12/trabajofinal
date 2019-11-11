@@ -3,6 +3,12 @@
 require __DIR__ . '/../src/autoload.php';
 require DIR_ROOT . '/src/session.php';
 
+/* Chequea permisos */
+if(!$user->hasRol(['Empleado', 'Administrador']))
+{
+    header('Location: ' . LOGIN);
+}
+
 use UPCN\Viaje;
 $clase = new Viaje();
 

@@ -1,15 +1,15 @@
 <div class="form-group">
-    <label for="tipo">Tipo Paquete</label>
-    <select name="id_tipo">	
+    <label for="tipo_viaje">Tipo Viaje</label>
+    <select name="id_tipo_viaje">	
 	<?php
 	try
 	{
-	    $datos = $clase->getTipoPaquete();
+	    $datos = $clase->getTipoViaje();
 	    echo '<option value="">Seleccione una opción</option>';
 	    foreach ($datos as $dato)
 	    {
 	        printf('<option value="%d"', $dato["id"]);
-	        if($dato["id"] == $clase->getId_tipo())
+	        if($dato["id"] == $clase->getId_tipo_viaje())
 	        {
 	            echo ' selected';
 	        }
@@ -22,7 +22,7 @@
 	}
 	?>	
 	</select>
-	<small id="tipoHelp" class="form-text text-muted">Seleccione un tipo.</small>
-    <div class="invalid-feedback">Debe elegir un tipo</div>
+	<small id="tipo_viajeHelp" class="form-text text-muted">Seleccione un tipo de viaje.</small>
+    <div class="invalid-feedback">Debe elegir un tipo de viaje</div>
 </div>
     

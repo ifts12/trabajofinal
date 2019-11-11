@@ -14,7 +14,7 @@ class Viaje extends Comun
      * Tipo
      * @var integer
      */
-    protected $id_tipo_paquete;
+    protected $id_tipo_viaje;
     
     /**
      * @var string
@@ -53,7 +53,7 @@ class Viaje extends Comun
     protected $noches;
     
     /**
-     * @var \DateTime
+     * @var \DateTime   
      */
     protected $fecha_desde;
 
@@ -61,7 +61,6 @@ class Viaje extends Comun
      * @var \DateTime
      */
     protected $fecha_hasta;
-
     
     
     /**
@@ -72,7 +71,7 @@ class Viaje extends Comun
         parent::__construct();
         $this->setTabla('viaje');
         $this->required = [
-            'id_tipo_paquete',
+            'id_tipo_viaje',
             'id_provincia',
             'lugar',
             'precio',
@@ -85,14 +84,41 @@ class Viaje extends Comun
     }
     
     
-    
     /**
      * {@inheritDoc}
      * @see \UPCN\PdoABM::select()
      */
     public function select()
     {
-        return $this->findAll('SELECT v.*, p.nombre AS provincia, t.nombre AS tipo FROM ' . $this->getTabla() . ' v LEFT JOIN provincia p ON v.id_provincia=p.id LEFT JOIN tipo t ON v.id_tipo=t.id');
+        return $this->findAll('SELECT v.*, p.nombre AS provincia, t.nombre AS tipo_viaje FROM ' . $this->getTabla() . ' v LEFT JOIN provincia p ON v.id_provincia=p.id LEFT JOIN tipo_viaje t ON v.id_tipo_viaje=t.id');
+    }
+    
+    /**
+     */
+    public function findByTipoViaje($tipoViaje = NULL)
+    {
+     
+        if(empty($tipoViaje))
+        {
+            $tipoViaje = 'Paquete';
+        }
+        
+        $this->con->beginTransaction();
+        $sql = 'SELECT v.*, p.nombre AS provincia, t.nombre AS tipo_viaje FROM ' . $this->getTabla() . ' v LEFT JOIN provincia p ON v.id_provincia=p.id LEFT JOIN tipo_viaje t ON v.id_tipo_viaje=t.id WHERE t.nombre=:tipoViaje';
+        $statement = $this->con->prepare($sql);
+        $statement->bindValue(':tipoViaje', $tipoViaje);
+        $res = FALSE;
+        if($statement->execute())
+        {
+            $this->con->commit();
+            $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        }
+        else
+        {
+            $arr = $statement->errorInfo();
+            print_r($arr);
+        }
+        return $res;
     }
     
     /**
@@ -103,8 +129,8 @@ class Viaje extends Comun
     public function insert()
     {
         $this->con->beginTransaction();
-        $statement = $this->con->prepare('INSERT INTO viaje (id_tipo_paquete, foto, id_provincia, lugar, precio, detalle, dias, noches, fecha_desde, fecha_hasta) VALUES (:id_tipo_paquete, :foto, :id_provincia, :lugar, :precio, :detalle, :dias, :noches, :fecha_desde, :fecha_hasta)');
-        $statement->bindValue(':id_tipo_paquete', $this->getId_tipo(), \PDO::PARAM_INT);
+        $statement = $this->con->prepare('INSERT INTO ' . $this->getTabla() . ' (id_tipo_viaje, foto, id_provincia, lugar, precio, detalle, dias, noches, fecha_desde, fecha_hasta) VALUES (:id_tipo_viaje, :foto, :id_provincia, :lugar, :precio, :detalle, :dias, :noches, :fecha_desde, :fecha_hasta)');
+        $statement->bindValue(':id_tipo_viaje', $this->getId_tipo_viaje(), \PDO::PARAM_INT);
         $statement->bindValue(':foto', $this->getLugar(), \PDO::PARAM_STR);
         $statement->bindValue(':id_provincia', $this->getId_provincia(), \PDO::PARAM_INT);
         $statement->bindValue(':lugar', $this->getLugar(), \PDO::PARAM_STR);
@@ -124,10 +150,10 @@ class Viaje extends Comun
     public function update()
     {
         $this->con->beginTransaction();
-        $sql = sprintf('UPDATE %s SET id_tipo_paquete=:id_tipo_paquete, foto=:foto, id_provincia=:id_provincia, lugar=:lugar, precio=:precio, detalle=:detalle, dias=:dias, noches=:noches, fecha_desde=:fecha_desde, fecha_hasta=:fecha_hasta WHERE id=:id', $this->getTabla());
+        $sql = sprintf('UPDATE %s SET id_tipo_viaje=:id_tipo_viaje, foto=:foto, id_provincia=:id_provincia, lugar=:lugar, precio=:precio, detalle=:detalle, dias=:dias, noches=:noches, fecha_desde=:fecha_desde, fecha_hasta=:fecha_hasta WHERE id=:id', $this->getTabla());
         
         $statement = $this->con->prepare($sql);
-        $statement->bindValue(':id_tipo_paquete', $this->getId_tipo(), \PDO::PARAM_INT);
+        $statement->bindValue(':id_tipo_viaje', $this->getId_tipo_viaje(), \PDO::PARAM_INT);
         $statement->bindValue(':foto', $this->getLugar(), \PDO::PARAM_STR);
         $statement->bindValue(':id_provincia', $this->getId_provincia(), \PDO::PARAM_INT);
         $statement->bindValue(':lugar', $this->getLugar(), \PDO::PARAM_STR);
@@ -142,7 +168,7 @@ class Viaje extends Comun
     }
     
     /**
-     * @return number
+     * @return integer
      */
     public function getId()
     {
@@ -150,7 +176,7 @@ class Viaje extends Comun
     }
 
     /**
-     * @param number $id
+     * @param integer $id
      */
     public function setId($id)
     {
@@ -158,7 +184,39 @@ class Viaje extends Comun
     }
 
     /**
-     * @return number
+     * @return integer
+     */
+    public function getId_tipo_viaje()
+    {
+        return $this->id_tipo_viaje;
+    }
+
+    /**
+     * @param integer $id_tipo_viaje
+     */
+    public function setId_tipo_viaje($id_tipo_viaje)
+    {
+        $this->id_tipo_viaje = $id_tipo_viaje;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    /**
+     * @param string $foto
+     */
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+    }
+
+    /**
+     * @return integer
      */
     public function getId_provincia()
     {
@@ -166,7 +224,7 @@ class Viaje extends Comun
     }
 
     /**
-     * @param number $id_provincia
+     * @param integer $id_provincia
      */
     public function setId_provincia($id_provincia)
     {
@@ -190,7 +248,7 @@ class Viaje extends Comun
     }
 
     /**
-     * @return number
+     * @return float
      */
     public function getPrecio()
     {
@@ -198,7 +256,7 @@ class Viaje extends Comun
     }
 
     /**
-     * @param number $precio
+     * @param float $precio
      */
     public function setPrecio($precio)
     {
@@ -222,7 +280,7 @@ class Viaje extends Comun
     }
 
     /**
-     * @return string
+     * @return integer
      */
     public function getDias()
     {
@@ -230,7 +288,7 @@ class Viaje extends Comun
     }
 
     /**
-     * @param string $dias
+     * @param integer $dias
      */
     public function setDias($dias)
     {
@@ -238,70 +296,7 @@ class Viaje extends Comun
     }
 
     /**
-     * @return number
-     */
-    public function getCantidad()
-    {
-        return $this->cantidad;
-    }
-
-    /**
-     * @param number $cantidad
-     */
-    public function setCantidad($cantidad)
-    {
-        $this->cantidad = $cantidad;
-    }
-
-    /**
-     * @return number
-     */
-    public function getId_tipo()
-    {
-        return $this->id_tipo;
-    }
-
-    /**
-     * @param number $id_tipo
-     */
-    public function setId_tipo($id_tipo)
-    {
-        $this->id_tipo = $id_tipo;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getFoto()
-    {
-        return $this->foto;
-    }
-
-    /**
-     * @param string $foto
-     */
-    public function setFoto($foto)
-    {
-        $this->foto = $foto;
-    }
-    /**
-     * @return number
-     */
-    public function getId_tipo_paquete()
-    {
-        return $this->id_tipo_paquete;
-    }
-
-    /**
-     * @param number $id_tipo_paquete
-     */
-    public function setId_tipo_paquete($id_tipo_paquete)
-    {
-        $this->id_tipo_paquete = $id_tipo_paquete;
-    }
-
-    /**
-     * @return number
+     * @return integer
      */
     public function getNoches()
     {
@@ -309,7 +304,7 @@ class Viaje extends Comun
     }
 
     /**
-     * @param number $noches
+     * @param integer $noches
      */
     public function setNoches($noches)
     {
@@ -348,6 +343,8 @@ class Viaje extends Comun
         $this->fecha_hasta = $fecha_hasta;
     }
 
+
+    
 
 
 }

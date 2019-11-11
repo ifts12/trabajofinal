@@ -44,32 +44,41 @@ class Conexion
         return $this->conexion->commit();
     }
     
-    public function execute($self, $statement, $msg)
+    public function execute($self, $statement, $msg, $param = NULL)
     {
         try
         {
-            if($statement->execute())
+            if(empty($param))
             {
-                $self->setMsg('success', $msg);
-                $this->conexion->commit();
-
-// echo '<pre>';
-// echo var_dump($self);
-// echo '<============>';
-// echo var_dump($statement);
-// echo '<============>';
-// echo var_dump($statement->debugDumpParams());
-// echo '</pre>';
-// exit;
-
-                return TRUE;
+                if($statement->execute())
+                {
+                    $self->setMsg('success', $msg);
+                    $this->conexion->commit();
+                    return TRUE;
+                }
+                else
+                {
+                    
+                    $self->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]);
+                    $this->conexion->rollBack();
+                    return FALSE;
+                }
             }
-            else
+            else 
             {
-                
-                $self->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]);
-                $this->conexion->rollBack();
-                return FALSE;
+                if($statement->execute($param))
+                {
+                    $self->setMsg('success', $msg);
+                    $this->conexion->commit();
+                    return TRUE;
+                }
+                else
+                {
+                    
+                    $self->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]);
+                    $this->conexion->rollBack();
+                    return FALSE;
+                }
             }
         }
         catch(\Exception $e)

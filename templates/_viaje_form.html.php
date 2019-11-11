@@ -12,58 +12,65 @@ if($_GET['a'] == 'edit')
 ?>
     
     <div class="form-group">
-        <label for="id">rol</label>
+        <label for="id">ID</label>
         <input name="id" type="number" class="form-control" id="id" value="<?php echo $clase->getId() ?>" aria-describedby="idRolHelp" placeholder="" readonly>
     </div>
     
 <?php 
 }
-?>
-    
-<?php 
-$selected = $clase->getId_provincia();
+
+include DIR_TEMPLATE . '/_form_tipo_viaje.php';
 include DIR_TEMPLATE . '/_form_provincia.php';
 ?>
     
     <div class="form-group">
         <label for="lugar">Lugar</label>
-        <input name="lugar" type="text" class="form-control<?php echo $clase->getError('lugar') ? ' is-invalid' : '' ?>" id="lugar" value="<?php echo $clase->getLugar() ?>" aria-describedby="lugarHelp" placeholder="Nombre">
+        <input name="lugar" type="text" class="form-control<?php echo $clase->getError('lugar') ? ' is-invalid' : '' ?>" id="lugar" value="<?php echo $clase->getLugar() ?>" aria-describedby="lugarHelp" placeholder="Lugar">
         <small id="lugarHelp" class="form-text text-muted">Lugar.</small>
         <div class="invalid-feedback">Debe ingresar un lugar</div>
     </div>
     
     <div class="form-group">
         <label for="precio">Precio</label>
-        <input name="precio" type="text" class="form-control<?php echo $clase->getError('precio') ? ' is-invalid' : '' ?>" id="precio" value="<?php echo $clase->getPrecio() ?>" aria-describedby="precioHelp" placeholder="Nombre">
+        <input name="precio" type="text" class="form-control<?php echo $clase->getError('precio') ? ' is-invalid' : '' ?>" id="precio" value="<?php echo $clase->getPrecio() ?>" aria-describedby="precioHelp" placeholder="Precio">
         <small id="precioHelp" class="form-text text-muted">Precio.</small>
         <div class="invalid-feedback">Debe ingresar un precio</div>
     </div>
     
     <div class="form-group">
-        <label for="detalle">detalle</label>
+        <label for="detalle">Detalle</label>
         <textarea name="detalle" type="text" class="form-control<?php echo $clase->getError('detalle') ? ' is-invalid' : '' ?>" id="detalle" aria-describedby="detalleHelp" placeholder="Detalle"><?php echo $clase->getDetalle() ?></textarea>
         <small id="detalleHelp" class="form-text text-muted">Detalle.</small>
         <div class="invalid-feedback">Debe ser un detalle válido</div>
     </div>
     
     <div class="form-group">
-        <label for="dias">dias</label>
-        <input name="dias" type="text" class="form-control<?php echo $clase->getError('dias') ? ' is-invalid' : '' ?>" id="dias" value="<?php echo $clase->getDias() ?>" aria-describedby="nombreHelp" placeholder="Nombre">
+        <label for="dias">Dias</label>
+        <input name="dias" type="number" class="form-control<?php echo $clase->getError('dias') ? ' is-invalid' : '' ?>" id="dias" value="<?php echo $clase->getDias() ?>" aria-describedby="diasHelp" placeholder="Dias" min="1">
         <small id="diasHelp" class="form-text text-muted">Dias.</small>
         <div class="invalid-feedback">Dias válido</div>
     </div>
     
     <div class="form-group">
-        <label for="cantidad">cantidad</label>
-        <input name="cantidad" type="number" class="form-control<?php echo $clase->getError('cantidad') ? ' is-invalid' : '' ?>" id="cantidad" value="<?php echo $clase->getCantidad() ?>" aria-describedby="cantidadHelp" placeholder="Cantidad" min="1">
-        <small id="cantidadHelp" class="form-text text-muted">Cantidad.</small>
-        <div class="invalid-feedback">Debe ser un número válido</div>
+        <label for="noches">Noches</label>
+        <input name="noches" type="number" class="form-control<?php echo $clase->getError('noches') ? ' is-invalid' : '' ?>" id="noches" value="<?php echo $clase->getNoches() ?>" aria-describedby="nochesHelp" placeholder="Noches" min="1">
+        <small id="nochesHelp" class="form-text text-muted">Noches.</small>
+        <div class="invalid-feedback">Dias válido</div>
     </div>
     
-<?php 
-$selected = $clase->getId_tipo();
-include DIR_TEMPLATE . '/_form_tipo.php';
-?>
+    <div class="form-group">
+        <label for="fecha_desde">Fecha Desde</label>
+        <input name="fecha_desde" type="date" class="form-control<?php echo $clase->getError('fecha_desde') ? ' is-invalid' : '' ?>" id="fecha_desde" value="<?php echo $clase->getFecha_desde() ?>" aria-describedby="fecha_desdeHelp" placeholder="Fecha Desde" min="1">
+        <small id="fecha_desdeHelp" class="form-text text-muted">Dias.</small>
+        <div class="invalid-feedback">Dias válido</div>
+    </div>
+    
+    <div class="form-group">
+        <label for="fecha_hasta">Fecha Hasta</label>
+        <input name="fecha_hasta" type="date" class="form-control<?php echo $clase->getError('fecha_hasta') ? ' is-invalid' : '' ?>" id="fecha_hasta" value="<?php echo $clase->getFecha_hasta() ?>" aria-describedby="fecha_hastaHelp" placeholder="Fecha Hasta" min="1">
+        <small id="fecha_hastaHelp" class="form-text text-muted">Dias.</small>
+        <div class="invalid-feedback">Dias válido</div>
+    </div>
     
     <div class="form-group">
         <button type="submit" class="btn btn-rect btn-grad btn-success float-left">Guardar</button>

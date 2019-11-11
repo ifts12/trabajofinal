@@ -7,46 +7,137 @@ class Compra extends Comun
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
     
     /**
      * @var integer
      */
-    private $dni;
+    protected $dni;
     
     /**
      * @var integer
      */
-    private $id_adicional;
+    protected $id_adicional;
     
     /**
      * @var integer
      */
-    private $id_asist;
+    protected $id_asistencia_medica;
     
     /**
      * @var integer
      */
-    private $id_viaje;
+    protected $id_viaje;
     
     /**
      * @var integer
      */
-    private $id_hotel;
+    protected $id_hotel;
     
     /**
      * @var integer
      */
-    private $cantidad;
+    protected $cantidad_afiliados;
+    
+    /**
+     * @var integer
+     */
+    protected $cantidad_invitados;
     
     /**
      * @var float
      */
-    private $precio_final;
+    protected $precio_final;
     
     
     /**
-     * @return number
+     * Construct
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setTabla('compra');
+        $this->required = [
+            'dni',
+            'id_provincia',
+            'id_asistencia_medica',
+            'cantidad_invitados',
+            'cantidad_invitados',
+            'precio_final'
+        ];
+    }
+    
+    public function setData($data)
+    {
+        echo var_dump($data);exit;
+        $reflect = new \ReflectionClass($this);
+        $props   = $reflect->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED);
+        
+        foreach ($props as $prop)
+        {
+            if(array_key_exists($prop->getName(), $data))
+            {
+                $metodo = new \ReflectionMethod($this, 'set' . ucfirst($prop->getName()));
+                $metodo->invokeArgs($this, [$data[$prop->getName()]]);
+                
+                if(empty($data[$prop->getName()]) && array_keys($this->required, $prop->getName()))
+                {
+                    $this->error[] = $prop->getName();
+                }
+            }
+        }
+        return $this;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::select()
+     */
+    public function select()
+    {
+        return $this->findAll('SELECT v.*, p.nombre AS provincia, t.nombre AS tipo_viaje FROM ' . $this->getTabla() . ' v LEFT JOIN provincia p ON v.id_provincia=p.id LEFT JOIN tipo_viaje t ON v.id_tipo_viaje=t.id');
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::insert()
+     * return boolean
+     */
+    public function insert()
+    {
+        $this->con->beginTransaction();
+        $sql = sprintf('INSERT INTO %s (dni, id_asistencia_medica, cantidad_afiliados, cantidad_invitados, precio_final', $this->getTabla());
+        $values = sprintf('VALUES (:dni, :id_asistencia_medica, :cantidad_afiliados, :cantidad_invitados, :precio_final');
+        $param = [':dni' => $this->getDni(), ':id_asistencia_medica' => $this->getId_asistencia_medica(), ':cantidad_afiliados' => $this->getCantidad_afiliados(), ':cantidad_invitados' => $this->getCantidad_invitados(), ':precio_final' => $this->getPrecio_final()];
+        
+        if(!empty($this->getId_adicional()))
+        {
+            $sql .= sprintf(', id_adicional');
+            $values .= sprintf(', :id_adicional');
+            $param[':id_adicional'] = $this->getId_adicional(); 
+        }
+        
+        if(!empty($this->getId_viaje()))
+        {
+            $sql .= sprintf(', id_viaje');
+            $values .= sprintf(', :id_viaje');
+            $param[':id_viaje'] = $this->getId_viaje(); 
+        }
+        
+        if(!empty($this->getId_hotel()))
+        {
+            $sql .= sprintf(', id_hotel');
+            $values .= sprintf(', :id_hotel');
+            $param[':id_hotel'] = $this->getId_hotel(); 
+        }
+        $sql .= sprintf(') ');
+        $values .= sprintf(')');
+        $statement = $this->con->prepare($sql . $values);
+        return $this->con->execute($this, $statement, "Se guardaron los datos correctamente.", $param);
+    }
+    
+    /**
+     * @return integer
      */
     public function getId()
     {
@@ -54,7 +145,7 @@ class Compra extends Comun
     }
 
     /**
-     * @param number $id
+     * @param integer $id
      */
     public function setId($id)
     {
@@ -62,7 +153,7 @@ class Compra extends Comun
     }
 
     /**
-     * @return number
+     * @return integer
      */
     public function getDni()
     {
@@ -70,7 +161,7 @@ class Compra extends Comun
     }
 
     /**
-     * @param number $dni
+     * @param integer $dni
      */
     public function setDni($dni)
     {
@@ -78,7 +169,7 @@ class Compra extends Comun
     }
 
     /**
-     * @return number
+     * @return integer
      */
     public function getId_adicional()
     {
@@ -86,7 +177,7 @@ class Compra extends Comun
     }
 
     /**
-     * @param number $id_adicional
+     * @param integer $id_adicional
      */
     public function setId_adicional($id_adicional)
     {
@@ -94,23 +185,23 @@ class Compra extends Comun
     }
 
     /**
-     * @return number
+     * @return integer
      */
-    public function getId_asist()
+    public function getId_asistencia_medica()
     {
-        return $this->id_asist;
+        return $this->id_asistencia_medica;
     }
 
     /**
-     * @param number $id_asist
+     * @param integer $id_asistencia_medica
      */
-    public function setId_asist($id_asist)
+    public function setId_asistencia_medica($id_asistencia_medica)
     {
-        $this->id_asist = $id_asist;
+        $this->id_asistencia_medica = $id_asistencia_medica;
     }
 
     /**
-     * @return number
+     * @return integer
      */
     public function getId_viaje()
     {
@@ -118,7 +209,7 @@ class Compra extends Comun
     }
 
     /**
-     * @param number $id_viaje
+     * @param integer $id_viaje
      */
     public function setId_viaje($id_viaje)
     {
@@ -126,7 +217,7 @@ class Compra extends Comun
     }
 
     /**
-     * @return number
+     * @return integer
      */
     public function getId_hotel()
     {
@@ -134,7 +225,7 @@ class Compra extends Comun
     }
 
     /**
-     * @param number $id_hotel
+     * @param integer $id_hotel
      */
     public function setId_hotel($id_hotel)
     {
@@ -142,23 +233,39 @@ class Compra extends Comun
     }
 
     /**
-     * @return number
+     * @return integer
      */
-    public function getCantidad()
+    public function getCantidad_afiliados()
     {
-        return $this->cantidad;
+        return $this->cantidad_afiliados;
     }
 
     /**
-     * @param number $cantidad
+     * @param integer $cantidad_afiliados
      */
-    public function setCantidad($cantidad)
+    public function setCantidad_afiliados($cantidad_afiliados)
     {
-        $this->cantidad = $cantidad;
+        $this->cantidad_afiliados = $cantidad_afiliados;
     }
 
     /**
-     * @return number
+     * @return integer
+     */
+    public function getCantidad_invitados()
+    {
+        return $this->cantidad_invitados;
+    }
+
+    /**
+     * @param integer $cantidad_invitados
+     */
+    public function setCantidad_invitados($cantidad_invitados)
+    {
+        $this->cantidad_invitados = $cantidad_invitados;
+    }
+
+    /**
+     * @return float
      */
     public function getPrecio_final()
     {
@@ -166,12 +273,14 @@ class Compra extends Comun
     }
 
     /**
-     * @param number $precio_final
+     * @param float $precio_final
      */
     public function setPrecio_final($precio_final)
     {
         $this->precio_final = $precio_final;
     }
+
+    
 
     
     

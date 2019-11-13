@@ -3,8 +3,8 @@
 require __DIR__ . '/../src/autoload.php';
 require DIR_ROOT . '/src/session.php';
 
-use UPCN\Tipo;
-$clase = new Tipo();
+use UPCN\TipoViaje;
+$clase = new TipoViaje();
 
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';

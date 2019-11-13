@@ -2,7 +2,7 @@
 
 namespace UPCN;
 
-class Tipo extends Comun
+class TipoViaje extends Comun
 {
     /**
      * ID
@@ -22,7 +22,7 @@ class Tipo extends Comun
     public function __construct()
     {
         parent::__construct();
-        $this->setTabla('tipo');
+        $this->setTabla('tipo_viaje');
         $this->required = [
             'nombre'
         ];

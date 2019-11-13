@@ -12,7 +12,7 @@
 					<li class="submenu nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown">Turismo</a>
 					    <div class="dropdown-menu" style="margin-top: -2px">
-                            <a class="dropdown-item" href="paquetes.php">Paquetes</a>
+                            <a class="dropdown-item" href="paquete.php">Paquetes</a>
                             <a class="dropdown-item" href="escapada.php">Escapada</a>
                             <a class="dropdown-item" href="miniturismo.php">Miniturismo</a>
                             <a class="dropdown-item" href="hoteleria.php">Hotelería</a>
@@ -33,7 +33,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="perfil.php">Perfil</a>
                             <a class="dropdown-item" href="rol.php">Rol</a>
-                            <a class="dropdown-item" href="tipo.php">Tipo</a>
+                            <a class="dropdown-item" href="tipo_viaje.php">Tipo Viaje</a>
                             <a class="dropdown-item" href="asistencia_medica.php">Asistencia</a>
                         </div>
 					</li>

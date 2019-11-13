@@ -68,16 +68,21 @@ class Comun implements PdoABM
     }
     
     
-    public function redirect()
+    public function redirect($url = NULL, $time = 0)
     {
+        if(empty($url))
+        {
+            $url = $this->getTabla() . '.php';
+        }
+        
         if (!headers_sent()) {
-            header('Location: ' . $this->getTabla() . '.php');
+            header('Location: ' . $url);
             exit;
         }
         else
         {
-            echo '<meta http-equiv="Refresh" content="0; url=' . $this->getTabla() . '.php' . '" />';
-            echo '<script>window.location.href="' . $this->getTabla() . '.php' . '"</script>';
+            echo sprintf('<meta http-equiv="Refresh" content="%d; url=%s" />', $time, $url);
+            echo sprintf('<script>window.location.href="%s"</script>', $url);
         }
     }
     
@@ -316,12 +321,56 @@ class Comun implements PdoABM
     }
     
     /**
+     * Obtiene todas las provincias
+     * @return mixed|boolean
+     */
+    public function findProvinciaById($id = NULL)
+    {
+        if(empty($id))
+        {
+            return false;
+        }
+        $this->con->beginTransaction();
+        $statement = $this->con->prepare('SELECT nombre FROM provincia WHERE id=:id');
+        if($statement->execute([':id' => $id]))
+        {
+            $this->con->commit();
+            $row = $statement->fetchObject(\UPCN\Provincia::class);
+            if (!empty($row))
+            {
+                return $row;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * Obtiene todos los tipos de paquetes
      * @return mixed|boolean
      */
     public function getTipoViaje()
     {
         return $this->findAll('SELECT * FROM tipo_viaje');
+    }
+    
+    /**
+     * Obtiene todos los tipos de paquetes
+     * @return mixed|boolean
+     */
+    public function getAsistenciaMedica()
+    {
+        $this->con->beginTransaction();
+        $statement = $this->con->prepare('SELECT * FROM asistencia_medica');
+        if($statement->execute())
+        {
+            $this->con->commit();
+            $row = $statement->fetchObject(\UPCN\AsistenciaMedica::class);
+            if (!empty($row))
+            {
+                return $row;
+            }
+        }
+        return false;
     }
     
     /**

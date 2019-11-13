@@ -9,7 +9,7 @@ use UPCN\Viaje;
 $clase = new Viaje();
 $datos = $clase->findByTipoViaje('Paquete');
 $portada = 'images/khachik-simonian-nXOB-wh4Oyc-unsplash.jpg';
-$titulo = 'Paquetes';
+$titulo = 'Paquete';
 include DIR_TEMPLATE . '/_viajes.html.php';
 
 include DIR_TEMPLATE . '/_javascripts.html.php';

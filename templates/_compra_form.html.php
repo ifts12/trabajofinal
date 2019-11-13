@@ -8,6 +8,10 @@
     echo '<input type="hidden" name="method" value="PUT">';
     echo sprintf('<input type="hidden" name="id_%s" value="%d">', $seccion, $_GET['d']);
     echo sprintf('<input type="hidden" name="s" value="%s">', $_GET['s']);
+    if(isset($asistenciaMedica) && !empty($asistenciaMedica))
+    {
+        echo sprintf('<input type="hidden" name="id_asistencia_medica" value="%d">', $asistenciaMedica->getId());
+    }
 ?>
     
     <div class="form-group">
@@ -25,7 +29,7 @@
     </div>
     
     <div class="form-check">
-        <input name="id_adicional" type="checkbox" class="form-check-input" id="id_adicional" aria-describedby="termHelp"><label for="term" class="form-check-label">Cobertura médica para invitado?</label>
+        <input name="id_adicional" type="checkbox" class="form-check-input" id="id_adicional" aria-describedby="termHelp" value="1" disabled><label for="term" class="form-check-label" >Cobertura médica para invitado?</label>
         <small id="termHelp" class="form-text text-muted">Cobertura médica en caso de emergencia.</small>
     </div>
     
@@ -35,7 +39,7 @@
     </div>
     
     <div class="form-group">
-        <button type="submit" class="btn btn-rect btn-grad btn-success float-left">Comprar</button>
+        <button type="submit" class="btn btn-rect btn-grad btn-success float-left" disabled="disabled">Comprar</button>
     </div>
 </form>
     

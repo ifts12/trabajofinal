@@ -10,7 +10,7 @@ foreach($datos as $dato)
 	<h5><?php echo $dato['nombre'] ?></h5>
 	<p><?php echo $dato['estrellas'] ?></p>
 	<p><?php echo $dato['precio'] ?></p>
-	<p><a class="btn btn-outline-success" role="button"  href="<?php echo (isset($_SESSION['u']) ? sprintf('comprar.php?s=%s&d=%d', strtolower($titulo), $dato["id"]) : 'login.php') ?>"><?php echo (isset($_SESSION['u']) ? 'Comprar' : 'Ingresar') ?></a></p>
+	<p><a class="btn btn-outline-success" role="button"  href="<?php echo (isset($_SESSION['u']) ? sprintf('compra.php?s=%s&d=%d', strtolower($titulo), $dato["id"]) : 'login.php') ?>"><?php echo (isset($_SESSION['u']) ? 'Comprar' : 'Ingresar') ?></a></p>
     
 <?php 
     include DIR_TEMPLATE . '/_content_body_foot.html.php';

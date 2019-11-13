@@ -14,6 +14,9 @@ include DIR_TEMPLATE . '/_menu.html.php';
 
 include DIR_TEMPLATE . '/_msg.html.php';
 
+$precio = NULL;
+$precioAsistencia = NULL;
+
 if(array_key_exists('s', $_GET) && array_key_exists('d', $_GET) && empty($_POST))
 {
     if($_GET['s'] == 'hotelería')
@@ -45,6 +48,9 @@ if(array_key_exists('s', $_GET) && array_key_exists('d', $_GET) && empty($_POST)
     $img = $clase->getImage($dato->getFoto());
     $asistenciaMedica = $clase->getAsistenciaMedica();
     
+    $precio = $dato->getPrecio();
+	$precioAsistencia = $asistenciaMedica->getPrecio();
+    
     if(get_class($dato) == Hotel::class)
     {
         $info .= sprintf('<h5>%s</h5>', $dato->getNombre());
@@ -61,7 +67,6 @@ if(array_key_exists('s', $_GET) && array_key_exists('d', $_GET) && empty($_POST)
     {
         $info .= sprintf('<small>%s ($ %0.2f)</small>', $asistenciaMedica->getDetalle(), $asistenciaMedica->getPrecio());
     }
-
 ?>
 
 <div class="container">
@@ -70,7 +75,6 @@ if(array_key_exists('s', $_GET) && array_key_exists('d', $_GET) && empty($_POST)
     	<div class="p-4 border col-6"><?php echo $info; ?></div>
     </div>
 </div>
-
 
     
 <?php 
@@ -89,31 +93,18 @@ elseif(!empty($_POST) && $_POST['method'] == 'PUT')
     
     $compra->setData($_POST);
     $compra->setDni($_SESSION['u']);
-    
-    
-    
-echo '<=============>';
 
-    echo '<pre>';
-    echo var_dump($compra);
-    echo '<=============>';
-    echo var_dump($clase);
-    echo '</pre>';
-exit;
     $status = $compra->insert();
-    $_SESSION['msg'] = json_encode($clase->getMsg());
+    $_SESSION['msg'] = json_encode($compra->getMsg());
 }
 
 include DIR_TEMPLATE . '/_javascripts.html.php';
 ?>
 
-
 <script type="text/javascript">
 $(document).ready(function() {
-
-	
-	precio = <?php echo $dato->getPrecio() ? $dato->getPrecio() : 0 ?>;
-	precioAsistencia = <?php echo $asistenciaMedica->getPrecio() ? $asistenciaMedica->getPrecio() : 0 ?>;
+	precio = <?php echo $precio ? $precio : 0 ?>;
+	precioAsistencia = <?php echo $precioAsistencia ? $precioAsistencia : 0 ?>;
 	
 	$('#cantidad_afiliados, #cantidad_invitados, #id_adicional').on('change', function()
 	{
@@ -145,6 +136,7 @@ $(document).ready(function() {
 			total += $('#cantidad_invitados').val() * precioAsistencia
 		}
 		$('#precio').html('$ ' + total);
+		$('#precio_final').val(total);
 	}
 	
 });

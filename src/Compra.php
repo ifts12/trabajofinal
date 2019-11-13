@@ -67,28 +67,6 @@ class Compra extends Comun
         ];
     }
     
-//     public function setData($data)
-//     {
-//         echo var_dump($data);exit;
-//         $reflect = new \ReflectionClass($this);
-//         $props   = $reflect->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED);
-        
-//         foreach ($props as $prop)
-//         {
-//             if(array_key_exists($prop->getName(), $data))
-//             {
-//                 $metodo = new \ReflectionMethod($this, 'set' . ucfirst($prop->getName()));
-//                 $metodo->invokeArgs($this, [$data[$prop->getName()]]);
-                
-//                 if(empty($data[$prop->getName()]) && array_keys($this->required, $prop->getName()))
-//                 {
-//                     $this->error[] = $prop->getName();
-//                 }
-//             }
-//         }
-//         return $this;
-//     }
-    
     /**
      * {@inheritDoc}
      * @see \UPCN\PdoABM::select()
@@ -130,10 +108,11 @@ class Compra extends Comun
             $values .= sprintf(', :id_hotel');
             $param[':id_hotel'] = $this->getId_hotel(); 
         }
+        
         $sql .= sprintf(') ');
         $values .= sprintf(')');
         $statement = $this->con->prepare($sql . $values);
-        return $this->con->execute($this, $statement, "Se guardaron los datos correctamente.", $param);
+        return $this->con->execute($this, $statement, "Gracias por su compra!!!.", $param);
     }
     
     /**
@@ -280,10 +259,6 @@ class Compra extends Comun
         $this->precio_final = $precio_final;
     }
 
-    
-
-    
-    
     
     
 }

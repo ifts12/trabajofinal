@@ -6,7 +6,6 @@ use UPCN\Config;
 
 class Conexion
 {
-    
     protected $conexion;
     
     public function __construct()
@@ -59,7 +58,7 @@ class Conexion
                 else
                 {
                     
-                    $self->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]);
+                    $self->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: (' . $statement->errorInfo()[1] . ') ' . $statement->errorInfo()[2]);
                     $this->conexion->rollBack();
                     return FALSE;
                 }
@@ -75,7 +74,7 @@ class Conexion
                 else
                 {
                     
-                    $self->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: ' . $statement->errorInfo()[2]);
+                    $self->setMsg('danger', 'Codigo: ' . $statement->errorInfo()[0] . ', Error: (' . $statement->errorInfo()[1] . ') ' . $statement->errorInfo()[2]);
                     $this->conexion->rollBack();
                     return FALSE;
                 }

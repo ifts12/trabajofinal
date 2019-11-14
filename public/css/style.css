@@ -210,4 +210,27 @@ header.sticky-top a.dropdown-item:hover
 	color: red;
 }
 
+.terminoscondiciones h1 { 
+	font-size: 1.5rem;
+	font-weight: bold;	
+}
+
+.terminoscondiciones h2 {
+	font-size: 1.25rem;
+	font-weight: bold;	
+}
+
+.terminoscondiciones h3 { 
+	font-size: 1.15rem;
+	font-style: italic;	
+}
+
+.terminoscondiciones h4 { 
+	font-size: 1.05rem;
+	font-style: italic;	
+}
+
+
+
+
 

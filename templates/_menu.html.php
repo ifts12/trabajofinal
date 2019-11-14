@@ -43,6 +43,7 @@
 						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown"><i class="fas fa-user-circle"></i></a>
 					    <div class="dropdown-menu" style="margin-top: -2px">
                             <a class="dropdown-item" href="info_perfil.php">Información (<?php echo $_SESSION['u'] ?>)</a>
+                            <a class="dropdown-item" href="compras.php">Mis viajes</a>
     						<a class="dropdown-item" href="logout.php">Salir</a>
                         </div>
 					</li>

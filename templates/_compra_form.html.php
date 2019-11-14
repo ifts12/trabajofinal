@@ -30,14 +30,14 @@
         <div class="invalid-feedback">Ingrese una cantidad válida de invitados.</div>
     </div>
     
-    <div class="form-check">
+    <div class="form-check my-3">
         <input name="id_adicional" type="checkbox" class="form-check-input" id="id_adicional" aria-describedby="termHelp" value="1" disabled><label for="term" class="form-check-label" >Cobertura médica para invitado?</label>
         <small id="termHelp" class="form-text text-muted">Cobertura médica en caso de emergencia.</small>
     </div>
     
-    <div class="form-check">
-        <input name="term" type="checkbox" class="form-check-input" id="term" aria-describedby="termHelp"><label for="term" class="form-check-label">
-        <a class="btn btn-outline-info  float-left" href="#" role="button"  data-toggle="modal" data-target="#modalCenter" data-titulo='Terminos y condiciones'>Terminos y condiciones</a></label>
+    <div class="form-check my-3">
+        <input name="term" type="checkbox" class="form-check-input" id="term" aria-describedby="termHelp">
+        <label for="term" class="form-check-label ml-1"><a class="btn btn-outline-info  float-left" href="#" role="button"  data-toggle="modal" data-target="#modalCenter" data-titulo='Terminos y condiciones' data-contenido="">Terminos y condiciones</a></label>
         <small id="termHelp" class="form-text text-muted">Terminos y condiciones.</small>
     </div>
     

@@ -71,9 +71,80 @@ class Compra extends Comun
      * {@inheritDoc}
      * @see \UPCN\PdoABM::select()
      */
-    public function select()
+    public function selectViaje($dni = NULL)
     {
-        return $this->findAll('SELECT v.*, p.nombre AS provincia, t.nombre AS tipo_viaje FROM ' . $this->getTabla() . ' v LEFT JOIN provincia p ON v.id_provincia=p.id LEFT JOIN tipo_viaje t ON v.id_tipo_viaje=t.id');
+        if(empty($dni))
+        {
+            return FALSE;
+        }
+        $sql = 'SELECT c.*, am.*, v.*, p.nombre AS provincia, tv.nombre AS tipoViaje FROM ' . $this->getTabla() . ' c LEFT JOIN asistencia_medica am ON c.id_asistencia_medica = am.id LEFT JOIN viaje v ON c.id_viaje = v.id LEFT JOIN provincia p ON v.id_provincia = p.id LEFT JOIN tipo_viaje tv ON v.id_tipo_viaje = tv.id  WHERE dni=:dni AND c.id_viaje IS NOT NULL';
+
+        $this->con->beginTransaction();
+        $statement = $this->con->prepare($sql);
+        if($statement->execute([':dni' => $dni]))
+        {
+            $this->con->commit();
+            $row = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            if (!empty($row))
+            {
+                return $row;
+            }
+        }
+        return FALSE;
+    }
+    
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::select()
+     */
+    public function selectHotel($dni = NULL)
+    {
+        if(empty($dni))
+        {
+            return FALSE;
+        }
+        $sql = 'SELECT c.*, am.*, h.*, p.nombre AS provincia FROM ' . $this->getTabla() . ' c LEFT JOIN asistencia_medica am ON c.id_asistencia_medica = am.id LEFT JOIN hotel h ON c.id_hotel = h.id LEFT JOIN provincia p ON h.id_provincia = p.id WHERE dni=:dni AND c.id_hotel IS NOT NULL';
+
+        $this->con->beginTransaction();
+        $statement = $this->con->prepare($sql);
+        if($statement->execute([':dni' => $dni]))
+        {
+            $this->con->commit();
+            $row = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            if (!empty($row))
+            {
+                return $row;
+            }
+        }
+        return FALSE;
+    }
+    
+    
+    /**
+     * {@inheritDoc}
+     * @see \UPCN\PdoABM::select()
+     */
+    public function select($dni = NULL)
+    {
+        if(empty($dni))
+        {
+            return FALSE;
+        }
+        $sql = 'SELECT c.*, am.*, v.*, h.*, p.nombre AS provincia, prov.nombre AS prov FROM ' . $this->getTabla() . ' c LEFT JOIN asistencia_medica am ON c.id_asistencia_medica = am.id LEFT JOIN viaje v ON c.id_viaje = v.id LEFT JOIN hotel h ON c.id_hotel = h.id LEFT JOIN provincia p ON v.id_provincia = p.id LEFT JOIN provincia prov ON h.id_provincia = prov.id WHERE dni=:dni';
+        
+        $this->con->beginTransaction();
+        $statement = $this->con->prepare($sql);
+        if($statement->execute([':dni' => $dni]))
+        {
+            $this->con->commit();
+            $row = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            if (!empty($row))
+            {
+                return $row;
+            }
+        }
+        return FALSE;
     }
     
     /**

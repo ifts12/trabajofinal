@@ -2,7 +2,7 @@
     <div class="form-group my-2">
     	<a class="btn btn-rect btn-grad btn-success" href="<?php echo $clase->getTabla() ?>.php?a=new" role="button">Nuevo</a>
     </div>
-    <table id="table">
+    <table id="table" class="table">
     	<tr>
     		<th>ID</th><th>Nombre</th><th>Apellido</th><th>Foto</th><th>Fecha Nac.</th><th>Email</th><th>Rol</th><th>Acción</th>
     	</tr>

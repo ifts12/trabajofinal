@@ -5,7 +5,7 @@
 <form enctype="multipart/form-data" name="forms" method="post" class="">
 
 <?php 
-if($_GET['a'] == 'edit')
+if(array_key_exists('a', $_GET) && $_GET['a'] == 'edit')
 {
     echo '<input type="hidden" name="method" value="PUT">';
 }
@@ -13,7 +13,7 @@ if($_GET['a'] == 'edit')
     
     <div class="form-group">
         <label for="dni">DNI</label>
-        <input name="dni" type="number" class="form-control<?php echo $clase->getError('dni') ? ' is-invalid' : '' ?>" id="dni" value="<?php echo $clase->getDni() ?>" aria-describedby="dniHelp" placeholder="D.N.I." min="2000000" max="100000000">
+        <input name="dni" type="number" class="form-control<?php echo $clase->getError('dni') ? ' is-invalid' : '' ?>" id="dni" value="<?php echo $clase->getDni() ?>" aria-describedby="dniHelp" placeholder="D.N.I." min="2000000" max="100000000" <?php echo $clase->getDni() ? 'readonly' : '' ?>>
         <small id="emailHelp" class="form-text text-muted">Documento Nacional de Identidad (sin puntos).</small>
         <div class="invalid-feedback">Debe ser un número de documento válido</div>
     </div>
@@ -97,7 +97,7 @@ include DIR_TEMPLATE . '/_form_rol.php';
     
 
 <?php 
-if($_GET['a'] == 'edit')
+if(array_key_exists('a', $_GET) && $_GET['a'] == 'edit')
 {
     include DIR_TEMPLATE . '/_form_borrar.php';
 }

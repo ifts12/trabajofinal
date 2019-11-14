@@ -6,7 +6,7 @@ if (!isset($_SESSION['u']))
 {
     session_unset();
     session_destroy();
-    header('Location: ' . LOGIN);
+//     header('Location: ' . LOGIN);
 }
 else
 {

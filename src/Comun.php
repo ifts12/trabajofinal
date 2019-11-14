@@ -123,9 +123,8 @@ class Comun implements PdoABM
         }
         if (is_uploaded_file($request['foto']['tmp_name']) && move_uploaded_file($request['foto']['tmp_name'], DIR_UPLOAD_IMG . DIRECTORY_SEPARATOR . basename($request['foto']['name'])))
         {
-            echo "El fichero es válido y se subió con éxito.\n";
             $this->setFoto(basename($request['foto']['name']));
-            $this->setMsg('success', "Se actualizaron los datos del rol correctamente.");
+//             $this->setMsg('success', "Se actualizaron los datos del rol correctamente.");
         }
         else
         {
@@ -161,7 +160,7 @@ class Comun implements PdoABM
     {
         if(empty($dir))
         {
-            $dir = DIR_PUBLIC . DIRECTORY_SEPARATOR . DIR_IMG;
+            $dir = DIR_PUBLIC . '/' . DIR_IMG;
         }
         $archivo = array_slice(scandir($dir), 2); // elimina los '.' y '..'
         $imgs = array_filter($archivo, function($v, $k) {
@@ -169,7 +168,7 @@ class Comun implements PdoABM
             }, ARRAY_FILTER_USE_BOTH);
             
         $elemento = array_rand($imgs);
-        return DIR_IMG . DIRECTORY_SEPARATOR . $imgs[$elemento];
+        return DIR_IMG . '/' . $imgs[$elemento];
     }
     
     public function getImage($image = NULL)
@@ -255,6 +254,7 @@ class Comun implements PdoABM
      */
     public function findBy($data)
     {
+        $sql = 'SELECT * FROM ' . $this->getTabla() . ' WHERE ';
         if(!empty($data) && is_array($data))
         {
             $reflect = new \ReflectionClass($this);
@@ -264,13 +264,10 @@ class Comun implements PdoABM
             {
                 if(array_key_exists($prop->getName(), $data))
                 {
-                    $sql = 'SELECT * FROM ' . $this->getTabla() . ' WHERE ';
-                    
                     foreach($data as $k => $v)
                     {
                         $sql .= sprintf("%s=:%s ", $k, $k);
                     }
-                    
                     $this->con->beginTransaction();
                     $statement = $this->con->prepare($sql);
                     
@@ -278,7 +275,6 @@ class Comun implements PdoABM
                     {
                         $statement->bindValue(':' . $k, $v);
                     }
-
                     if($statement->execute())
                     {
                         $this->con->commit();
@@ -296,6 +292,22 @@ class Comun implements PdoABM
                         return $rows;
                     }
                 }
+            }
+        }
+        elseif(!empty($data) && is_int((int) $data))
+        {
+            $sql .= sprintf("id=:id");
+            $this->con->beginTransaction();
+            $statement = $this->con->prepare($sql);
+            if($statement->execute([':id' => $data]))
+            {
+                $this->con->commit();
+                $res = $statement->fetchObject(get_class($this));
+                if(empty($res))
+                {
+                    return FALSE;
+                }
+                return $res;
             }
         }
         return $this;
@@ -345,7 +357,7 @@ class Comun implements PdoABM
     }
     
     /**
-     * Obtiene todos los tipos de paquetes
+     * Obtiene todos los tipos de paquete
      * @return mixed|boolean
      */
     public function getTipoViaje()
@@ -354,7 +366,7 @@ class Comun implements PdoABM
     }
     
     /**
-     * Obtiene todos los tipos de paquetes
+     * Obtiene todos los tipos de paquete
      * @return mixed|boolean
      */
     public function getAsistenciaMedica()

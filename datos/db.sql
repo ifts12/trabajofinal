@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS `compra`;
 CREATE TABLE IF NOT EXISTS `compra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dni` int(11) NOT NULL,
-  `id_adicional` int(11) NOT NULL,
+  `id_adicional` int(11) DEFAULT NULL,
   `id_asistencia_medica` int(11) NOT NULL,
   `id_viaje` int(11) DEFAULT NULL,
   `id_hotel` int(11) DEFAULT NULL,

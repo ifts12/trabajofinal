@@ -8,7 +8,7 @@
     echo '<input type="hidden" name="method" value="PUT">';
     echo sprintf('<input type="hidden" name="id_%s" value="%d">', $seccion, $_GET['d']);
     echo sprintf('<input type="hidden" name="s" value="%s">', $_GET['s']);
-    echo '<input type="hidden" name="precio_final" id="precio_final" value="">';
+    echo sprintf('<input type="hidden" name="precio_final" id="precio_final" value="%.2f">', $precio);
     
     if(isset($asistenciaMedica) && !empty($asistenciaMedica))
     {
@@ -36,7 +36,8 @@
     </div>
     
     <div class="form-check">
-        <input name="term" type="checkbox" class="form-check-input" id="term" aria-describedby="termHelp"><label for="term" class="form-check-label">Terminos y condiciones</label>
+        <input name="term" type="checkbox" class="form-check-input" id="term" aria-describedby="termHelp"><label for="term" class="form-check-label">
+        <a class="btn btn-outline-info  float-left" href="#" role="button"  data-toggle="modal" data-target="#modalCenter" data-titulo='Terminos y condiciones'>Terminos y condiciones</a></label>
         <small id="termHelp" class="form-text text-muted">Terminos y condiciones.</small>
     </div>
     

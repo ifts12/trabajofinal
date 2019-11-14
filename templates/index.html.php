@@ -7,7 +7,7 @@
 				<div class="col-md-8">
 					<h1 class="text-white font-weight-light">Turismo Nacional</h1>
 					<p class="mb-5">Paquetes para disfrutar.</p>
-					<p><a href="./paquetes.php" class="btn btn-primary py-3 px-5 text-white">Ver paquetes</a></p>
+					<p><a href="./paquete.php" class="btn btn-primary py-3 px-5 text-white">Ver paquete</a></p>
 				</div>
 			</div>
 		</div>
@@ -19,17 +19,17 @@
 	<div class="container overlap">
 		<div class="row">
 			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<a href="miniturismo.html.php" class="unit-1 text-center"> <img src="images/marco-ceschi-Aq36dAm15Yo-unsplash.jpg" alt="Image" class="img-fluid">
+				<a href="miniturismo.php" class="unit-1 text-center"> <img src="images/marco-ceschi-Aq36dAm15Yo-unsplash.jpg" alt="Image" class="img-fluid">
 					<div class="unit-1-text"><h3 class="unit-1-heading">Miniturismo</h3></div>
 				</a>
 			</div>
 			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<a href="escapada.html.php" class="unit-1 text-center"> <img src="images/chaandersoon-3NlcDImS9_0-unsplash.jpg" alt="Image" class="img-fluid">
+				<a href="escapada.php" class="unit-1 text-center"> <img src="images/chaandersoon-3NlcDImS9_0-unsplash.jpg" alt="Image" class="img-fluid">
 					<div class="unit-1-text"><h3 class="unit-1-heading">Escapada</h3></div>
 				</a>
 			</div>
 			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<a href="hoteleria.html.php" class="unit-1 text-center"> <img src="images/roberto-nickson-ttB3z9bDiHQ-unsplash.jpg" alt="Image" class="img-fluid">
+				<a href="hoteleria.php" class="unit-1 text-center"> <img src="images/roberto-nickson-ttB3z9bDiHQ-unsplash.jpg" alt="Image" class="img-fluid">
 					<div class="unit-1-text"><h3 class="unit-1-heading">Hotelería</h3></div>
 				</a>
 			</div>

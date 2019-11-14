@@ -1,3 +1,10 @@
+<?php 
+if(!$clase->hasRol('Administrador'))
+{
+    return false;
+}
+?>
+
 <div class="form-group">
     <label for="rol">Rol</label>
     <select name="id_rol">	

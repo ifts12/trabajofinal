@@ -16,7 +16,7 @@ if(!empty($_POST))
     if($clase->login(filter_var($_POST['dni'], FILTER_SANITIZE_NUMBER_INT)))
     {
         $_SESSION['u'] = $clase->getDni();
-        header('Location: paquetes.php');
+        header('Location: paquete.php');
     }
     else
     {

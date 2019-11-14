@@ -12,13 +12,14 @@ $compra = new Compra();
 include DIR_TEMPLATE . '/_head.html.php';
 include DIR_TEMPLATE . '/_menu.html.php';
 
-include DIR_TEMPLATE . '/_msg.html.php';
 
 $precio = NULL;
 $precioAsistencia = NULL;
 
 if(array_key_exists('s', $_GET) && array_key_exists('d', $_GET) && empty($_POST))
 {
+    include DIR_TEMPLATE . '/_msg.html.php';
+    
     if($_GET['s'] == 'hotelería')
     {
         $clase = new Hotel();
@@ -96,6 +97,10 @@ elseif(!empty($_POST) && $_POST['method'] == 'PUT')
 
     $status = $compra->insert();
     $_SESSION['msg'] = json_encode($compra->getMsg());
+    include DIR_TEMPLATE . '/_msg.html.php';
+    
+    include DIR_TEMPLATE . '/_datos_presentar.html.php';
+    
 }
 
 include DIR_TEMPLATE . '/_javascripts.html.php';
@@ -125,19 +130,42 @@ $(document).ready(function() {
 	
 	$('#term').on('change', function()
 	{
-		$(':submit').attr('disabled', false);
+		if($(':submit').attr('disabled') == 'disabled')
+		{
+    		$(':submit').attr('disabled', false);
+		}
+		else
+		{
+    		$(':submit').attr('disabled', true);
+		}
 	});
 	
 	function calcularPrecio()
 	{
-		total = $('#cantidad_afiliados').val() * precio + $('#cantidad_invitados').val() * precio;
+		total = $('#cantidad_afiliados').val() * precio;
+
+		if($('#cantidad_invitados').length > 0)
+		{
+			total += $('#cantidad_invitados').val() * precio;
+		}
+
 		if($('#id_adicional:checked').length > 0)
 		{
-			total += $('#cantidad_invitados').val() * precioAsistencia
+			total += $('#cantidad_invitados').val() * precioAsistencia;
 		}
 		$('#precio').html('$ ' + total);
 		$('#precio_final').val(total);
 	}
+
+	$('#modalCenter').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget) // Button that triggered the modal
+		  var titulo = button.data('titulo') // Extract info from data-* attributes
+		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		  var modal = $(this)
+		  modal.find('.modal-title').text(titulo)
+		  modal.find('.modal-body').html('DATAAAAAAAAAA');
+	});
 	
 });
 

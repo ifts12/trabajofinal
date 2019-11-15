@@ -66,7 +66,7 @@ if(array_key_exists('s', $_GET) && array_key_exists('d', $_GET) && empty($_POST)
     $info .= sprintf('<div id="precio" class="precio">$ %.2f</div>', $dato->getPrecio());
     if($asistenciaMedica)
     {
-        $info .= sprintf('<small>%s ($ %0.2f)</small>', $asistenciaMedica->getDetalle(), $asistenciaMedica->getPrecio());
+        $info .= sprintf('<small>%s ($ %.2f)</small>', $asistenciaMedica->getDetalle(), $asistenciaMedica->getPrecio());
     }
 ?>
 
@@ -142,7 +142,7 @@ $(document).ready(function() {
 	
 	function calcularPrecio()
 	{
-		total = $('#cantidad_afiliados').val() * precio;
+		total = $('#cantidad_afiliados').val() * parseFloat(precio);
 
 		if($('#cantidad_invitados').length > 0)
 		{

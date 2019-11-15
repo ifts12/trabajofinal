@@ -197,7 +197,15 @@ class Hotel extends Comun
     {
         $this->id_provincia = $id_provincia;
     }
-
+    
+    /**
+     * @return float
+     */
+    public function getPrecioArg()
+    {
+        return number_format(floatval($this->precio), 2, ',', '.');
+    }
+    
     /**
      * @return number
      */

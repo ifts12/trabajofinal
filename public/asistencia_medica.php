@@ -25,7 +25,7 @@ else
             $foto = $clase->getFoto();
         }
         
-        $clase->setData($_POST);
+        $clase->setData($_POST, TRUE);
         if(isset($foto))
         {
             $clase->setFoto($foto);

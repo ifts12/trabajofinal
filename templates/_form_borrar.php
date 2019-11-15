@@ -1,5 +1,5 @@
 <?php 
-if(!$clase->hasRol('Administrador'))
+if(!$user->hasRol('Administrador'))
 {
     return false;
 }

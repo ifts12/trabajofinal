@@ -3,3 +3,4 @@
 node_modules/
 .buildpath
 public/upload/images/
+src/Config.php

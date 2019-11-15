@@ -134,7 +134,7 @@ class Viaje extends Comun
         $statement->bindValue(':foto', $this->getLugar(), \PDO::PARAM_STR);
         $statement->bindValue(':id_provincia', $this->getId_provincia(), \PDO::PARAM_INT);
         $statement->bindValue(':lugar', $this->getLugar(), \PDO::PARAM_STR);
-        $statement->bindValue(':precio', $this->getPrecio(), \PDO::PARAM_INT);
+        $statement->bindValue(':precio', $this->getPrecio(), \PDO::PARAM_STR);
         $statement->bindValue(':detalle', $this->getDetalle(), \PDO::PARAM_STR);
         $statement->bindValue(':dias', $this->getDias(), \PDO::PARAM_INT);
         $statement->bindValue(':noches', $this->getNoches(), \PDO::PARAM_INT);
@@ -157,7 +157,7 @@ class Viaje extends Comun
         $statement->bindValue(':foto', $this->getLugar(), \PDO::PARAM_STR);
         $statement->bindValue(':id_provincia', $this->getId_provincia(), \PDO::PARAM_INT);
         $statement->bindValue(':lugar', $this->getLugar(), \PDO::PARAM_STR);
-        $statement->bindValue(':precio', $this->getPrecio(), \PDO::PARAM_INT);
+        $statement->bindValue(':precio', $this->getPrecio(), \PDO::PARAM_STR);
         $statement->bindValue(':detalle', $this->getDetalle(), \PDO::PARAM_STR);
         $statement->bindValue(':dias', $this->getDias(), \PDO::PARAM_INT);
         $statement->bindValue(':noches', $this->getNoches(), \PDO::PARAM_INT);
@@ -250,9 +250,27 @@ class Viaje extends Comun
     /**
      * @return float
      */
+    public function getPrecioArg()
+    {
+        return number_format(floatval($this->precio), 2, ',', '.');
+    }
+
+    /**
+     * @param float $precio
+     */
+    public function setPrecioArg($precio)
+    {
+        $precio = str_replace('.', '', $precio);
+        $precio = str_replace(',', '.', $precio);
+        $this->precio = $precio;
+    }
+
+    /**
+     * @return float
+     */
     public function getPrecio()
     {
-        return $this->precio;
+        return floatval($this->precio);
     }
 
     /**

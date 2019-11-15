@@ -90,7 +90,7 @@ class Comun implements PdoABM
      * Mapea Array a Objeto
      * @param Array $data
      */
-    public function setData($data)
+    public function setData($data, $post = NULL)
     {
         $reflect = new \ReflectionClass($this);
         $props   = $reflect->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED);
@@ -99,7 +99,14 @@ class Comun implements PdoABM
         {
             if(array_key_exists($prop->getName(), $data))
             {
-                $metodo = new \ReflectionMethod($this, 'set' . ucfirst($prop->getName()));
+                if(!empty($post) && ($prop->getName() == 'precio' || $prop->getName() == 'precio_final'))
+                {
+                    $metodo = new \ReflectionMethod($this, 'set' . ucfirst($prop->getName()) . 'Arg');
+                }
+                else 
+                {
+                    $metodo = new \ReflectionMethod($this, 'set' . ucfirst($prop->getName()));
+                }
                 $metodo->invokeArgs($this, [$data[$prop->getName()]]);
 
                 if(empty($data[$prop->getName()]) && array_keys($this->required, $prop->getName()))

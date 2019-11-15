@@ -100,6 +100,14 @@ class AsistenciaMedica extends Comun
     }
     
     /**
+     * @return float
+     */
+    public function getPrecioArg()
+    {
+        return number_format(floatval($this->precio), 2, ',', '.');
+    }
+    
+    /**
      * @return number
      */
     public function getPrecio()

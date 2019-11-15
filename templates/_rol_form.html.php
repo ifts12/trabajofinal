@@ -1,4 +1,3 @@
-
 <div class="container">
 <h1 class="t1"><?php echo sprintf("%s de %s", (isset($accion) ? $accion : 'Listado'), ucfirst($clase->getTabla())); ?></h1>
 

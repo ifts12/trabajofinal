@@ -204,7 +204,7 @@ header.sticky-top a.dropdown-item:hover
 	border-bottom: 1px solid #a0a0dd;
 }
 
-#precio
+.precio
 {
 	font-size: 1.5rem;
 	color: red;

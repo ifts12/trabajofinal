@@ -30,18 +30,21 @@ foreach($datos as $v)
         $info .= sprintf('<div>%s</div>', $dato->getDetalle());
         $info .= sprintf('<div>%d día%s / %d noche%s</div>', $dato->getDias(), ($dato->getDias() > 1 ? 's' : ''), $dato->getNoches(), ($dato->getNoches() > 1 ? 's' : ''));
     }
-    $info .= sprintf('<div id="precio" class="precio">$ %.2f</div>', $dato->getPrecio());
+    $info .= sprintf('<div id="precio" class="precio">$ %s</div>', $dato->getPrecioArg());
     if($asistenciaMedica)
     {
-        $info .= sprintf('<div><small>%s ($ %0.2f)</small></div>', $asistenciaMedica->getDetalle(), $asistenciaMedica->getPrecio());
+        $info .= sprintf('<div><small>%s ($ %s)</small></div>', $asistenciaMedica->getDetalle(), $asistenciaMedica->getPrecioArg());
         $info .= '<div><small><strong>Bonificado para el afiliado y grupo familiar</strong></small></div>';
     }
     
     $url = (isset($_SESSION['u']) ? sprintf('compra.php?s=%s&d=%d', strtolower($titulo), $dato->getId()) : 'login.php');
     $txtLink = (isset($_SESSION['u']) ? 'Comprar' : 'Ingresar');
-    
-    $info .= sprintf('<div class="mt-2"><a class="btn btn-outline-success" role="button"  href="%s">%s</a></div>', $url, $txtLink);
-    echo $info;
+    if (!$user->hasRol("Empleado"))
+	{
+	    $info .= sprintf('<div class="mt-2"><a class="btn btn-outline-success" role="button"  href="%s">%s</a></div>', $url, $txtLink);
+	}
+	
+   echo $info;
 ?>
 	
     

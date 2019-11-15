@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         8.0.16 - MySQL Community Server - GPL
+-- Versi&oacute;n del servidor:         8.0.16 - MySQL Community Server - GPL
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             10.1.0.5464
+-- HeidiSQL Versi&oacute;n:             10.1.0.5464
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `hotel` (
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
 INSERT INTO `hotel` (`id`, `foto`, `nombre`, `id_provincia`, `estrellas`, `precio`, `cantidad`) VALUES
 	(1, NULL, 'Hotel Sol Andino', 13, 3, 5577.00, 15),
-	(2, NULL, 'Hotel Cordón del Plata', 13, 4, 6176.00, 10),
+	(2, NULL, 'Hotel Cord&oacute;n del Plata', 13, 4, 6176.00, 10),
 	(3, NULL, 'Gran Hotel San Luis', 19, 5, 6778.00, 12),
 	(4, NULL, 'Hotel El Mirador', 6, 3, 5531.00, 15),
 	(5, NULL, 'Hotel Kalton', 6, 4, 6262.00, 15),
@@ -90,7 +90,7 @@ INSERT INTO `hotel` (`id`, `foto`, `nombre`, `id_provincia`, `estrellas`, `preci
 	(11, NULL, 'Provincial Plaza Hotel', 17, 4, 4700.00, 10),
 	(12, NULL, 'Wilson Hotel', 17, 3, 2500.00, 11),
 	(13, NULL, 'Hotel Ushuaia', 23, 3, 3500.00, 12),
-	(14, NULL, 'Hotel las Leñas', 23, 4, 5000.00, 12);
+	(14, NULL, 'Hotel las Le&ntilde;as', 23, 4, 5000.00, 12);
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 
 -- Volcando estructura para tabla upcn.perfil
@@ -150,30 +150,30 @@ CREATE TABLE IF NOT EXISTS `provincia` (
 -- Volcando datos para la tabla upcn.provincia: ~24 rows (aproximadamente)
 /*!40000 ALTER TABLE `provincia` DISABLE KEYS */;
 INSERT INTO `provincia` (`id`, `nombre`) VALUES
-	(1, 'Ciudad Autónoma de Buenos Aires'),
+	(1, 'Ciudad Aut&oacute;noma de Buenos Aires'),
 	(2, 'Buenos Aires'),
 	(3, 'Catamarca'),
 	(4, 'Chaco'),
 	(5, 'Chubut'),
-	(6, 'Córdoba'),
+	(6, 'C&oacute;rdoba'),
 	(7, 'Corrientes'),
-	(8, 'Entre Ríos'),
+	(8, 'Entre R&iacute;os'),
 	(9, 'Formosa'),
 	(10, 'Jujuy'),
 	(11, 'La Pampa'),
 	(12, 'La Rioja'),
 	(13, 'Mendoza'),
 	(14, 'Misiones'),
-	(15, 'Neuquén'),
-	(16, 'Río Negro'),
+	(15, 'Neuqu&eacute;n'),
+	(16, 'R&iacute;o Negro'),
 	(17, 'Salta'),
 	(18, 'San Juan'),
 	(19, 'San Luis'),
 	(20, 'Santa Cruz'),
 	(21, 'Santa Fe'),
 	(22, 'Santiago del Estero'),
-	(23, 'Tierra del Fuego, Antártida e Islas del Atlántico '),
-	(24, 'Tucumán');
+	(23, 'Tierra del Fuego, Ant&aacute;rtida e Islas del Atl&aacute;ntico '),
+	(24, 'Tucum&aacute;n');
 /*!40000 ALTER TABLE `provincia` ENABLE KEYS */;
 
 -- Volcando estructura para tabla upcn.rol
@@ -232,31 +232,31 @@ CREATE TABLE IF NOT EXISTS `viaje` (
 -- Volcando datos para la tabla upcn.viaje: ~25 rows (aproximadamente)
 /*!40000 ALTER TABLE `viaje` DISABLE KEYS */;
 INSERT INTO `viaje` (`id`, `id_tipo_viaje`, `foto`, `id_provincia`, `lugar`, `precio`, `detalle`, `dias`, `noches`, `fecha_desde`, `fecha_hasta`) VALUES
-	(1, 1, NULL, 13, 'Con termas de Cacheuta', 5677.00, 'Hotel Sol Andino+Media pensión', 4, 2, '2020-03-02', '2020-03-05'),
-	(2, 1, NULL, 13, 'Con termas de Cacheuta', 6176.00, 'Hotel Cordón del Plata+Media pensión', 4, 2, '2020-03-06', '2020-03-09'),
-	(3, 1, NULL, 19, 'Parque Nacional Sierras de la Quijada', 6778.00, 'Gran Hotel San Luis+Media pensión', 4, 2, '2020-03-02', '2020-03-05'),
-	(4, 1, NULL, 6, 'Villa Carlos Paz', 5531.00, 'Hotel El Mirador+ Pensión completa', 4, 2, '2020-03-02', '2020-03-05'),
-	(5, 1, NULL, 6, 'Villa Carlos Paz', 6262.00, 'Hotel Kalton + Pensión completa', 4, 2, '2020-03-02', '2020-03-05'),
+	(1, 1, NULL, 13, 'Con termas de Cacheuta', 5677.00, 'Hotel Sol Andino+Media pensi&oacute;n', 4, 2, '2020-03-02', '2020-03-05'),
+	(2, 1, NULL, 13, 'Con termas de Cacheuta', 6176.00, 'Hotel Cord&oacute;n del Plata+Media pensi&oacute;n', 4, 2, '2020-03-06', '2020-03-09'),
+	(3, 1, NULL, 19, 'Parque Nacional Sierras de la Quijada', 6778.00, 'Gran Hotel San Luis+Media pensi&oacute;n', 4, 2, '2020-03-02', '2020-03-05'),
+	(4, 1, NULL, 6, 'Villa Carlos Paz', 5531.00, 'Hotel El Mirador+ Pensi&oacute;n completa', 4, 2, '2020-03-02', '2020-03-05'),
+	(5, 1, NULL, 6, 'Villa Carlos Paz', 6262.00, 'Hotel Kalton + Pensi&oacute;n completa', 4, 2, '2020-03-02', '2020-03-05'),
 	(6, 1, NULL, 2, 'Mar del Plata', 4207.00, 'Hotel Dos Reyes+ Desayuno incluido', 4, 2, '2020-02-03', '2020-03-06'),
 	(7, 1, NULL, 2, 'Mar del Plata', 3800.00, 'Hotel Pergamino + Desayuno incluido', 4, 2, '2020-02-03', '2020-02-06'),
-	(8, 1, NULL, 21, 'Rosario', 2500.00, 'Hotel de la Cité+ Desayuno incluido', 4, 2, '2020-04-04', '2020-04-07'),
-	(9, 1, NULL, 14, 'Cataratas del Iguazu', 6000.00, 'Hotel Colonial Iguazu+ Media Pensión', 4, 2, '2020-04-04', '2020-04-07'),
-	(10, 1, NULL, 14, 'Caratas del Iguazu', 7000.00, 'Exe Hotel Cataratas+ Media Pensión', 4, 2, '2020-04-04', '2020-04-07'),
-	(11, 2, NULL, 2, 'Día de campo en Brandsen', 2000.00, 'Actividades de campo+ Desayuno+ Picada+ Merienda', 1, 2, '2020-07-10', '2020-07-14'),
-	(12, 2, NULL, 19, 'Parque Nacional Sierras de la Quijada', 6778.00, 'Gran Hotel San Luis + Media pensión', 4, 2, '2020-07-10', '2020-07-14'),
-	(13, 2, NULL, 6, 'Villa Carlos Paz', 5531.00, 'Hotel El Mirador + Pensión completa', 4, 2, '2020-07-10', '2020-07-14'),
-	(14, 2, NULL, 6, 'Villa Carlos Paz', 6262.00, 'Hotel Kalton + Pensión completa', 4, 2, '2020-07-10', '2020-07-14'),
-	(15, 2, NULL, 8, 'Villa Elisa ', 5200.00, 'Hotel Quinto Elemento + Media pensión', 4, 2, '2020-10-13', '2020-07-16'),
+	(8, 1, NULL, 21, 'Rosario', 2500.00, 'Hotel de la Cit&eacute;+ Desayuno incluido', 4, 2, '2020-04-04', '2020-04-07'),
+	(9, 1, NULL, 14, 'Cataratas del Iguazu', 6000.00, 'Hotel Colonial Iguazu+ Media Pensi&oacute;n', 4, 2, '2020-04-04', '2020-04-07'),
+	(10, 1, NULL, 14, 'Caratas del Iguazu', 7000.00, 'Exe Hotel Cataratas+ Media Pensi&oacute;n', 4, 2, '2020-04-04', '2020-04-07'),
+	(11, 2, NULL, 2, 'D&iacute;a de campo en Brandsen', 2000.00, 'Actividades de campo+ Desayuno+ Picada+ Merienda', 1, 2, '2020-07-10', '2020-07-14'),
+	(12, 2, NULL, 19, 'Parque Nacional Sierras de la Quijada', 6778.00, 'Gran Hotel San Luis + Media pensi&oacute;n', 4, 2, '2020-07-10', '2020-07-14'),
+	(13, 2, NULL, 6, 'Villa Carlos Paz', 5531.00, 'Hotel El Mirador + Pensi&oacute;n completa', 4, 2, '2020-07-10', '2020-07-14'),
+	(14, 2, NULL, 6, 'Villa Carlos Paz', 6262.00, 'Hotel Kalton + Pensi&oacute;n completa', 4, 2, '2020-07-10', '2020-07-14'),
+	(15, 2, NULL, 8, 'Villa Elisa ', 5200.00, 'Hotel Quinto Elemento + Media pensi&oacute;n', 4, 2, '2020-10-13', '2020-07-16'),
 	(16, 2, NULL, 2, 'Tigre ', 3350.00, 'Hotel Wyndham Nordelta + Desayuno incluido ', 4, 2, '2020-10-13', '2020-07-16'),
 	(17, 2, NULL, 2, 'Lobos', 3000.00, 'La candelaria + Media pension ', 4, 2, '2020-06-12', '2020-06-15'),
-	(18, 3, NULL, 13, 'Termas de Cacheuta', 5677.00, 'Hotel Sol Andino + Media pensión+ Micro', 4, 2, '2020-06-12', '2020-07-12'),
-	(19, 3, NULL, 13, 'Termas de Cacheuta', 6176.00, 'Hotel Cordón del Plata + Media pensión+ Micro', 4, 2, '2020-06-10', '2020-06-14'),
-	(20, 3, NULL, 19, 'Parque Nacional Sierras de la Quijada', 6778.00, 'Gran Hotel San Luis+ Media pensión+ Micro', 4, 2, '2020-01-12', '2020-01-15'),
-	(21, 3, NULL, 6, 'Villa Carlos Paz', 5531.00, 'Hotel El Mirador+ Media pensión+ Micro ', 4, 2, '2020-01-12', '2020-01-15'),
-	(22, 3, NULL, 6, 'Villa Carlos Paz', 6262.00, 'Hotel Kalton + pensión completa + Micro', 4, 2, '2020-02-10', '2020-02-14'),
+	(18, 3, NULL, 13, 'Termas de Cacheuta', 5677.00, 'Hotel Sol Andino + Media pensi&oacute;n+ Micro', 4, 2, '2020-06-12', '2020-07-12'),
+	(19, 3, NULL, 13, 'Termas de Cacheuta', 6176.00, 'Hotel Cord&oacute;n del Plata + Media pensi&oacute;n+ Micro', 4, 2, '2020-06-10', '2020-06-14'),
+	(20, 3, NULL, 19, 'Parque Nacional Sierras de la Quijada', 6778.00, 'Gran Hotel San Luis+ Media pensi&oacute;n+ Micro', 4, 2, '2020-01-12', '2020-01-15'),
+	(21, 3, NULL, 6, 'Villa Carlos Paz', 5531.00, 'Hotel El Mirador+ Media pensi&oacute;n+ Micro ', 4, 2, '2020-01-12', '2020-01-15'),
+	(22, 3, NULL, 6, 'Villa Carlos Paz', 6262.00, 'Hotel Kalton + pensi&oacute;n completa + Micro', 4, 2, '2020-02-10', '2020-02-14'),
 	(23, 3, NULL, 13, 'MENDOZA', 12000.00, 'Hotel Provincial+ Desayuno incluido+ Aereo', 4, 2, '2020-02-06', '2020-02-09'),
 	(24, 3, NULL, 16, 'Bariloche', 20000.00, 'Hotel Nevada+ Desayuno + Aereo', 4, 2, '2020-02-06', '2020-02-09'),
-	(25, 3, NULL, 5, 'Puerto Madryn', 15000.00, 'Hotel Península Valdés+ Desayuno+ Aereo', 4, 2, '2020-02-06', '2020-02-09');
+	(25, 3, NULL, 5, 'Puerto Madryn', 15000.00, 'Hotel Pen&iacute;nsula Vald&eacute;s+ Desayuno+ Aereo', 4, 2, '2020-02-06', '2020-02-09');
 /*!40000 ALTER TABLE `viaje` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

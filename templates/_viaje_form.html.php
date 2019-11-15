@@ -32,7 +32,7 @@ include DIR_TEMPLATE . '/_form_provincia.php';
     
     <div class="form-group">
         <label for="precio">Precio</label>
-        <input name="precio" type="text" class="form-control<?php echo $clase->getError('precio') ? ' is-invalid' : '' ?>" id="precio" value="<?php echo $clase->getPrecio() ?>" aria-describedby="precioHelp" placeholder="Precio">
+        <input name="precio" type="text" class="form-control<?php echo $clase->getError('precio') ? ' is-invalid' : '' ?>" id="precio" value="<?php echo $clase->getPrecioArg() ?>" aria-describedby="precioHelp" placeholder="Precio">
         <small id="precioHelp" class="form-text text-muted">Precio.</small>
         <div class="invalid-feedback">Debe ingresar un precio</div>
     </div>

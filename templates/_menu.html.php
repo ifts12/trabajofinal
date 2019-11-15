@@ -24,17 +24,19 @@
 					<li class="nav-item">
 						<a class="nav-link" href="contacto.php">Contacto</a>
 					</li>
-					<?php if(isset($user) && @get_class($user) && $user->hasRol("Administrador")) { ?>
+					<?php if(isset($user) && @get_class($user) && $user->hasRol(["Administrador","Empleado"])) { ?>
 					<li class="submenu nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown">Administrar</a>
 					    <div class="dropdown-menu" style="margin-top: -2px">
-                            <a class="dropdown-item" href="hotel.php">Hotel</a>
                             <a class="dropdown-item" href="viaje.php">Viaje</a>
+							<?php if( $user->hasRol("Administrador")) { ?>
+							<a class="dropdown-item" href="hotel.php">Hotel</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="perfil.php">Perfil</a>
                             <a class="dropdown-item" href="rol.php">Rol</a>
                             <a class="dropdown-item" href="tipo_viaje.php">Tipo Viaje</a>
                             <a class="dropdown-item" href="asistencia_medica.php">Asistencia</a>
+							<?php } ?>
                         </div>
 					</li>
 					<?php } ?>
@@ -42,7 +44,7 @@
 					<li class="submenu nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="javascript:void;" data-toggle="dropdown"><i class="fas fa-user-circle"></i></a>
 					    <div class="dropdown-menu" style="margin-top: -2px">
-                            <a class="dropdown-item" href="info_perfil.php">Información (<?php echo $_SESSION['u'] ?>)</a>
+                            <a class="dropdown-item" href="info_perfil.php">Mí Perfil (<?php echo $_SESSION['u'] ?>)</a>
                             <a class="dropdown-item" href="compras.php">Mis viajes</a>
     						<a class="dropdown-item" href="logout.php">Salir</a>
                         </div>

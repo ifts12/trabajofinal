@@ -37,11 +37,15 @@ foreach($datos as $v)
         $info .= '<div><small><strong>Bonificado para el afiliado y grupo familiar</strong></small></div>';
     }
     
-    $url = (isset($_SESSION['u']) ? sprintf('compra.php?s=%s&d=%d', strtolower($titulo), $dato->getId()) : 'login.php');
-    $txtLink = (isset($_SESSION['u']) ? 'Comprar' : 'Ingresar');
-    if (!$user->hasRol("Empleado"))
+    $url = (isset($_SESSION['u']) ? sprintf('compra.php?s=%s&d=%d', strtolower($titulo), $dato->getId()) : '');
+    $txtLink = (isset($_SESSION['u']) ? 'Comprar' : '');
+    if (isset($user) && !$user->hasRol("Empleado"))
 	{
-	    $info .= sprintf('<div class="mt-2"><a class="btn btn-outline-success" role="button"  href="%s">%s</a></div>', $url, $txtLink);
+	    $info .= sprintf('<div class="mt-2"><a class="btn btn-outline-success" role="button"  href="compra.php?s=%s&d=%d">Comprar</a></div>', strtolower($titulo), $dato->getId());
+	}
+	else
+	{
+	    $info .= sprintf('<div class="mt-2"><a class="btn btn-outline-success" role="button"  href="login.php">Ingresar</a></div>');
 	}
 	
    echo $info;

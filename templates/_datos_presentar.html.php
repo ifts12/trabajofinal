@@ -11,10 +11,10 @@
     		</ul>
     	</li>
     	<li>
-    		<a href="ficha medica_v2.pdf"><i class="far fa-file-pdf"></i> Ficha médica</a> firmada por un profesional.
+    		<a href="ficha medica_v2.pdf" target="_blank"><i class="far fa-file-pdf"></i> Ficha médica</a> firmada por un profesional.
     	 </li>
     	<li>
-    		<a href="AutorizacionMenores.pdf"><i class="far fa-file-pdf"></i> Autorizacion para Menores de edad</a>. (En caso de viajar con menores de edad)
+    		<a href="AutorizacionMenores.pdf" target="_blank"><i class="far fa-file-pdf"></i> Autorizacion para Menores de edad</a>. (En caso de viajar con menores de edad)
     	 </li>
     </ul>
 </div>
